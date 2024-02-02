@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Storage and Management Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+</head>
+<body>
+
+    <div class="calculator">
+        <h1>Data Storage and Management Calculator</h1>
+        <label for="initialDataSize">Initial Data Size (GB):</label>
+        <input type="number" id="initialDataSize" name="initialDataSize" value="1000">
+
+        <label for="growthRate">Monthly Growth Rate (%):</label>
+        <input type="number" id="growthRate" name="growthRate" step="0.1" value="5">
+
+        <label for="duration">Duration (Months):</label>
+        <input type="number" id="duration" name="duration" value="12">
+
+        <button type="button" id="calculate">Calculate</button>
+
+        <div id="result">
+            <p>Total Storage Needed: <span id="totalStorageNeeded"></span> GB</p>
+            <p>Total Cost: $<span id="totalCost"></span></p>
+        </div>
+    </div>
+
+
+</body>
+</html>
