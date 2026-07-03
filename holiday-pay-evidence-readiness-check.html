@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holiday Pay Evidence Readiness Check</title>
+<style>
+  :root {
+    --ink: #1a2230;
+    --ink-soft: #4a5568;
+    --paper: #fbfaf7;
+    --panel: #ffffff;
+    --line: #d9d4c8;
+    --accent: #1f5f4f;
+    --accent-soft: #e8f0ed;
+    --warn: #8a5a1f;
+    --warn-soft: #fbf0e0;
+    --risk: #8a2c2c;
+    --risk-soft: #fbe9e6;
+    --focus: #1f5f4f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  header h1 {
+    font-size: 1.9rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  header p.subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    margin: 0 0 1.75rem;
+    max-width: 60ch;
+  }
+
+  .context-box {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    margin-bottom: 2.25rem;
+  }
+
+  .context-box strong {
+    color: var(--ink);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  fieldset {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+    padding: 1.25rem 1.5rem 1.4rem;
+    margin: 0;
+  }
+
+  legend {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    padding: 0 0.4rem;
+    color: var(--ink);
+  }
+
+  .q-number {
+    display: inline-block;
+    color: var(--accent);
+    margin-right: 0.4rem;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease;
+  }
+
+  .option:hover {
+    background: var(--accent-soft);
+  }
+
+  .option input[type="radio"] {
+    margin-top: 0.2rem;
+    accent-color: var(--accent);
+    width: 1.05rem;
+    height: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  .option input[type="radio"]:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .option label {
+    cursor: pointer;
+    font-size: 0.98rem;
+  }
+
+  .option.checked {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  button {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  #submitBtn {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  #submitBtn:hover {
+    background: #17493d;
+  }
+
+  #submitBtn:disabled {
+    background: #a9b5b0;
+    cursor: not-allowed;
+  }
+
+  #resetBtn {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+  }
+
+  #resetBtn:hover {
+    background: #f0ede4;
+  }
+
+  .validation-msg {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--risk);
+    font-size: 0.92rem;
+    margin: 0;
+    min-height: 1.2em;
+  }
+
+  #results {
+    margin-top: 2.5rem;
+    display: none;
+  }
+
+  #results.visible {
+    display: block;
+  }
+
+  .result-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.75rem;
+  }
+
+  .result-card.band-good { border-left: 5px solid var(--accent); }
+  .result-card.band-mid { border-left: 5px solid var(--warn); }
+  .result-card.band-risk { border-left: 5px solid var(--risk); }
+
+  .score-line {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.25rem;
+  }
+
+  .score-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .band-name {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0.4rem 0 0.9rem;
+  }
+
+  .band-good .band-name { color: var(--accent); }
+  .band-mid .band-name { color: var(--warn); }
+  .band-risk .band-name { color: var(--risk); }
+
+  .band-desc {
+    margin: 0 0 1.4rem;
+  }
+
+  h3.next-checks-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    margin: 0 0 0.6rem;
+  }
+
+  ul.next-checks {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    margin: 0 0 1.5rem;
+    padding-left: 1.3rem;
+  }
+
+  ul.next-checks li {
+    margin-bottom: 0.4rem;
+  }
+
+  .summary-block {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  .summary-block h3 {
+    font-size: 1rem;
+    margin: 0 0 0.6rem;
+  }
+
+  textarea#summaryText {
+    width: 100%;
+    min-height: 220px;
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    font-size: 0.85rem;
+    padding: 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: #f7f5ef;
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .copy-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.7rem;
+  }
+
+  #copyBtn {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  #copyBtn:hover {
+    background: #000;
+  }
+
+  #copyStatus {
+    font-size: 0.88rem;
+    color: var(--accent);
+  }
+
+  footer.disclaimer {
+    margin-top: 2.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    header h1 { font-size: 1.5rem; }
+    fieldset { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Holiday Pay Evidence Readiness Check</h1>
+    <p class="subtitle">A 2-minute check for payroll, HR and advisers preparing for Fair Work Agency holiday pay enforcement.</p>
+  </header>
+
+  <div class="context-box">
+    <strong>Why this matters:</strong> DBT is consulting on Fair Work Agency holiday pay compliance and enforcement from 2027. This check is not legal advice. It helps employers and advisers think about whether holiday pay records could evidence compliance.
+  </div>
+
+  <form id="checkForm" novalidate>
+
+    <fieldset data-qindex="0">
+      <legend><span class="q-number">1.</span>Can the employer identify who was entitled to holiday across the relevant period?</legend>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="q1" id="q1-yes" value="3">
+          <label for="q1-yes">Yes, confidently</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q1" id="q1-partly" value="2">
+          <label for="q1-partly">Partly, with gaps</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q1" id="q1-no" value="0">
+          <label for="q1-no">No, not without manual work</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q1" id="q1-notsure" value="1">
+          <label for="q1-notsure">Not sure</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset data-qindex="1">
+      <legend><span class="q-number">2.</span>Can the employer show how holiday entitlement was calculated?</legend>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="q2" id="q2-yes" value="3">
+          <label for="q2-yes">Yes, confidently</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q2" id="q2-partly" value="2">
+          <label for="q2-partly">Partly, with gaps</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q2" id="q2-no" value="0">
+          <label for="q2-no">No, not without manual work</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q2" id="q2-notsure" value="1">
+          <label for="q2-notsure">Not sure</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset data-qindex="2">
+      <legend><span class="q-number">3.</span>Can the employer evidence holiday taken, paid, carried over or corrected?</legend>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="q3" id="q3-yes" value="3">
+          <label for="q3-yes">Yes, confidently</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q3" id="q3-partly" value="2">
+          <label for="q3-partly">Partly, with gaps</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q3" id="q3-no" value="0">
+          <label for="q3-no">No, not without manual work</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q3" id="q3-notsure" value="1">
+          <label for="q3-notsure">Not sure</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset data-qindex="3">
+      <legend><span class="q-number">4.</span>Can the employer show how holiday pay was calculated and paid?</legend>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="q4" id="q4-yes" value="3">
+          <label for="q4-yes">Yes, confidently</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q4" id="q4-partly" value="2">
+          <label for="q4-partly">Partly, with gaps</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q4" id="q4-no" value="0">
+          <label for="q4-no">No, not without manual work</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q4" id="q4-notsure" value="1">
+          <label for="q4-notsure">Not sure</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset data-qindex="4">
+      <legend><span class="q-number">5.</span>Can the employer evidence or reconstruct the records across six years?</legend>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="q5" id="q5-yes" value="3">
+          <label for="q5-yes">Yes, confidently</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q5" id="q5-partly" value="2">
+          <label for="q5-partly">Partly, with gaps</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q5" id="q5-no" value="0">
+          <label for="q5-no">No, not without manual work</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="q5" id="q5-notsure" value="1">
+          <label for="q5-notsure">Not sure</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="submit" id="submitBtn">See my result</button>
+      <button type="button" id="resetBtn">Reset</button>
+    </div>
+    <p class="validation-msg" id="validationMsg" role="alert"></p>
+  </form>
+
+  <section id="results" aria-live="polite">
+    <div class="result-card" id="resultCard">
+      <p class="score-line">Your score</p>
+      <p><span class="score-number" id="scoreNumber">0</span> / 15</p>
+      <p class="band-name" id="bandName"></p>
+      <p class="band-desc" id="bandDesc"></p>
+
+      <h3 class="next-checks-title">Recommended next checks</h3>
+      <ul class="next-checks" id="nextChecks"></ul>
+
+      <div class="summary-block">
+        <h3>Copyable summary</h3>
+        <textarea id="summaryText" readonly aria-label="Copyable summary of your result"></textarea>
+        <div class="copy-row">
+          <button type="button" id="copyBtn">Copy summary</button>
+          <span id="copyStatus" role="status"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="disclaimer">
+    This tool runs entirely in your browser. Nothing you enter is saved, tracked, transmitted or collected. No cookies, no analytics, no external requests. This is a general self-check, not legal advice, and does not confirm compliance with the Working Time Regulations or any future Fair Work Agency enforcement standard.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var form = document.getElementById("checkForm");
+  var validationMsg = document.getElementById("validationMsg");
+  var resultsSection = document.getElementById("results");
+  var resultCard = document.getElementById("resultCard");
+  var scoreNumber = document.getElementById("scoreNumber");
+  var bandName = document.getElementById("bandName");
+  var bandDesc = document.getElementById("bandDesc");
+  var nextChecks = document.getElementById("nextChecks");
+  var summaryText = document.getElementById("summaryText");
+  var copyBtn = document.getElementById("copyBtn");
+  var copyStatus = document.getElementById("copyStatus");
+  var resetBtn = document.getElementById("resetBtn");
+
+  var questions = [
+    "Can the employer identify who was entitled to holiday across the relevant period?",
+    "Can the employer show how holiday entitlement was calculated?",
+    "Can the employer evidence holiday taken, paid, carried over or corrected?",
+    "Can the employer show how holiday pay was calculated and paid?",
+    "Can the employer evidence or reconstruct the records across six years?"
+  ];
+
+  var optionLabels = {
+    "3": "Yes, confidently",
+    "2": "Partly, with gaps",
+    "0": "No, not without manual work",
+    "1": "Not sure"
+  };
+
+  var nextChecksByBand = {
+    good: [
+      "Spot-check a sample of high-risk worker groups: casual, zero-hours, term-time and irregular-hours staff.",
+      "Confirm holiday pay calculations reflect regular and voluntary overtime, commission and other normal pay elements.",
+      "Test that six years of records could actually be pulled together on request, not just that a policy says they exist."
+    ],
+    mid: [
+      "Map which worker categories have the weakest records: agency, casual, or those who have changed contract type.",
+      "Reconcile payroll history against leave records to find where the two do not match.",
+      "Check whether carried-over and corrected holiday is documented, not just current-year entitlement.",
+      "Identify how far back clean records actually go, and where reconstruction would be needed."
+    ],
+    risk: [
+      "Start with the highest-risk worker groups first: those most likely to raise a claim or be subject to a complaint.",
+      "Establish what source data still exists (timesheets, contracts, payroll exports) before assuming reconstruction is impossible.",
+      "Get a clear view of how far back usable records go, since six years of gaps is a materially different problem to one or two.",
+      "Treat this as a project with an owner and a timeline, not an ongoing background risk."
+    ]
+  };
+
+  function getBand(score) {
+    if (score >= 12) {
+      return {
+        key: "good",
+        label: "Evidence-ready, but review high-risk worker groups.",
+        desc: "Your answers suggest the core holiday pay records are largely in place. The main residual risk usually sits with atypical worker groups rather than the main workforce."
+      };
+    }
+    if (score >= 7) {
+      return {
+        key: "mid",
+        label: "Evidence gaps likely. Review worker categories, payroll history and leave records.",
+        desc: "There are probably usable records somewhere in the business, but they are not yet in a state that would clearly evidence compliance if tested."
+      };
+    }
+    return {
+      key: "risk",
+      label: "High evidence-readiness risk. Manual reconstruction may be needed before FWA enforcement pressure increases.",
+      desc: "Based on your answers, evidencing compliance today would likely require significant manual work. It is worth treating this as a priority before enforcement activity increases."
+    };
+  }
+
+  function updateOptionStyles(fieldset) {
+    var opts = fieldset.querySelectorAll(".option");
+    opts.forEach(function (opt) {
+      var input = opt.querySelector("input[type=radio]");
+      if (input.checked) {
+        opt.classList.add("checked");
+      } else {
+        opt.classList.remove("checked");
+      }
+    });
+  }
+
+  form.addEventListener("change", function (e) {
+    if (e.target && e.target.type === "radio") {
+      var fieldset = e.target.closest("fieldset");
+      updateOptionStyles(fieldset);
+      validationMsg.textContent = "";
+    }
+  });
+
+  function buildSummary(score, band, answers) {
+    var lines = [];
+    lines.push("Holiday Pay Evidence Readiness Check");
+    lines.push("Score: " + score + " / 15");
+    lines.push("Result: " + band.label);
+    lines.push("");
+    lines.push("Answers:");
+    answers.forEach(function (a, i) {
+      lines.push((i + 1) + ". " + questions[i]);
+      lines.push("   " + optionLabels[a]);
+    });
+    lines.push("");
+    lines.push("Recommended next checks:");
+    nextChecksByBand[band.key].forEach(function (c) {
+      lines.push("- " + c);
+    });
+    lines.push("");
+    lines.push("This is a self-check, not legal advice.");
+    return lines.join("\n");
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var answers = [];
+    var missing = false;
+
+    for (var i = 1; i <= 5; i++) {
+      var selected = form.querySelector('input[name="q' + i + '"]:checked');
+      if (!selected) {
+        missing = true;
+        break;
+      }
+      answers.push(selected.value);
+    }
+
+    if (missing) {
+      validationMsg.textContent = "Please answer all five questions before seeing your result.";
+      return;
+    }
+
+    validationMsg.textContent = "";
+
+    var score = answers.reduce(function (sum, v) {
+      return sum + parseInt(v, 10);
+    }, 0);
+
+    var band = getBand(score);
+
+    scoreNumber.textContent = score;
+    bandName.textContent = band.label;
+    bandDesc.textContent = band.desc;
+
+    resultCard.classList.remove("band-good", "band-mid", "band-risk");
+    resultCard.classList.add("band-" + band.key);
+
+    nextChecks.innerHTML = "";
+    nextChecksByBand[band.key].forEach(function (item) {
+      var li = document.createElement("li");
+      li.textContent = item;
+      nextChecks.appendChild(li);
+    });
+
+    summaryText.value = buildSummary(score, band, answers);
+    copyStatus.textContent = "";
+
+    resultsSection.classList.add("visible");
+    resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  resetBtn.addEventListener("click", function () {
+    form.reset();
+    document.querySelectorAll(".option").forEach(function (opt) {
+      opt.classList.remove("checked");
+    });
+    validationMsg.textContent = "";
+    resultsSection.classList.remove("visible");
+    copyStatus.textContent = "";
+  });
+
+  copyBtn.addEventListener("click", function () {
+    summaryText.select();
+    summaryText.setSelectionRange(0, summaryText.value.length);
+
+    var copied = false;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(summaryText.value).then(function () {
+        copyStatus.textContent = "Copied to clipboard.";
+      }).catch(function () {
+        fallbackCopy();
+      });
+    } else {
+      fallbackCopy();
+    }
+
+    function fallbackCopy() {
+      try {
+        copied = document.execCommand("copy");
+        copyStatus.textContent = copied ? "Copied to clipboard." : "Select the text above and copy manually.";
+      } catch (err) {
+        copyStatus.textContent = "Select the text above and copy manually.";
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
