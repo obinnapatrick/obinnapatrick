@@ -21,6 +21,26 @@ OCDS, or Contracts Finder.
   `schemas/`, `scripts/` for key-like patterns and for the literal value
   of any key present in the environment).
 
+## Setting the key locally (operator instructions)
+
+Windows PowerShell (current window only — nothing written to disk):
+
+```powershell
+$env:COMPANIES_HOUSE_API_KEY = "paste-your-key-here"
+```
+
+Windows, persistent across windows (stored in your user environment, not
+in the repository): `setx COMPANIES_HOUSE_API_KEY "paste-your-key-here"`,
+then open a NEW PowerShell window.
+
+macOS/Linux: `export COMPANIES_HOUSE_API_KEY="paste-your-key-here"`.
+
+Rules: never paste the key into any file inside the repository; never
+pass it on a command line that gets committed to scripts or docs; the
+bootstrap and preflight only ever report "present"/"absent". The run
+works without the key (documented limitation path — see
+docs/LOCAL_EXECUTION.md).
+
 ## Access notes
 
 - This session's outbound HTTPS passes through an organisation
