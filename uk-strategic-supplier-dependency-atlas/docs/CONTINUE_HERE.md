@@ -1,48 +1,45 @@
 # Continue here
 
-You are picking up the UK Strategic Supplier Dependency Atlas. Read
-`docs/PROJECT_STATE.md` first (30 seconds), then act on whichever of the
-two situations applies.
+Read `docs/PROJECT_STATE.md` first (30 seconds), then pick your
+situation.
 
-## Situation A — source access is still blocked
+## Situation A — you are a human operator with a normal computer
 
-Do NOT build further data features; everything buildable without data is
-built. Useful remaining work: none critical. Verify health only:
+The project is waiting for exactly you. Follow
+`docs/WINDOWS_QUICKSTART.md` (macOS/Linux: `bash
+scripts/bootstrap_local.sh`). One command runs everything from source
+probe to the verified Level-4 profile and prints the output path. Then
+commit and push as the quickstart shows.
+
+## Situation B — you are a model session WITHOUT access to the official hosts
+
+(That includes the original remote Claude environment.) Everything
+buildable without data is built. Verify health only:
 
 ```bash
-python3 tests/test_pipeline_fixture.py     # expect 27/27
-python3 scripts/atlas.py run_acceptance_gates   # expect 5 pass / 0 fail / 5 blocked
+python3 tests/test_pipeline_fixture.py      # expect 27/27
+python3 tests/test_local_bridge.py          # expect 23/23
+python3 scripts/preflight_local.py          # expect honest BLOCKED here
+python3 scripts/atlas.py run_acceptance_gates
 ```
 
-Then stop and ask the operator for the unblock (network allowlist and/or
-local run + optional CH key). The blocked-host list and instructions are
-in `docs/SOURCE_ACCESS_LOG.md`.
+Then hand the operator `docs/WINDOWS_QUICKSTART.md`. Do not fabricate
+data; do not weaken gates.
 
-## Situation B — source access works now
+## Situation C — you are a model session WITH access (policy changed) or auditing after the local Level-4 run
 
-Follow `docs/NEXT_COMMANDS.md` top to bottom. Summary:
+- Access now works here: `python3 scripts/run_level4.py` (same
+  orchestrator the bootstrap uses), then commit/push.
+- Level-4 already ran locally and was pushed: execute the
+  "After Level 4" Fable command at the bottom of
+  `docs/NEXT_COMMANDS.md` (audit → field-mapping verification → licence
+  verification → re-decide state → mini cohort).
 
-1. `python3 scripts/atlas.py probe_sources` → must print PASS or PARTIAL.
-2. `python3 scripts/atlas.py fetch_suppliers` → capture the official list;
-   **inspect the parsed rows** (`python3 src/ingest/govuk_strategic_suppliers.py --offline`).
-   If the attachment format defeats the parser, extend the parser — never
-   type the list in.
-3. `python3 scripts/atlas.py lock_sources` after every fetch batch.
-4. Verify adapter field mappings against one real FTS and one real CF
-   payload (they are marked *(verify live)* in docs/SOURCE_ADAPTERS.md);
-   fix `src/normalize/ocds.py` mappings if reality differs.
-5. Capture live licence/terms pages; update
-   `docs/LICENCE_AND_TERMS_REVIEW.md` from PROVISIONAL to verified.
-6. `score_suppliers --online`, choose the first supplier (evidence-clean,
-   non-trivial), record the reason in docs/DECISIONS.md (checkpoint CP4).
-7. Fetch procurement + CH for that supplier, `build_truth_slice`,
-   `run_acceptance_gates` until 0 fail/0 blocked on slice gates,
-   `render_static_profile` (CP6–CP8).
-8. Only then consider the mini cohort (`expand_mini_cohort` is gated).
+## Invariants you must not break (all situations)
 
-## Invariants you must not break
-
-- Real facts only from `EVIDENCE`-class raw captures under data/raw/.
-- Fact states are conservative; model assistance can never confirm.
-- outputs/ must stay fixture-free (gate enforces).
-- No public anything without the operator review gate.
+- Real facts only from `EVIDENCE`-class raw captures under `data/raw/`.
+- Suppliers only from the captured official list — never memory.
+- Conservative fact states; model assistance can never confirm.
+- `outputs/` stays fixture-free (gate + verifier enforce).
+- Raw evidence is immutable once locked.
+- Nothing public without the operator review gate.

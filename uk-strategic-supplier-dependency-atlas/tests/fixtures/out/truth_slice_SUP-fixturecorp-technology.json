@@ -35,7 +35,7 @@
         "evidence_against": [],
         "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services' via exact_legal_name; GB-COH FIX00001 corroborated by captured CH record 'FIXTURECORP TECHNOLOGY SERVICES LIMITED'",
         "reviewer_status": "machine_only",
-        "assessed_at": "2026-07-17T09:32:57Z"
+        "assessed_at": "2026-07-17T11:08:49Z"
       },
       "evidence": [
         "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
@@ -59,7 +59,7 @@
         "evidence_against": [],
         "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services (UK)' via normalised_legal_name",
         "reviewer_status": "machine_only",
-        "assessed_at": "2026-07-17T09:32:57Z"
+        "assessed_at": "2026-07-17T11:08:49Z"
       },
       "evidence": [
         "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
@@ -82,7 +82,7 @@
         "evidence_against": [],
         "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services' via exact_legal_name",
         "reviewer_status": "machine_only",
-        "assessed_at": "2026-07-17T09:32:57Z"
+        "assessed_at": "2026-07-17T11:08:49Z"
       },
       "evidence": [
         "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
@@ -460,7 +460,7 @@
       "unit": "notices",
       "limitations": "Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "CONFIRMED",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Pure count of evidenced links; no interpretation attached."
     },
     {
@@ -482,7 +482,7 @@
       "unit": "notices",
       "limitations": "Candidate matches pending review; excluded from all headline figures.",
       "confidence": "POSSIBLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Transparency metric for unresolved workload."
     },
     {
@@ -509,7 +509,7 @@
       "unit": "GBP",
       "limitations": "0 of 3 linked notices have no usable GBP value and are excluded. Published values may be estimates or ceilings. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "PROBABLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Sum of source-published values only, labelled 'visible'."
     },
     {
@@ -535,7 +535,7 @@
       "unit": "buyer authorities",
       "limitations": "Buyer names are not canonicalised across sources; duplicates under different spellings may over- or under-count. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "PROBABLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Count of distinct named buyers in evidence."
     },
     {
@@ -557,7 +557,7 @@
       "unit": "CPV divisions",
       "limitations": "CPV coding quality varies by buyer. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "PROBABLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Standard classification counts only."
     },
     {
@@ -584,7 +584,7 @@
       "unit": "share of visible value",
       "limitations": "Value coverage is partial (3/3 notices valued); top buyer (normalised) = 'fixture department for testing'. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "PROBABLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Neutral concentration ratio over published values."
     },
     {
@@ -613,7 +613,7 @@
       "unit": null,
       "limitations": "Only 3/3 linked notices publish an end date; extensions/terminations not visible. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "POSSIBLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Descriptive clustering of published end dates."
     },
     {
@@ -635,7 +635,7 @@
       "unit": "share",
       "limitations": "Only 3/3 linked notices publish a procedure type; OCDS 'limited' covers several lawful routes. This is a source-supported procedural statistic, not an assessment. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
       "confidence": "PROBABLE",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Directly derived from the source's own procedure field."
     },
     {
@@ -659,7 +659,7 @@
       "unit": "share",
       "limitations": "Higher means weaker records, not worse behaviour.",
       "confidence": "CONFIRMED",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Data-quality transparency metric."
     },
     {
@@ -685,7 +685,7 @@
       "unit": "share",
       "limitations": "Reflects evidence strength of the linkage itself.",
       "confidence": "CONFIRMED",
-      "calculated_at": "2026-07-17T09:32:57Z",
+      "calculated_at": "2026-07-17T11:08:49Z",
       "safe_to_display_reason": "Meta-metric on the atlas's own evidence."
     }
   ],
@@ -704,7 +704,7 @@
       "recommended_next_step": "Capture CH record / FTS org identifier and re-run resolution",
       "publication_status": "displayable_as_unresolved",
       "severity": "medium",
-      "created_at": "2026-07-17T09:32:57Z",
+      "created_at": "2026-07-17T11:08:49Z",
       "resolved_at": null,
       "resolution": null
     },
@@ -721,7 +721,7 @@
       "recommended_next_step": "Run companies_house.search for the notice supplier name",
       "publication_status": "displayable_as_unresolved",
       "severity": "medium",
-      "created_at": "2026-07-17T09:32:57Z",
+      "created_at": "2026-07-17T11:08:49Z",
       "resolved_at": null,
       "resolution": null
     },
@@ -738,7 +738,7 @@
       "recommended_next_step": "Run companies_house.search for the notice supplier name",
       "publication_status": "displayable_as_unresolved",
       "severity": "medium",
-      "created_at": "2026-07-17T09:32:57Z",
+      "created_at": "2026-07-17T11:08:49Z",
       "resolved_at": null,
       "resolution": null
     },
@@ -760,7 +760,7 @@
       "recommended_next_step": "Review group structure; decide primary contracting entity; keep others as group members",
       "publication_status": "displayable_as_unresolved",
       "severity": "medium",
-      "created_at": "2026-07-17T09:32:57Z",
+      "created_at": "2026-07-17T11:08:49Z",
       "resolved_at": null,
       "resolution": null
     }
@@ -1619,7 +1619,7 @@
     }
   ],
   "meta": {
-    "built_at": "2026-07-17T09:32:57Z",
+    "built_at": "2026-07-17T11:08:49Z",
     "fixture_mode": true,
     "raw_root": "tests/fixtures/raw",
     "offline": true,

@@ -1,6 +1,28 @@
 # Project state
 
-**Last human-readable refresh: 2026-07-17 (session 1).**
+**Last human-readable refresh: 2026-07-17 (session 2 — local execution bridge added).**
+
+## Session 2 addition: the local unblock
+
+The repository is now a **one-command local runner**. On any normal
+Windows/macOS/Linux machine:
+`powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap_local.ps1`
+(see `docs/WINDOWS_QUICKSTART.md`) drives preflight → source probe →
+official-list capture → licence-page capture → supplier scoring →
+guarded selection → procurement + Companies House capture (key or
+documented key-free path) → source lock → truth slice → acceptance gates
+→ release-state decision → static profile → Level-4 verification →
+checkpoints + handoff. Restartable (`-Resume`), with a file-drop
+fallback (`data/inbox/README.md`) and a verifier that quarantines any
+output violating real-data invariants
+(`scripts/verify_level4.py`). Proven in this blocked environment:
+preflight correctly classifies BLOCKED and refuses real output; 23 bridge
+tests + 27 pipeline fixture tests pass.
+
+---
+
+**Original session-1 state below (still accurate for THIS remote
+environment — the egress policy still blocks all official hosts here).**
 Machine twin: `data/validation/status.json` (always current — refresh with
 `python3 scripts/atlas.py write_handoff`).
 

@@ -36,3 +36,4 @@ Append-only log of pipeline actions.
 | 2026-07-17T11:08:13Z | checkpoint | CP1 blocked |
 | 2026-07-17T11:08:13Z | checkpoint | CP4 blocked |
 | 2026-07-17T11:08:49Z | run_acceptance_gates | pass=5 fail=0 blocked=5 |
+| 2026-07-17T11:10:19Z | write_handoff | commit=8419a9d73bc2 missing_docs=[] |
