@@ -1,0 +1,8 @@
+{
+  "probe": "cf",
+  "url": "https://www.contractsfinder.service.gov.uk/api/rest/2/search_notices/json?keyword=infrastructure&size=1",
+  "http_status": null,
+  "reachable": false,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "tested_at": "2026-07-17T11:05:22Z"
+}

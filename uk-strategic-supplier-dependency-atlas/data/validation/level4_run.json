@@ -1,0 +1,13 @@
+{
+  "stages": {
+    "preflight": {
+      "status": "stopped",
+      "detail": "Preflight classified this machine as BLOCKED - no lawful route to required real evidence from here. Fix network access (see docs/LOCAL_TROUBLESHOOTING.md) or use the file-drop fallback (data/inbox/README.md), then rerun: python scripts/run_level4.py --resume",
+      "at": "2026-07-17T11:05:23Z"
+    }
+  },
+  "run_started_at": "2026-07-17T11:05:19Z",
+  "updated_at": "2026-07-17T11:05:23Z",
+  "last_error": "preflight: Preflight classified this machine as BLOCKED - no lawful route to required real evidence from here. Fix network access (see docs/LOCAL_TROUBLESHOOTING.md) or use the file-drop fallback (data/inbox/README.md), then rerun: python scripts/run_level4.py --resume",
+  "resume_command": "python scripts/run_level4.py --resume"
+}

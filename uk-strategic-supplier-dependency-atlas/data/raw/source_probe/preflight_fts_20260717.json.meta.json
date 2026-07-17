@@ -1,0 +1,12 @@
+{
+  "source_name": "preflight probe: fts",
+  "source_url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-07-17T05:05:21&updatedTo=2026-07-17T11:05:21",
+  "retrieval_method": "HTTP GET (local preflight)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "evidence_class": "ACCESS_TEST",
+  "local_path": "data/raw/source_probe/preflight_fts_20260717.json",
+  "sha256": "0f450bd8bff5dedee78c261d1d9d996163f87eb72a3138155fc45b8f4db617d2",
+  "bytes": 325,
+  "saved_at": "2026-07-17T11:05:22Z"
+}

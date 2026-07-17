@@ -10,12 +10,12 @@ Machine-readable twin: `data/validation/checkpoints.json`.
 
 ## CP1 — Source spine verified [BLOCKED]
 - phase: PHASE 0 source spine  
-- at: 2026-07-17T09:28:23Z
+- at: 2026-07-17T11:08:13Z
 - completed: probe module; 2 probe runs over 8 official hosts; failure evidence with timestamps; WebFetch/WebSearch policy tests; canonical publication URL located (LOCATOR_ONLY); docs/DATA_SOURCES.md; docs/SOURCE_ACCESS_LOG.md
 - missing: any evidence-grade raw capture
 - blocker: egress policy denies www.gov.uk, assets.publishing.service.gov.uk, www.find-tender.service.gov.uk, www.contractsfinder.service.gov.uk, api.company-information.service.gov.uk, find-and-update.company-information.service.gov.uk, download.companieshouse.gov.uk
-- next command: `python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md`
-- continuation: Verdict BLOCKED: every required host CONNECT-403 by session egress policy; COMPANIES_HOUSE_API_KEY also absent. Unblock options documented in docs/SOURCE_ACCESS_LOG.md.
+- next command: `powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap_local.ps1  (on a local machine; see docs/WINDOWS_QUICKSTART.md)`
+- continuation: Still BLOCKED in the remote environment. The local execution bridge is now the unblock path: one command on any normal machine runs source proof through Level 4.
 
 ## CP2 — Source-lock manifest created [PASS]
 - phase: source lock  
@@ -35,12 +35,12 @@ Machine-readable twin: `data/validation/checkpoints.json`.
 
 ## CP4 — Supplier shortlist scored [BLOCKED]
 - phase: supplier shortlist  
-- at: 2026-07-17T09:28:23Z
+- at: 2026-07-17T11:08:13Z
 - completed: scoring module with 10 criteria; name-ambiguity heuristic; provisional-score guard
 - missing: captured official list; live visibility probes; scored table; first-supplier selection
 - blocker: no official-list capture possible (egress policy)
-- next command: `python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md`
-- continuation: Selection is forbidden until the official list is captured (mission rules 2/12). score_suppliers refuses to run without a capture and refuses to finalise on provisional scores.
+- next command: `powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap_local.ps1`
+- continuation: Selection runs automatically inside the local bootstrap (guardrails: >=3 CF hits, low ambiguity; stops for operator choice via -Supplier otherwise).
 
 ## CP5 — Graph schema created [PASS]
 - phase: graph schema  

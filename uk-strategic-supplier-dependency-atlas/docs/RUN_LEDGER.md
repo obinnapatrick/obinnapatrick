@@ -28,3 +28,11 @@ Append-only log of pipeline actions.
 | 2026-07-17T09:31:20Z | write_handoff | commit=4d83042d9ce3 missing_docs=[] |
 | 2026-07-17T09:32:57Z | run_acceptance_gates | pass=5 fail=0 blocked=5 |
 | 2026-07-17T09:32:58Z | write_handoff | commit=9026e2b20b65 missing_docs=[] |
+| 2026-07-17T11:05:08Z | preflight_local | BLOCKED |
+| 2026-07-17T11:05:21Z | preflight_local | BLOCKED |
+| 2026-07-17T11:05:23Z | preflight_local | BLOCKED |
+| 2026-07-17T11:08:12Z | lock_sources | 14 raw files locked (0 evidence-grade) |
+| 2026-07-17T11:08:12Z | run_acceptance_gates | pass=4 fail=1 blocked=5 |
+| 2026-07-17T11:08:13Z | checkpoint | CP1 blocked |
+| 2026-07-17T11:08:13Z | checkpoint | CP4 blocked |
+| 2026-07-17T11:08:49Z | run_acceptance_gates | pass=5 fail=0 blocked=5 |

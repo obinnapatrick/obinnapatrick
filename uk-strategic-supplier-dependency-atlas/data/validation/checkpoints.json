@@ -22,7 +22,7 @@
     "checkpoint_id": "CP1",
     "title": "Source spine verified",
     "phase": "PHASE 0 source spine",
-    "timestamp": "2026-07-17T09:28:23Z",
+    "timestamp": "2026-07-17T11:08:13Z",
     "completed_outputs": [
       "probe module",
       "2 probe runs over 8 official hosts",
@@ -42,8 +42,8 @@
     ],
     "status": "blocked",
     "blocker": "egress policy denies www.gov.uk, assets.publishing.service.gov.uk, www.find-tender.service.gov.uk, www.contractsfinder.service.gov.uk, api.company-information.service.gov.uk, find-and-update.company-information.service.gov.uk, download.companieshouse.gov.uk",
-    "next_command": "python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md",
-    "continuation_note": "Verdict BLOCKED: every required host CONNECT-403 by session egress policy; COMPANIES_HOUSE_API_KEY also absent. Unblock options documented in docs/SOURCE_ACCESS_LOG.md."
+    "next_command": "powershell -ExecutionPolicy Bypass -File .\\scripts\\bootstrap_local.ps1  (on a local machine; see docs/WINDOWS_QUICKSTART.md)",
+    "continuation_note": "Still BLOCKED in the remote environment. The local execution bridge is now the unblock path: one command on any normal machine runs source proof through Level 4."
   },
   "CP2": {
     "checkpoint_id": "CP2",
@@ -91,7 +91,7 @@
     "checkpoint_id": "CP4",
     "title": "Supplier shortlist scored",
     "phase": "supplier shortlist",
-    "timestamp": "2026-07-17T09:28:23Z",
+    "timestamp": "2026-07-17T11:08:13Z",
     "completed_outputs": [
       "scoring module with 10 criteria",
       "name-ambiguity heuristic",
@@ -107,8 +107,8 @@
     "evidence_saved": [],
     "status": "blocked",
     "blocker": "no official-list capture possible (egress policy)",
-    "next_command": "python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md",
-    "continuation_note": "Selection is forbidden until the official list is captured (mission rules 2/12). score_suppliers refuses to run without a capture and refuses to finalise on provisional scores."
+    "next_command": "powershell -ExecutionPolicy Bypass -File .\\scripts\\bootstrap_local.ps1",
+    "continuation_note": "Selection runs automatically inside the local bootstrap (guardrails: >=3 CF hits, low ambiguity; stops for operator choice via -Supplier otherwise)."
   },
   "CP5": {
     "checkpoint_id": "CP5",

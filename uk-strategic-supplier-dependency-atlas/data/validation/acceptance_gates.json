@@ -1,5 +1,5 @@
 {
-  "ran_at": "2026-07-17T09:32:57Z",
+  "ran_at": "2026-07-17T11:08:49Z",
   "gates": [
     {
       "gate_id": "GATE-SRC-01",
@@ -11,7 +11,7 @@
       "evidence_file": "data/raw/source_probe/probe_report.json",
       "failure_reason": "All official hosts denied by session egress policy (CONNECT 403)",
       "next_action": "Allowlist hosts in environment network policy or run locally; see docs/SOURCE_ACCESS_LOG.md",
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-LOCK-01",
@@ -23,7 +23,7 @@
       "evidence_file": null,
       "failure_reason": null,
       "next_action": null,
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-LOCK-02",
@@ -35,7 +35,7 @@
       "evidence_file": null,
       "failure_reason": null,
       "next_action": null,
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-SECRET-01",
@@ -47,7 +47,7 @@
       "evidence_file": null,
       "failure_reason": null,
       "next_action": null,
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-FIX-01",
@@ -59,7 +59,7 @@
       "evidence_file": null,
       "failure_reason": null,
       "next_action": null,
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-SAFE-01",
@@ -71,7 +71,7 @@
       "evidence_file": null,
       "failure_reason": null,
       "next_action": null,
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-LIC-01",
@@ -83,7 +83,7 @@
       "evidence_file": null,
       "failure_reason": "Classifications are PROVISIONAL (terms pages unreachable this session)",
       "next_action": "Re-verify terms from live pages once access restored",
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-SCHEMA-01",
@@ -95,7 +95,7 @@
       "evidence_file": null,
       "failure_reason": "No truth slice exists (source access BLOCKED)",
       "next_action": "Restore source access, then: fetch_suppliers, fetch procurement, build_truth_slice",
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-PROV-01",
@@ -107,7 +107,7 @@
       "evidence_file": null,
       "failure_reason": "No truth slice exists (source access BLOCKED)",
       "next_action": "Restore source access, then: fetch_suppliers, fetch procurement, build_truth_slice",
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     },
     {
       "gate_id": "GATE-SLICE-01",
@@ -119,7 +119,7 @@
       "evidence_file": null,
       "failure_reason": "No truth slice exists (source access BLOCKED)",
       "next_action": "Restore source access, then: fetch_suppliers, fetch procurement, build_truth_slice",
-      "ran_at": "2026-07-17T09:32:57Z"
+      "ran_at": "2026-07-17T11:08:49Z"
     }
   ],
   "summary": {
