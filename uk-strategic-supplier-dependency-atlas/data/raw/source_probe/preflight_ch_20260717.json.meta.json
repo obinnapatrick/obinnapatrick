@@ -1,0 +1,12 @@
+{
+  "source_name": "preflight probe: ch",
+  "source_url": "https://api.company-information.service.gov.uk/company/00000006",
+  "retrieval_method": "HTTP GET (local preflight)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "evidence_class": "ACCESS_TEST",
+  "local_path": "data/raw/source_probe/preflight_ch_20260717.json",
+  "sha256": "a34fe54ad5366df5e15f999e738aabc9dc59efe0e85633390cdfe34fd6e7f94c",
+  "bytes": 259,
+  "saved_at": "2026-07-17T21:53:42Z"
+}

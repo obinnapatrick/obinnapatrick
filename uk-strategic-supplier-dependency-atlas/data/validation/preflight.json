@@ -1,0 +1,57 @@
+{
+  "ran_at": "2026-07-17T21:53:42Z",
+  "classification": "BLOCKED",
+  "notes": [
+    "GOV.UK unreachable - the official supplier list cannot be captured",
+    "Neither Find a Tender nor Contracts Finder reachable - no procurement evidence path"
+  ],
+  "checks": {
+    "git_available": true,
+    "python_ok": true,
+    "repo_writable": true,
+    "branch": "claude/uk-supplier-dependency-atlas-ukhu0y",
+    "tree_dirty": false,
+    "govuk_reachable": false,
+    "fts_reachable": false,
+    "cf_reachable": false,
+    "ch_reachable": false,
+    "ch_key_present": false,
+    "missing_dirs": [],
+    "fixture_leaks": [],
+    "secrets_findings": []
+  },
+  "probes": [
+    {
+      "probe": "govuk",
+      "url": "https://www.gov.uk/api/content/government/publications/crown-representatives-and-strategic-suppliers",
+      "http_status": null,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "tested_at": "2026-07-17T21:53:41Z"
+    },
+    {
+      "probe": "fts",
+      "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-07-17T15:53:41&updatedTo=2026-07-17T21:53:41",
+      "http_status": null,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "tested_at": "2026-07-17T21:53:42Z"
+    },
+    {
+      "probe": "cf",
+      "url": "https://www.contractsfinder.service.gov.uk/api/rest/2/search_notices/json?keyword=infrastructure&size=1",
+      "http_status": null,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "tested_at": "2026-07-17T21:53:42Z"
+    },
+    {
+      "probe": "ch",
+      "url": "https://api.company-information.service.gov.uk/company/00000006",
+      "http_status": null,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "tested_at": "2026-07-17T21:53:42Z"
+    }
+  ]
+}

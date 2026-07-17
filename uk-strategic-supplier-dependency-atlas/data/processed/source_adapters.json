@@ -1,0 +1,144 @@
+{
+  "generated_at": "2026-07-17T09:27:24Z",
+  "adapters": [
+    {
+      "name": "govuk_strategic_suppliers",
+      "source": "GOV.UK",
+      "access_method": "HTTP GET content API + attachments",
+      "auth_required": false,
+      "auth_variable": null,
+      "rate_limits": "none documented; 1s politeness delay",
+      "raw_payload_format": "JSON + CSV/ODS",
+      "raw_path_pattern": "data/raw/strategic_suppliers/*",
+      "normalized_schema": "strategic_supplier.schema.json",
+      "stable_record_id": "content_id + row ordinal",
+      "evidence_fields": [
+        "SUPPLIER_NAME",
+        "CROWN_REPRESENTATIVE"
+      ],
+      "citation_method": "publication URL + attachment + row",
+      "known_limitations": [
+        "attachment format varies",
+        "list updates replace attachments"
+      ],
+      "retry_failure_behaviour": "2 retries w/ backoff; structured SourceAccessFailure",
+      "freshness_behaviour": "re-capture per run; sha256 change detection",
+      "offline_capable": true
+    },
+    {
+      "name": "find_a_tender",
+      "source": "FTS",
+      "access_method": "HTTP GET OCDS release packages (date window + cursor)",
+      "auth_required": false,
+      "auth_variable": null,
+      "rate_limits": "documented API limits — verify live; 1s delay",
+      "raw_payload_format": "OCDS JSON release packages",
+      "raw_path_pattern": "data/raw/procurement/fts_*",
+      "normalized_schema": "contract.schema.json",
+      "stable_record_id": "ocid + release id",
+      "evidence_fields": [
+        "TITLE",
+        "BUYER_NAME",
+        "SUPPLIER_NAME",
+        "SUPPLIER_IDENTIFIER",
+        "VALUE_AMOUNT",
+        "AWARD_DATE",
+        "CONTRACT_START",
+        "CONTRACT_END",
+        "CPV_CODE",
+        "PROCEDURE_TYPE",
+        "PUBLISHED_DATE"
+      ],
+      "citation_method": "FTS notice URL + OCID",
+      "known_limitations": [
+        "no keyword search",
+        "above-threshold only",
+        "identifiers not always populated"
+      ],
+      "retry_failure_behaviour": "2 retries w/ backoff; partial windows recorded",
+      "freshness_behaviour": "immutable snapshots; new windows appended",
+      "offline_capable": true
+    },
+    {
+      "name": "contracts_finder",
+      "source": "CF",
+      "access_method": "HTTP GET REST2 keyword search + OCDS harvester window",
+      "auth_required": false,
+      "auth_variable": null,
+      "rate_limits": "none published; 1s politeness delay",
+      "raw_payload_format": "JSON (search) + OCDS JSON",
+      "raw_path_pattern": "data/raw/procurement/cf_*",
+      "normalized_schema": "contract.schema.json",
+      "stable_record_id": "notice id / ocid",
+      "evidence_fields": [
+        "TITLE",
+        "BUYER_NAME",
+        "SUPPLIER_NAME",
+        "VALUE_AMOUNT",
+        "AWARD_DATE",
+        "CONTRACT_START",
+        "CONTRACT_END",
+        "CPV_CODE"
+      ],
+      "citation_method": "CF notice URL + id",
+      "known_limitations": [
+        "keyword recall imperfect (trading names)",
+        "zero hits is not proof of absence"
+      ],
+      "retry_failure_behaviour": "2 retries w/ backoff; structured errors",
+      "freshness_behaviour": "immutable snapshots",
+      "offline_capable": true
+    },
+    {
+      "name": "companies_house",
+      "source": "CH",
+      "access_method": "HTTP GET REST API (Basic auth: key as username)",
+      "auth_required": true,
+      "auth_variable": "COMPANIES_HOUSE_API_KEY",
+      "rate_limits": "600 req/5min (verify live); throttled <=1 req/s",
+      "raw_payload_format": "JSON (minimised at write: no residential addresses/DOB)",
+      "raw_path_pattern": "data/raw/companies_house/*",
+      "normalized_schema": "companies_house_record.schema.json",
+      "stable_record_id": "company_number",
+      "evidence_fields": [
+        "COMPANY_NAME",
+        "COMPANY_NUMBER",
+        "COMPANY_STATUS",
+        "DATE_OF_CREATION",
+        "PREVIOUS_NAME",
+        "PSC_*"
+      ],
+      "citation_method": "LINK-ONLY web profile URL + API field",
+      "known_limitations": [
+        "API key required",
+        "PSC lags corporate events",
+        "minimisation intentionally drops fields"
+      ],
+      "retry_failure_behaviour": "429 backoff; MissingCredential structured error",
+      "freshness_behaviour": "dated captures per rebuild",
+      "offline_capable": true
+    },
+    {
+      "name": "govuk_terms_capture",
+      "source": "GOV.UK",
+      "access_method": "HTTP GET terms/licence pages for the licence review",
+      "auth_required": false,
+      "auth_variable": null,
+      "rate_limits": "n/a",
+      "raw_payload_format": "HTML",
+      "raw_path_pattern": "data/raw/source_probe/terms_*",
+      "normalized_schema": "source_lock.schema.json",
+      "stable_record_id": "URL + date",
+      "evidence_fields": [
+        "LICENCE_TEXT"
+      ],
+      "citation_method": "URL + quoted passage",
+      "known_limitations": [
+        "pending first capture"
+      ],
+      "retry_failure_behaviour": "2 retries w/ backoff",
+      "freshness_behaviour": "re-capture before each release decision",
+      "offline_capable": true
+    }
+  ]
+}

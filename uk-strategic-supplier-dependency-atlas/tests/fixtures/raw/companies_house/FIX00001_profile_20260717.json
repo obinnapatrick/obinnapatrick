@@ -1,0 +1,22 @@
+{
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "company_number": "FIX00001",
+  "company_name": "FIXTURECORP TECHNOLOGY SERVICES LIMITED",
+  "company_status": "active",
+  "type": "ltd",
+  "date_of_creation": "1999-04-01",
+  "registered_office_address": {
+    "locality": "Testtown",
+    "postal_code": "TE5 7XX"
+  },
+  "previous_company_names": [
+    {
+      "name": "FIXTURE LEGACY SYSTEMS LIMITED",
+      "effective_from": "1999-04-01",
+      "ceased_on": "2010-06-15"
+    }
+  ],
+  "sic_codes": [
+    "62020"
+  ]
+}

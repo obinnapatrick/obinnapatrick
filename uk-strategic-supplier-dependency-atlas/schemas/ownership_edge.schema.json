@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/ownership_edge.schema.json",
+  "title": "OwnershipOrControlEdge",
+  "description": "",
+  "type": "object",
+  "required": [
+    "edge_id",
+    "from_entity",
+    "to_entity",
+    "edge_type",
+    "source",
+    "evidence",
+    "fact_state",
+    "personal_data_minimisation_applied"
+  ],
+  "properties": {
+    "edge_id": {
+      "type": "string"
+    },
+    "from_entity": {
+      "type": "string"
+    },
+    "to_entity": {
+      "type": "string"
+    },
+    "edge_type": {
+      "type": "string",
+      "enum": [
+        "owns_or_controls",
+        "is_owned_or_controlled_by",
+        "group_member"
+      ]
+    },
+    "natures_of_control": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "GOVUK",
+        "FAT",
+        "CF",
+        "CH",
+        "PARLIAMENT",
+        "OTHER"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "fact_state": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED",
+        "PROBABLE",
+        "POSSIBLE",
+        "UNRESOLVED",
+        "CONFLICTING"
+      ]
+    },
+    "evidence_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "contradiction_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "personal_data_minimisation_applied": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

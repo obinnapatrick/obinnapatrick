@@ -1,0 +1,310 @@
+{
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "uri": "https://fixture.invalid/ocds-package-0001",
+  "publishedDate": "2026-07-17T00:00:00Z",
+  "releases": [
+    {
+      "ocid": "fixture-ocds-0001",
+      "id": "FIXNOTICE-0001",
+      "date": "2026-01-15T00:00:00Z",
+      "tag": [
+        "award"
+      ],
+      "parties": [
+        {
+          "id": "buyer-1",
+          "name": "Fixture Department for Testing",
+          "roles": [
+            "buyer"
+          ]
+        },
+        {
+          "id": "sup-1",
+          "name": "Fixturecorp Technology Services",
+          "roles": [
+            "supplier"
+          ],
+          "identifier": {
+            "scheme": "GB-COH",
+            "id": "FIX00001"
+          }
+        }
+      ],
+      "buyer": {
+        "id": "buyer-1",
+        "name": "Fixture Department for Testing"
+      },
+      "tender": {
+        "title": "Fixture managed IT services contract",
+        "status": "complete",
+        "procurementMethod": "open",
+        "classification": {
+          "scheme": "CPV",
+          "id": "72000000",
+          "description": "FIXTURE category"
+        }
+      },
+      "awards": [
+        {
+          "id": "FIXNOTICE-0001-a1",
+          "status": "active",
+          "date": "2026-01-15T00:00:00Z",
+          "value": {
+            "amount": 1200000,
+            "currency": "GBP"
+          },
+          "suppliers": [
+            {
+              "id": "sup-1",
+              "name": "Fixturecorp Technology Services"
+            }
+          ],
+          "contractPeriod": {
+            "startDate": "2026-02-01T00:00:00Z",
+            "endDate": "2027-01-31T00:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "ocid": "fixture-ocds-0002",
+      "id": "FIXNOTICE-0002",
+      "date": "2026-03-02T00:00:00Z",
+      "tag": [
+        "award"
+      ],
+      "parties": [
+        {
+          "id": "buyer-1",
+          "name": "Fixture Department for Testing",
+          "roles": [
+            "buyer"
+          ]
+        },
+        {
+          "id": "sup-1",
+          "name": "Fixturecorp Technology Services Limited",
+          "roles": [
+            "supplier"
+          ],
+          "identifier": {
+            "scheme": "GB-COH",
+            "id": "FIX00001"
+          }
+        }
+      ],
+      "buyer": {
+        "id": "buyer-1",
+        "name": "Fixture Department for Testing"
+      },
+      "tender": {
+        "title": "Fixture data platform award",
+        "status": "complete",
+        "procurementMethod": "open",
+        "classification": {
+          "scheme": "CPV",
+          "id": "72300000",
+          "description": "FIXTURE category"
+        }
+      },
+      "awards": [
+        {
+          "id": "FIXNOTICE-0002-a1",
+          "status": "active",
+          "date": "2026-03-02T00:00:00Z",
+          "value": {
+            "amount": 450000,
+            "currency": "GBP"
+          },
+          "suppliers": [
+            {
+              "id": "sup-1",
+              "name": "Fixturecorp Technology Services Limited"
+            }
+          ],
+          "contractPeriod": {
+            "startDate": "2026-04-01T00:00:00Z",
+            "endDate": "2027-03-31T00:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "ocid": "fixture-ocds-0003",
+      "id": "FIXNOTICE-0003",
+      "date": "2026-05-20T00:00:00Z",
+      "tag": [
+        "award"
+      ],
+      "parties": [
+        {
+          "id": "buyer-1",
+          "name": "Fixture Agency for Examples",
+          "roles": [
+            "buyer"
+          ]
+        },
+        {
+          "id": "sup-1",
+          "name": "Fixturecorp Technology Services (UK)",
+          "roles": [
+            "supplier"
+          ]
+        }
+      ],
+      "buyer": {
+        "id": "buyer-1",
+        "name": "Fixture Agency for Examples"
+      },
+      "tender": {
+        "title": "Fixture support services renewal",
+        "status": "complete",
+        "procurementMethod": null,
+        "classification": {
+          "scheme": "CPV",
+          "id": "72500000",
+          "description": "FIXTURE category"
+        }
+      },
+      "awards": [
+        {
+          "id": "FIXNOTICE-0003-a1",
+          "status": "active",
+          "date": "2026-05-20T00:00:00Z",
+          "value": {
+            "amount": null,
+            "currency": "GBP"
+          },
+          "suppliers": [
+            {
+              "id": "sup-1",
+              "name": "Fixturecorp Technology Services (UK)"
+            }
+          ],
+          "contractPeriod": {
+            "startDate": "2026-06-01T00:00:00Z",
+            "endDate": null
+          }
+        }
+      ]
+    },
+    {
+      "ocid": "fixture-ocds-0004",
+      "id": "FIXNOTICE-0004",
+      "date": "2026-02-10T00:00:00Z",
+      "tag": [
+        "award"
+      ],
+      "parties": [
+        {
+          "id": "buyer-1",
+          "name": "Fixture Agency for Examples",
+          "roles": [
+            "buyer"
+          ]
+        },
+        {
+          "id": "sup-1",
+          "name": "Unrelated Vendor Ltd",
+          "roles": [
+            "supplier"
+          ]
+        }
+      ],
+      "buyer": {
+        "id": "buyer-1",
+        "name": "Fixture Agency for Examples"
+      },
+      "tender": {
+        "title": "Fixture unrelated stationery award",
+        "status": "complete",
+        "procurementMethod": "open",
+        "classification": {
+          "scheme": "CPV",
+          "id": "30190000",
+          "description": "FIXTURE category"
+        }
+      },
+      "awards": [
+        {
+          "id": "FIXNOTICE-0004-a1",
+          "status": "active",
+          "date": "2026-02-10T00:00:00Z",
+          "value": {
+            "amount": 90000,
+            "currency": "GBP"
+          },
+          "suppliers": [
+            {
+              "id": "sup-1",
+              "name": "Unrelated Vendor Ltd"
+            }
+          ],
+          "contractPeriod": {
+            "startDate": "2026-03-01T00:00:00Z",
+            "endDate": "2026-12-31T00:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "ocid": "fixture-ocds-0005",
+      "id": "FIXNOTICE-0005",
+      "date": "2026-06-01T00:00:00Z",
+      "tag": [
+        "award"
+      ],
+      "parties": [
+        {
+          "id": "buyer-1",
+          "name": "Fixture Agency for Examples",
+          "roles": [
+            "buyer"
+          ]
+        },
+        {
+          "id": "sup-1",
+          "name": "Fixturecorp Technology Services",
+          "roles": [
+            "supplier"
+          ]
+        }
+      ],
+      "buyer": {
+        "id": "buyer-1",
+        "name": "Fixture Agency for Examples"
+      },
+      "tender": {
+        "title": "Fixture hosting call-off",
+        "status": "complete",
+        "procurementMethod": "direct",
+        "classification": {
+          "scheme": "CPV",
+          "id": "72400000",
+          "description": "FIXTURE category"
+        }
+      },
+      "awards": [
+        {
+          "id": "FIXNOTICE-0005-a1",
+          "status": "active",
+          "date": "2026-06-01T00:00:00Z",
+          "value": {
+            "amount": 800000,
+            "currency": "GBP"
+          },
+          "suppliers": [
+            {
+              "id": "sup-1",
+              "name": "Fixturecorp Technology Services"
+            }
+          ],
+          "contractPeriod": {
+            "startDate": "2026-07-01T00:00:00Z",
+            "endDate": "2027-02-28T00:00:00Z"
+          }
+        }
+      ]
+    }
+  ]
+}

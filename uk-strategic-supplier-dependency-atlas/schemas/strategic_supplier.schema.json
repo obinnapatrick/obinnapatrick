@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/strategic_supplier.schema.json",
+  "title": "StrategicSupplier",
+  "description": "A supplier as named on the official GOV.UK strategic supplier list.",
+  "type": "object",
+  "required": [
+    "supplier_id",
+    "official_name",
+    "source_list",
+    "row_ordinal",
+    "evidence",
+    "fact_state"
+  ],
+  "properties": {
+    "supplier_id": {
+      "type": "string"
+    },
+    "official_name": {
+      "type": "string"
+    },
+    "source_list": {
+      "type": "object",
+      "required": [
+        "source_url",
+        "raw_path"
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string"
+        },
+        "content_id": {
+          "type": "string"
+        },
+        "raw_path": {
+          "type": "string"
+        },
+        "list_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "row_ordinal": {
+      "type": "integer"
+    },
+    "crown_representative": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "fact_state": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED",
+        "PROBABLE",
+        "POSSIBLE",
+        "UNRESOLVED",
+        "CONFLICTING"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

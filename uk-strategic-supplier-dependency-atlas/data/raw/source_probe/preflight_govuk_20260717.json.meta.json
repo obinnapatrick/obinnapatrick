@@ -1,0 +1,12 @@
+{
+  "source_name": "preflight probe: govuk",
+  "source_url": "https://www.gov.uk/api/content/government/publications/crown-representatives-and-strategic-suppliers",
+  "retrieval_method": "HTTP GET (local preflight)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "evidence_class": "ACCESS_TEST",
+  "local_path": "data/raw/source_probe/preflight_govuk_20260717.json",
+  "sha256": "27a311b963320eadb70e419d1950d724b8ce289898a2581f536c6c6226008bf7",
+  "bytes": 299,
+  "saved_at": "2026-07-17T21:53:41Z"
+}

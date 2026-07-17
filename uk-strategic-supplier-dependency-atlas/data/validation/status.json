@@ -1,0 +1,16 @@
+{
+  "source_probe_verdict": "BLOCKED",
+  "source_probe_at": "2026-07-17T09:06:08Z",
+  "companies_house_key_present": false,
+  "updated_at": "2026-07-17T21:54:09Z",
+  "source_lock_entries": 14,
+  "evidence_grade_captures": 0,
+  "licence_review_state": "PROVISIONAL",
+  "release_state": "BLOCKED_NEEDS_HUMAN_DECISION",
+  "artifact_level": "METHODOLOGY_AND_DATA_SPINE_PACKAGE",
+  "release_reason": "No evidence-grade source capture is possible: every official host is denied by the session's egress policy, and COMPANIES_HOUSE_API_KEY is absent. The machinery, schemas, adapter contracts, gates and fixtures are complete and tested; a human must either allowlist the hosts (and optionally provide the CH key) or run the pipeline in a network-permitted environment.",
+  "git_commit": "8419a9d73bc263534fb610ee9f655afdaa6e5781",
+  "continuation_docs_missing": [],
+  "preflight_classification": "BLOCKED",
+  "preflight_at": "2026-07-17T21:53:42Z"
+}

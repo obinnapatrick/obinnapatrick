@@ -1,0 +1,29 @@
+{
+  "record_type": "LOCATOR_ONLY",
+  "evidence_class": "LOCATOR_ONLY",
+  "warning": "Search-engine snippets. NOT source evidence. Mission rule: 'Do not use unsupported search snippets as confirmed evidence.' This record exists solely to document how the canonical official publication URL was located while direct access to www.gov.uk was blocked by session egress policy.",
+  "retrieval_method": "Claude Code harness WebSearch tool (server-side search API; bypasses container egress)",
+  "retrieved_at": "2026-07-17T09:04:00Z",
+  "query": "GOV.UK strategic suppliers publication Cabinet Office list",
+  "primary_locator": {
+    "title": "Crown Representatives and strategic suppliers - GOV.UK",
+    "url": "https://www.gov.uk/government/publications/crown-representatives-and-strategic-suppliers",
+    "why_primary": "Official GOV.UK publication page; expected to carry the official strategic supplier list as attachment(s). Must be fetched, saved raw and hashed before any supplier data is used."
+  },
+  "secondary_locators": [
+    {
+      "title": "House of Commons Committee of Public Accounts Strategic Suppliers",
+      "url": "https://publications.parliament.uk/pa/cm201719/cmselect/cmpubacc/1031/1031.pdf",
+      "note": "Parliamentary corroboration source; secondary only."
+    },
+    {
+      "title": "Strategic Suppliers inquiry - Committees - UK Parliament",
+      "url": "https://committees.parliament.uk/work/3941/strategic-suppliers-inquiry/publications/",
+      "note": "Parliamentary corroboration source; secondary only."
+    }
+  ],
+  "unverified_context_notes": [
+    "Search snippet claimed ~39 designated strategic suppliers as of June 2026 (attributed to a commercial secondary source). UNVERIFIED. Do not use in any data file or output. Recorded only to size expectations for the ingest adapter.",
+    "Search snippet claimed the designation threshold relates to suppliers receiving over 100m GBP/year revenue from government contracts. UNVERIFIED. Must be confirmed from the official publication body text after access is restored."
+  ]
+}

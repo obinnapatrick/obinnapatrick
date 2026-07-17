@@ -1,0 +1,13 @@
+{
+  "probe": "companies_house_web_profile",
+  "source_url": "https://find-and-update.company-information.service.gov.uk/company/00000006",
+  "retrieval_method": "HTTP GET (stdlib urllib via session proxy)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "content_type": "",
+  "note": "Public CH web profile - used for LINK-ONLY citations, not scraping",
+  "local_path": "data/raw/source_probe/companies_house_web_profile.txt",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bytes": 0,
+  "saved_at": "2026-07-17T09:05:59Z"
+}
