@@ -1,0 +1,216 @@
+{
+  "CP0": {
+    "checkpoint_id": "CP0",
+    "title": "Repository created",
+    "phase": "PHASE 0",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "repository scaffold",
+      "required directory tree",
+      "git branch claude/uk-supplier-dependency-atlas-ukhu0y",
+      "stdlib utilities (raw saving, evidence IDs, ledger, status)"
+    ],
+    "missing_outputs": [],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "pass",
+    "blocker": null,
+    "next_command": "python3 scripts/atlas.py probe_sources",
+    "continuation_note": "Project lives in uk-strategic-supplier-dependency-atlas/ inside the obinnapatrick/obinnapatrick repo."
+  },
+  "CP1": {
+    "checkpoint_id": "CP1",
+    "title": "Source spine verified",
+    "phase": "PHASE 0 source spine",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "probe module",
+      "2 probe runs over 8 official hosts",
+      "failure evidence with timestamps",
+      "WebFetch/WebSearch policy tests",
+      "canonical publication URL located (LOCATOR_ONLY)",
+      "docs/DATA_SOURCES.md",
+      "docs/SOURCE_ACCESS_LOG.md"
+    ],
+    "missing_outputs": [
+      "any evidence-grade raw capture"
+    ],
+    "files_changed": [],
+    "evidence_saved": [
+      "data/raw/source_probe/probe_report.json",
+      "data/raw/source_probe/*.meta.json"
+    ],
+    "status": "blocked",
+    "blocker": "egress policy denies www.gov.uk, assets.publishing.service.gov.uk, www.find-tender.service.gov.uk, www.contractsfinder.service.gov.uk, api.company-information.service.gov.uk, find-and-update.company-information.service.gov.uk, download.companieshouse.gov.uk",
+    "next_command": "python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md",
+    "continuation_note": "Verdict BLOCKED: every required host CONNECT-403 by session egress policy; COMPANIES_HOUSE_API_KEY also absent. Unblock options documented in docs/SOURCE_ACCESS_LOG.md."
+  },
+  "CP2": {
+    "checkpoint_id": "CP2",
+    "title": "Source-lock manifest created",
+    "phase": "source lock",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "docs/SOURCE_LOCK_MANIFEST.md (mechanism + evidence classes)",
+      "lock_sources command",
+      "data/processed/source_lock.jsonl (10 entries, 0 evidence-grade)",
+      "hash-immutability check"
+    ],
+    "missing_outputs": [
+      "evidence-grade entries (blocked upstream)"
+    ],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "pass",
+    "blocker": null,
+    "next_command": "python3 scripts/atlas.py lock_sources",
+    "continuation_note": "Manifest mechanism proven; every raw file hashed and registered; rebuild-from-raw enforced by design."
+  },
+  "CP3": {
+    "checkpoint_id": "CP3",
+    "title": "Source adapters specified",
+    "phase": "adapters",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "docs/SOURCE_ADAPTERS.md (5 contracts)",
+      "data/processed/source_adapters.json (schema-validated)",
+      "adapter code: GOV.UK list, FTS OCDS, Contracts Finder, Companies House (key-aware, minimising), terms capture",
+      "all adapters offline-capable"
+    ],
+    "missing_outputs": [
+      "live payload verification of field mappings"
+    ],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "pass",
+    "blocker": null,
+    "next_command": "python3 scripts/atlas.py build_source_adapters",
+    "continuation_note": "Field mappings written against documented API structure; marked (verify live) in contracts."
+  },
+  "CP4": {
+    "checkpoint_id": "CP4",
+    "title": "Supplier shortlist scored",
+    "phase": "supplier shortlist",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "scoring module with 10 criteria",
+      "name-ambiguity heuristic",
+      "provisional-score guard"
+    ],
+    "missing_outputs": [
+      "captured official list",
+      "live visibility probes",
+      "scored table",
+      "first-supplier selection"
+    ],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "blocked",
+    "blocker": "no official-list capture possible (egress policy)",
+    "next_command": "python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md",
+    "continuation_note": "Selection is forbidden until the official list is captured (mission rules 2/12). score_suppliers refuses to run without a capture and refuses to finalise on provisional scores."
+  },
+  "CP5": {
+    "checkpoint_id": "CP5",
+    "title": "Graph schema created",
+    "phase": "graph schema",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "17 JSON schemas",
+      "evidence-ID rule implemented",
+      "provenance classes",
+      "fact states",
+      "manual-review schema",
+      "docs/METHODOLOGY.md",
+      "docs/DATA_DICTIONARY.md"
+    ],
+    "missing_outputs": [],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "pass",
+    "blocker": null,
+    "next_command": "python3 tests/test_pipeline_fixture.py",
+    "continuation_note": "Schema-lite validator enforces required/enum/type; full validation depth documented as a limitation."
+  },
+  "CP6": {
+    "checkpoint_id": "CP6",
+    "title": "One-supplier truth slice built",
+    "phase": "one-supplier truth slice",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "truth-slice builder (offline, deterministic)",
+      "entity-resolution ladder",
+      "indicators engine",
+      "ownership edges from PSC",
+      "27/27 fixture e2e checks pass"
+    ],
+    "missing_outputs": [
+      "real truth slice (needs evidence-grade captures)"
+    ],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "blocked",
+    "blocker": "source access BLOCKED",
+    "next_command": "python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md",
+    "continuation_note": "Machinery fixture-proven end-to-end; no real data may be processed until source access exists."
+  },
+  "CP7": {
+    "checkpoint_id": "CP7",
+    "title": "Acceptance gates passed",
+    "phase": "acceptance gates",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "gate engine + data/validation/acceptance_gates.json",
+      "secrets gate PASS",
+      "fixture firewall PASS",
+      "publication-safety PASS",
+      "source-lock gates PASS"
+    ],
+    "missing_outputs": [
+      "GATE-SRC-01, GATE-LIC-01, GATE-SCHEMA-01, GATE-PROV-01, GATE-SLICE-01 (all blocked on access)"
+    ],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "blocked",
+    "blocker": "source access BLOCKED",
+    "next_command": "python3 scripts/atlas.py run_acceptance_gates",
+    "continuation_note": "5 pass / 0 fail / 5 blocked; every blocked gate carries its unblock action."
+  },
+  "CP8": {
+    "checkpoint_id": "CP8",
+    "title": "Static supplier profile rendered",
+    "phase": "static profile",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "renderer with evidence panels, fact-state labels, manual-review view, rebuild command",
+      "fixture render verified (banner, evidence chips, no prohibited wording)"
+    ],
+    "missing_outputs": [
+      "real supplier profile under outputs/profiles/"
+    ],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "blocked",
+    "blocker": "source access BLOCKED",
+    "next_command": "python3 scripts/atlas.py probe_sources  # after allowlisting hosts per docs/SOURCE_ACCESS_LOG.md",
+    "continuation_note": "Renderer is ready; outputs/profiles stays empty until a real slice passes gates."
+  },
+  "CP12": {
+    "checkpoint_id": "CP12",
+    "title": "Release state decided",
+    "phase": "release state",
+    "timestamp": "2026-07-17T09:28:23Z",
+    "completed_outputs": [
+      "docs/RELEASE_STATE.md",
+      "docs/OPERATOR_REVIEW_GATE.md",
+      "status.json release_state=BLOCKED_NEEDS_HUMAN_DECISION"
+    ],
+    "missing_outputs": [],
+    "files_changed": [],
+    "evidence_saved": [],
+    "status": "pass",
+    "blocker": null,
+    "next_command": "python3 scripts/atlas.py decide_release_state",
+    "continuation_note": "Honest classification: BLOCKED / NEEDS HUMAN DECISION; artifact level = METHODOLOGY AND DATA-SPINE PACKAGE. CP9-CP11 (mini cohort, validation, findings) intentionally not created: they cannot exist before a real truth slice."
+  }
+}

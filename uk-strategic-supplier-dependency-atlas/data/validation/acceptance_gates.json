@@ -1,0 +1,131 @@
+{
+  "ran_at": "2026-07-17T09:27:40Z",
+  "gates": [
+    {
+      "gate_id": "GATE-SRC-01",
+      "phase": "source_access",
+      "requirement": "Official sources retrievable (verdict PASS or PARTIAL)",
+      "test_method": "probe_sources verdict in status.json",
+      "status": "blocked",
+      "blocking": true,
+      "evidence_file": "data/raw/source_probe/probe_report.json",
+      "failure_reason": "All official hosts denied by session egress policy (CONNECT 403)",
+      "next_action": "Allowlist hosts in environment network policy or run locally; see docs/SOURCE_ACCESS_LOG.md",
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-LOCK-01",
+      "phase": "source_lock",
+      "requirement": "Every raw file has a .meta.json sidecar (method, timestamp, sha256)",
+      "test_method": "filesystem sweep of data/raw/",
+      "status": "pass",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": null,
+      "next_action": null,
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-LOCK-02",
+      "phase": "source_lock",
+      "requirement": "Every raw file is registered in source_lock.jsonl",
+      "test_method": "compare data/raw sweep to data/processed/source_lock.jsonl",
+      "status": "pass",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": null,
+      "next_action": null,
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-SECRET-01",
+      "phase": "secrets",
+      "requirement": "No credentials in code, docs, data, outputs or logs",
+      "test_method": "regex scan + literal env-value scan",
+      "status": "pass",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": null,
+      "next_action": null,
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-FIX-01",
+      "phase": "fixture_firewall",
+      "requirement": "No fixture IDs/markers in outputs/ or data/processed|exports",
+      "test_method": "marker scan (FIXTURE-, SYNTHETIC_TEST_FIXTURE)",
+      "status": "pass",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": null,
+      "next_action": null,
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-SAFE-01",
+      "phase": "publication_safety",
+      "requirement": "No prohibited accusation wording in any output tree",
+      "test_method": "word list scan over outputs/, data/exports/, data/processed/",
+      "status": "pass",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": null,
+      "next_action": null,
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-LIC-01",
+      "phase": "licence_terms",
+      "requirement": "Every source classified; classifications verified from live terms",
+      "test_method": "docs/LICENCE_AND_TERMS_REVIEW.md status marker",
+      "status": "blocked",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": "Classifications are PROVISIONAL (terms pages unreachable this session)",
+      "next_action": "Re-verify terms from live pages once access restored",
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-SCHEMA-01",
+      "phase": "schema_validation",
+      "requirement": "Truth-slice records validate against JSON schemas",
+      "test_method": "requires a built truth slice",
+      "status": "blocked",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": "No truth slice exists (source access BLOCKED)",
+      "next_action": "Restore source access, then: fetch_suppliers, fetch procurement, build_truth_slice",
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-PROV-01",
+      "phase": "provenance",
+      "requirement": "Every displayed claim resolves to evidence",
+      "test_method": "requires a built truth slice",
+      "status": "blocked",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": "No truth slice exists (source access BLOCKED)",
+      "next_action": "Restore source access, then: fetch_suppliers, fetch procurement, build_truth_slice",
+      "ran_at": "2026-07-17T09:27:40Z"
+    },
+    {
+      "gate_id": "GATE-SLICE-01",
+      "phase": "truth_slice",
+      "requirement": ">=3 linked procurement records",
+      "test_method": "requires a built truth slice",
+      "status": "blocked",
+      "blocking": true,
+      "evidence_file": null,
+      "failure_reason": "No truth slice exists (source access BLOCKED)",
+      "next_action": "Restore source access, then: fetch_suppliers, fetch procurement, build_truth_slice",
+      "ran_at": "2026-07-17T09:27:40Z"
+    }
+  ],
+  "summary": {
+    "pass": 5,
+    "fail": 0,
+    "blocked": 5,
+    "not_run": 0
+  }
+}
