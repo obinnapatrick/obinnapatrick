@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/confidence.schema.json",
+  "title": "ConfidenceAssessment",
+  "description": "",
+  "type": "object",
+  "required": [
+    "subject_type",
+    "subject_id",
+    "fact_state",
+    "method",
+    "evidence_for",
+    "reason",
+    "reviewer_status",
+    "assessed_at"
+  ],
+  "properties": {
+    "assessment_id": {
+      "type": "string"
+    },
+    "subject_type": {
+      "type": "string"
+    },
+    "subject_id": {
+      "type": "string"
+    },
+    "fact_state": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED",
+        "PROBABLE",
+        "POSSIBLE",
+        "UNRESOLVED",
+        "CONFLICTING"
+      ]
+    },
+    "score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "method": {
+      "type": "string"
+    },
+    "evidence_for": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "evidence_against": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "reviewer_status": {
+      "type": "string",
+      "enum": [
+        "unreviewed",
+        "machine_only",
+        "human_reviewed"
+      ]
+    },
+    "assessed_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

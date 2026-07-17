@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/indicator.schema.json",
+  "title": "DependencyIndicator",
+  "description": "Neutral structural indicator. Never a subjective risk score.",
+  "type": "object",
+  "required": [
+    "indicator_id",
+    "name",
+    "subject_type",
+    "subject_id",
+    "formula",
+    "input_fields",
+    "input_record_ids",
+    "evidence_ids",
+    "value",
+    "limitations",
+    "confidence",
+    "calculated_at",
+    "safe_to_display_reason"
+  ],
+  "properties": {
+    "indicator_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "subject_type": {
+      "type": "string"
+    },
+    "subject_id": {
+      "type": "string"
+    },
+    "formula": {
+      "type": "string"
+    },
+    "input_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "input_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "value": {},
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED",
+        "PROBABLE",
+        "POSSIBLE",
+        "UNRESOLVED",
+        "CONFLICTING"
+      ]
+    },
+    "calculated_at": {
+      "type": "string"
+    },
+    "safe_to_display_reason": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

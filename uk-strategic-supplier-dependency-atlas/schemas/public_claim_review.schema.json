@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/public_claim_review.schema.json",
+  "title": "PublicClaimReview",
+  "description": "",
+  "type": "object",
+  "required": [
+    "finding_id",
+    "exact_claim",
+    "supporting_evidence_ids",
+    "supporting_source_records",
+    "calculation",
+    "remaining_uncertainty",
+    "prohibited_stronger_interpretation",
+    "could_imply_wrongdoing",
+    "could_imply_complete_coverage",
+    "could_imply_confirmed_ownership",
+    "safe_to_display",
+    "decided_at",
+    "decided_by"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string"
+    },
+    "exact_claim": {
+      "type": "string"
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "supporting_source_records": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "calculation": {
+      "type": "string"
+    },
+    "remaining_uncertainty": {
+      "type": "string"
+    },
+    "prohibited_stronger_interpretation": {
+      "type": "string"
+    },
+    "could_imply_wrongdoing": {
+      "type": "object",
+      "required": [
+        "answer",
+        "note"
+      ],
+      "properties": {
+        "answer": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "could_imply_complete_coverage": {
+      "type": "object",
+      "required": [
+        "answer",
+        "note"
+      ],
+      "properties": {
+        "answer": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "could_imply_confirmed_ownership": {
+      "type": "object",
+      "required": [
+        "answer",
+        "note"
+      ],
+      "properties": {
+        "answer": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "safe_to_display": {
+      "type": "object",
+      "required": [
+        "answer",
+        "note"
+      ],
+      "properties": {
+        "answer": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "decided_at": {
+      "type": "string"
+    },
+    "decided_by": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

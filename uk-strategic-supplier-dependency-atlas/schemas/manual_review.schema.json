@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/manual_review.schema.json",
+  "title": "ManualReviewItem",
+  "description": "",
+  "type": "object",
+  "required": [
+    "item_id",
+    "entity_affected",
+    "issue_type",
+    "recommended_next_step",
+    "publication_status",
+    "severity",
+    "created_at"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "entity_affected": {
+      "type": "string"
+    },
+    "issue_type": {
+      "type": "string"
+    },
+    "evidence_available": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "candidate_resolutions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_next_step": {
+      "type": "string"
+    },
+    "publication_status": {
+      "type": "string",
+      "enum": [
+        "blocked_until_resolved",
+        "private_only",
+        "displayable_as_unresolved"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "resolved_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "resolution": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
