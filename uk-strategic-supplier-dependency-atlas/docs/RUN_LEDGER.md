@@ -26,3 +26,5 @@ Append-only log of pipeline actions.
 | 2026-07-17T09:28:23Z | checkpoint | CP12 pass |
 | 2026-07-17T09:31:20Z | package_release | /home/user/obinnapatrick/uk-strategic-supplier-dependency-atlas/outputs/release/atlas_package_20260717.zip |
 | 2026-07-17T09:31:20Z | write_handoff | commit=4d83042d9ce3 missing_docs=[] |
+| 2026-07-17T09:32:57Z | run_acceptance_gates | pass=5 fail=0 blocked=5 |
+| 2026-07-17T09:32:58Z | write_handoff | commit=9026e2b20b65 missing_docs=[] |
