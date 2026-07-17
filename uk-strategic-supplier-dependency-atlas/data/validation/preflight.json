@@ -1,5 +1,5 @@
 {
-  "ran_at": "2026-07-17T11:05:23Z",
+  "ran_at": "2026-07-17T21:53:42Z",
   "classification": "BLOCKED",
   "notes": [
     "GOV.UK unreachable - the official supplier list cannot be captured",
@@ -10,7 +10,7 @@
     "python_ok": true,
     "repo_writable": true,
     "branch": "claude/uk-supplier-dependency-atlas-ukhu0y",
-    "tree_dirty": true,
+    "tree_dirty": false,
     "govuk_reachable": false,
     "fts_reachable": false,
     "cf_reachable": false,
@@ -27,15 +27,15 @@
       "http_status": null,
       "reachable": false,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "tested_at": "2026-07-17T11:05:22Z"
+      "tested_at": "2026-07-17T21:53:41Z"
     },
     {
       "probe": "fts",
-      "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-07-17T05:05:21&updatedTo=2026-07-17T11:05:21",
+      "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-07-17T15:53:41&updatedTo=2026-07-17T21:53:41",
       "http_status": null,
       "reachable": false,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "tested_at": "2026-07-17T11:05:22Z"
+      "tested_at": "2026-07-17T21:53:42Z"
     },
     {
       "probe": "cf",
@@ -43,7 +43,7 @@
       "http_status": null,
       "reachable": false,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "tested_at": "2026-07-17T11:05:22Z"
+      "tested_at": "2026-07-17T21:53:42Z"
     },
     {
       "probe": "ch",
@@ -51,7 +51,7 @@
       "http_status": null,
       "reachable": false,
       "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
-      "tested_at": "2026-07-17T11:05:23Z"
+      "tested_at": "2026-07-17T21:53:42Z"
     }
   ]
 }

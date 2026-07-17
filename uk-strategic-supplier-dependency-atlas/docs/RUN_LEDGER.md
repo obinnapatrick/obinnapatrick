@@ -37,3 +37,6 @@ Append-only log of pipeline actions.
 | 2026-07-17T11:08:13Z | checkpoint | CP4 blocked |
 | 2026-07-17T11:08:49Z | run_acceptance_gates | pass=5 fail=0 blocked=5 |
 | 2026-07-17T11:10:19Z | write_handoff | commit=8419a9d73bc2 missing_docs=[] |
+| 2026-07-17T21:53:42Z | preflight_local | BLOCKED |
+| 2026-07-17T21:54:09Z | lock_sources | 14 raw files locked (0 evidence-grade) |
+| 2026-07-17T21:54:09Z | run_acceptance_gates | pass=5 fail=0 blocked=5 |

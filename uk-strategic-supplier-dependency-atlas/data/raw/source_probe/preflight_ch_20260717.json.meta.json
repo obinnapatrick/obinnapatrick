@@ -6,7 +6,7 @@
   "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
   "evidence_class": "ACCESS_TEST",
   "local_path": "data/raw/source_probe/preflight_ch_20260717.json",
-  "sha256": "6a9df73216e76b5b4d792436b32e843c0bc01a6792731e47d8270b9b56dde5a5",
+  "sha256": "a34fe54ad5366df5e15f999e738aabc9dc59efe0e85633390cdfe34fd6e7f94c",
   "bytes": 259,
-  "saved_at": "2026-07-17T11:05:23Z"
+  "saved_at": "2026-07-17T21:53:42Z"
 }

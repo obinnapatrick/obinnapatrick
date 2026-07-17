@@ -6,7 +6,7 @@
   "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
   "evidence_class": "ACCESS_TEST",
   "local_path": "data/raw/source_probe/preflight_govuk_20260717.json",
-  "sha256": "94de79029e7b74cda22fa8ddb044315d56244a4965e6785908b3156f6cac21c1",
+  "sha256": "27a311b963320eadb70e419d1950d724b8ce289898a2581f536c6c6226008bf7",
   "bytes": 299,
-  "saved_at": "2026-07-17T11:05:22Z"
+  "saved_at": "2026-07-17T21:53:41Z"
 }
