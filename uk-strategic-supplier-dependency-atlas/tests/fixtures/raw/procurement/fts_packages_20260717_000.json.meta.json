@@ -1,0 +1,11 @@
+{
+  "source_name": "SYNTHETIC fixture OCDS package",
+  "source_url": "https://fixture.invalid/ocds",
+  "retrieval_method": "fixture",
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "warning": "SYNTHETIC_TEST_FIXTURE - not real data; never cite as evidence",
+  "local_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+  "sha256": "13f16fb6372744593a91518d52979ee5b2ec8bd9403935630afd6b47bd36a463",
+  "bytes": 7372,
+  "saved_at": "2026-07-17T09:30:00Z"
+}

@@ -1,0 +1,13 @@
+{
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "items": [
+    {
+      "kind": "corporate-entity-person-with-significant-control",
+      "name": "Fixturecorp Global Holdings BV",
+      "natures_of_control": [
+        "ownership-of-shares-75-to-100-percent"
+      ],
+      "notified_on": "2020-01-01"
+    }
+  ]
+}

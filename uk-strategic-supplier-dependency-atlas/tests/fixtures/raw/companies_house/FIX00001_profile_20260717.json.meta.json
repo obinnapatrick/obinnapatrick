@@ -1,0 +1,12 @@
+{
+  "source_name": "SYNTHETIC fixture CH profile",
+  "source_url": "https://fixture.invalid/company/FIX00001",
+  "retrieval_method": "fixture",
+  "company_number": "FIX00001",
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "warning": "SYNTHETIC_TEST_FIXTURE - not real data; never cite as evidence",
+  "local_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+  "sha256": "6ea266da8bc5ee09ade6637f3adc05cb9047fa939d253a24d62f2c2e22e54d88",
+  "bytes": 506,
+  "saved_at": "2026-07-17T09:30:00Z"
+}

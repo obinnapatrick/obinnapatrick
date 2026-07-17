@@ -1,0 +1,1634 @@
+{
+  "supplier": {
+    "supplier_id": "SUP-fixturecorp-technology",
+    "official_name": "Fixturecorp Technology Services",
+    "source_list": {
+      "source_url": "https://fixture.invalid/strategic-suppliers",
+      "content_id": "FIXTURE-CONTENT-0001",
+      "raw_path": "tests/fixtures/raw/strategic_suppliers/attachment_20260717_strategic_suppliers_fixture.csv",
+      "list_date": null
+    },
+    "row_ordinal": 1,
+    "crown_representative": "Fixture Person A",
+    "evidence": [
+      "FIXTURE-GOVUK-20260717-STRATEGIC_SUPPLIER_LIST_ROW01-SUPPLIER_NAME",
+      "FIXTURE-GOVUK-20260717-STRATEGIC_SUPPLIER_LIST_ROW01-CROWN_REPRESENTATIVE"
+    ],
+    "fact_state": "CONFIRMED",
+    "notes": "SYNTHETIC_TEST_FIXTURE"
+  },
+  "legal_entities": [
+    {
+      "entity_id": "ENT-GB_COH_FIX00001",
+      "name": "Fixturecorp Technology Services",
+      "company_number": "FIX00001",
+      "jurisdiction": "GB",
+      "match": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "exact_company_number",
+        "fact_state": "CONFIRMED",
+        "confidence_score": 0.95,
+        "candidate_alternatives": [],
+        "evidence_for": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME"
+        ],
+        "evidence_against": [],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services' via exact_legal_name; GB-COH FIX00001 corroborated by captured CH record 'FIXTURECORP TECHNOLOGY SERVICES LIMITED'",
+        "reviewer_status": "machine_only",
+        "assessed_at": "2026-07-17T09:27:24Z"
+      },
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME"
+      ]
+    },
+    {
+      "entity_id": "ENT-NAME_FIXTURECORP_TECHNOLOGY_SERVICES_UK",
+      "name": "Fixturecorp Technology Services (UK)",
+      "company_number": null,
+      "jurisdiction": null,
+      "match": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "normalised_legal_name",
+        "fact_state": "POSSIBLE",
+        "confidence_score": 0.5,
+        "candidate_alternatives": [],
+        "evidence_for": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+        ],
+        "evidence_against": [],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services (UK)' via normalised_legal_name",
+        "reviewer_status": "machine_only",
+        "assessed_at": "2026-07-17T09:27:24Z"
+      },
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+      ]
+    },
+    {
+      "entity_id": "ENT-NAME_FIXTURECORP_TECHNOLOGY_SERVICES",
+      "name": "Fixturecorp Technology Services",
+      "company_number": null,
+      "jurisdiction": null,
+      "match": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "exact_legal_name",
+        "fact_state": "PROBABLE",
+        "confidence_score": 0.75,
+        "candidate_alternatives": [],
+        "evidence_for": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+        ],
+        "evidence_against": [],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services' via exact_legal_name",
+        "reviewer_status": "machine_only",
+        "assessed_at": "2026-07-17T09:27:24Z"
+      },
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+      ]
+    }
+  ],
+  "companies_house_records": [
+    {
+      "company_number": "FIX00001",
+      "company_name": "FIXTURECORP TECHNOLOGY SERVICES LIMITED",
+      "company_status": "active",
+      "company_type": "ltd",
+      "date_of_creation": "1999-04-01",
+      "registered_office": {
+        "locality": "Testtown",
+        "postal_code": "TE5 7XX"
+      },
+      "previous_names": [
+        {
+          "name": "FIXTURE LEGACY SYSTEMS LIMITED",
+          "effective_from": "1999-04-01",
+          "ceased_on": "2010-06-15"
+        }
+      ],
+      "sic_codes": [
+        "62020"
+      ],
+      "psc_summary": [
+        {
+          "kind": "corporate-entity-person-with-significant-control",
+          "name": "Fixturecorp Global Holdings BV",
+          "natures_of_control": [
+            "ownership-of-shares-75-to-100-percent"
+          ],
+          "notified_on": "2020-01-01"
+        }
+      ],
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+      "evidence": [
+        "FIXTURE-CH-20260717-FIX00001-COMPANY_NAME",
+        "FIXTURE-CH-20260717-FIX00001-COMPANY_NUMBER",
+        "FIXTURE-CH-20260717-FIX00001-COMPANY_STATUS",
+        "FIXTURE-CH-20260717-FIX00001-DATE_OF_CREATION",
+        "FIXTURE-CH-20260717-FIX00001-PREVIOUS_NAME",
+        "FIXTURE-CH-20260717-FIX00001-PSC_0"
+      ],
+      "fixture": true,
+      "web_profile_url": "https://find-and-update.company-information.service.gov.uk/company/FIX00001"
+    }
+  ],
+  "contracts": [
+    {
+      "record_id": "fixture-ocds-0001",
+      "source": "FAT",
+      "ocid": "fixture-ocds-0001",
+      "title": "Fixture managed IT services contract",
+      "title_evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-TITLE",
+      "description": null,
+      "stage": "award",
+      "buyer": {
+        "name": "Fixture Department for Testing",
+        "identifier": "buyer-1",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-BUYER_NAME"
+      },
+      "suppliers": [
+        {
+          "name": "Fixturecorp Technology Services",
+          "identifier_scheme": "GB-COH",
+          "identifier_id": "FIX00001",
+          "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME"
+        }
+      ],
+      "value": {
+        "amount": 1200000,
+        "currency": "GBP",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-VALUE_AMOUNT"
+      },
+      "dates": {
+        "published": "2026-01-15T00:00:00Z",
+        "award": "2026-01-15T00:00:00Z",
+        "start": "2026-02-01T00:00:00Z",
+        "end": "2027-01-31T00:00:00Z"
+      },
+      "procedure_type": "open",
+      "cpv": [
+        {
+          "code": "72000000",
+          "description": "FIXTURE category"
+        }
+      ],
+      "notice_url": "https://www.find-tender.service.gov.uk/Notice/FIXNOTICE-0001",
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-TITLE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-PUBLISHED_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-AWARD_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-CONTRACT_START",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-CONTRACT_END",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_IDENTIFIER",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-PROCEDURE_TYPE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-CPV_CODE"
+      ],
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "fixture": true,
+      "supplier_link": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "exact_company_number",
+        "fact_state": "CONFIRMED",
+        "evidence_ids": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME"
+        ],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services' via exact_legal_name; GB-COH FIX00001 corroborated by captured CH record 'FIXTURECORP TECHNOLOGY SERVICES LIMITED'"
+      }
+    },
+    {
+      "record_id": "fixture-ocds-0002",
+      "source": "FAT",
+      "ocid": "fixture-ocds-0002",
+      "title": "Fixture data platform award",
+      "title_evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-TITLE",
+      "description": null,
+      "stage": "award",
+      "buyer": {
+        "name": "Fixture Department for Testing",
+        "identifier": "buyer-1",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-BUYER_NAME"
+      },
+      "suppliers": [
+        {
+          "name": "Fixturecorp Technology Services Limited",
+          "identifier_scheme": "GB-COH",
+          "identifier_id": "FIX00001",
+          "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME"
+        }
+      ],
+      "value": {
+        "amount": 450000,
+        "currency": "GBP",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-VALUE_AMOUNT"
+      },
+      "dates": {
+        "published": "2026-03-02T00:00:00Z",
+        "award": "2026-03-02T00:00:00Z",
+        "start": "2026-04-01T00:00:00Z",
+        "end": "2027-03-31T00:00:00Z"
+      },
+      "procedure_type": "open",
+      "cpv": [
+        {
+          "code": "72300000",
+          "description": "FIXTURE category"
+        }
+      ],
+      "notice_url": "https://www.find-tender.service.gov.uk/Notice/FIXNOTICE-0002",
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-TITLE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-PUBLISHED_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-AWARD_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-CONTRACT_START",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-CONTRACT_END",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_IDENTIFIER",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-PROCEDURE_TYPE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-CPV_CODE"
+      ],
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "fixture": true,
+      "supplier_link": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "exact_company_number",
+        "fact_state": "CONFIRMED",
+        "evidence_ids": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME"
+        ],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services Limited' via normalised_legal_name; GB-COH FIX00001 corroborated by captured CH record 'FIXTURECORP TECHNOLOGY SERVICES LIMITED'"
+      }
+    },
+    {
+      "record_id": "fixture-ocds-0003",
+      "source": "FAT",
+      "ocid": "fixture-ocds-0003",
+      "title": "Fixture support services renewal",
+      "title_evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-TITLE",
+      "description": null,
+      "stage": "award",
+      "buyer": {
+        "name": "Fixture Agency for Examples",
+        "identifier": "buyer-1",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-BUYER_NAME"
+      },
+      "suppliers": [
+        {
+          "name": "Fixturecorp Technology Services (UK)",
+          "identifier_scheme": null,
+          "identifier_id": null,
+          "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+        }
+      ],
+      "value": {},
+      "dates": {
+        "published": "2026-05-20T00:00:00Z",
+        "award": "2026-05-20T00:00:00Z",
+        "start": "2026-06-01T00:00:00Z"
+      },
+      "procedure_type": null,
+      "cpv": [
+        {
+          "code": "72500000",
+          "description": "FIXTURE category"
+        }
+      ],
+      "notice_url": "https://www.find-tender.service.gov.uk/Notice/FIXNOTICE-0003",
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-TITLE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-PUBLISHED_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-AWARD_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-CONTRACT_START",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-CPV_CODE"
+      ],
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "fixture": true,
+      "supplier_link": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "normalised_legal_name",
+        "fact_state": "POSSIBLE",
+        "evidence_ids": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+        ],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services (UK)' via normalised_legal_name"
+      }
+    },
+    {
+      "record_id": "fixture-ocds-0005",
+      "source": "FAT",
+      "ocid": "fixture-ocds-0005",
+      "title": "Fixture hosting call-off",
+      "title_evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-TITLE",
+      "description": null,
+      "stage": "award",
+      "buyer": {
+        "name": "Fixture Agency for Examples",
+        "identifier": "buyer-1",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-BUYER_NAME"
+      },
+      "suppliers": [
+        {
+          "name": "Fixturecorp Technology Services",
+          "identifier_scheme": null,
+          "identifier_id": null,
+          "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+        }
+      ],
+      "value": {
+        "amount": 800000,
+        "currency": "GBP",
+        "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-VALUE_AMOUNT"
+      },
+      "dates": {
+        "published": "2026-06-01T00:00:00Z",
+        "award": "2026-06-01T00:00:00Z",
+        "start": "2026-07-01T00:00:00Z",
+        "end": "2027-02-28T00:00:00Z"
+      },
+      "procedure_type": "direct",
+      "cpv": [
+        {
+          "code": "72400000",
+          "description": "FIXTURE category"
+        }
+      ],
+      "notice_url": "https://www.find-tender.service.gov.uk/Notice/FIXNOTICE-0005",
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-TITLE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-PUBLISHED_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-AWARD_DATE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-CONTRACT_START",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-CONTRACT_END",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-PROCEDURE_TYPE",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-CPV_CODE"
+      ],
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "fixture": true,
+      "supplier_link": {
+        "supplier_id": "SUP-fixturecorp-technology",
+        "method": "exact_legal_name",
+        "fact_state": "PROBABLE",
+        "evidence_ids": [
+          "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+        ],
+        "reason": "official list name 'Fixturecorp Technology Services' vs notice supplier 'Fixturecorp Technology Services' via exact_legal_name"
+      }
+    }
+  ],
+  "public_bodies": [
+    {
+      "body_id": "PB-FIXTURE_AGENCY_FOR_EXAMPLES",
+      "name": "Fixture Agency for Examples",
+      "identifier": null,
+      "contract_record_ids": [
+        "fixture-ocds-0003",
+        "fixture-ocds-0005"
+      ],
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-BUYER_NAME"
+      ],
+      "fact_state": "CONFIRMED"
+    },
+    {
+      "body_id": "PB-FIXTURE_DEPARTMENT_FOR_TESTING",
+      "name": "Fixture Department for Testing",
+      "identifier": null,
+      "contract_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002"
+      ],
+      "evidence": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-BUYER_NAME"
+      ],
+      "fact_state": "CONFIRMED"
+    }
+  ],
+  "ownership_edges": [
+    {
+      "edge_id": "OWN-FIX00001-0",
+      "from_entity": "Fixturecorp Global Holdings BV",
+      "to_entity": "ENT-GB_COH_FIX00001",
+      "edge_type": "owns_or_controls",
+      "natures_of_control": [
+        "ownership-of-shares-75-to-100-percent"
+      ],
+      "source": "CH",
+      "evidence": [
+        "FIXTURE-CH-20260717-FIX00001-PSC_0"
+      ],
+      "fact_state": "PROBABLE",
+      "evidence_date": "2020-01-01",
+      "contradiction_status": null,
+      "personal_data_minimisation_applied": true,
+      "notes": "Corporate-entity PSC (org-level display)"
+    }
+  ],
+  "indicators": [
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-LINKED_CONTRACT_COUNT",
+      "name": "linked_contract_count",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "count(linked contracts with fact_state in {CONFIRMED, PROBABLE})",
+      "input_fields": [
+        "supplier_link.fact_state"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+      ],
+      "value": 3,
+      "unit": "notices",
+      "limitations": "Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "CONFIRMED",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Pure count of evidenced links; no interpretation attached."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-POSSIBLE_LINKS_COUNT",
+      "name": "possible_links_count",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "count(linked contracts with fact_state == POSSIBLE)",
+      "input_fields": [
+        "supplier_link.fact_state"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0003"
+      ],
+      "evidence_ids": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+      ],
+      "value": 1,
+      "unit": "notices",
+      "limitations": "Candidate matches pending review; excluded from all headline figures.",
+      "confidence": "POSSIBLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Transparency metric for unresolved workload."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-VISIBLE_CONTRACT_VALUE_GBP",
+      "name": "visible_contract_value_gbp",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "sum(award value.amount where currency==GBP over headline-linked notices)",
+      "input_fields": [
+        "value.amount",
+        "value.currency"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-VALUE_AMOUNT"
+      ],
+      "value": 2450000,
+      "unit": "GBP",
+      "limitations": "0 of 3 linked notices have no usable GBP value and are excluded. Published values may be estimates or ceilings. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "PROBABLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Sum of source-published values only, labelled 'visible'."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-BUYER_AUTHORITY_COUNT",
+      "name": "buyer_authority_count",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "count(distinct normalised buyer names over headline-linked notices)",
+      "input_fields": [
+        "buyer.name"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-BUYER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-BUYER_NAME"
+      ],
+      "value": 2,
+      "unit": "buyer authorities",
+      "limitations": "Buyer names are not canonicalised across sources; duplicates under different spellings may over- or under-count. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "PROBABLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Count of distinct named buyers in evidence."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-SERVICE_CATEGORY_COUNT",
+      "name": "service_category_count",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "count(distinct CPV 2-digit divisions over headline-linked notices)",
+      "input_fields": [
+        "cpv.code"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [],
+      "value": 1,
+      "unit": "CPV divisions",
+      "limitations": "CPV coding quality varies by buyer. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "PROBABLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Standard classification counts only."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-BUYER_CONCENTRATION_TOP_SHARE",
+      "name": "buyer_concentration_top_share",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "max(buyer visible GBP value) / total visible GBP value",
+      "input_fields": [
+        "buyer.name",
+        "value.amount"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-VALUE_AMOUNT",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-VALUE_AMOUNT"
+      ],
+      "value": 0.6735,
+      "unit": "share of visible value",
+      "limitations": "Value coverage is partial (3/3 notices valued); top buyer (normalised) = 'fixture department for testing'. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "PROBABLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Neutral concentration ratio over published values."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-EXPIRY_CLUSTERING",
+      "name": "expiry_clustering",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "max over rolling 12-month windows of share(linked contracts with end date in window), among contracts with an end date",
+      "input_fields": [
+        "dates.end"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [],
+      "value": {
+        "share": 1.0,
+        "window": [
+          "2027-01-31",
+          "2028-01-31"
+        ],
+        "contracts_with_end_date": 3
+      },
+      "unit": null,
+      "limitations": "Only 3/3 linked notices publish an end date; extensions/terminations not visible. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "POSSIBLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Descriptive clustering of published end dates."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-DIRECT_AWARD_SHARE",
+      "name": "direct_award_share",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "count(procurementMethod in {direct, limited}) / count(notices with procurementMethod present)",
+      "input_fields": [
+        "procedure_type"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [],
+      "value": 0.3333,
+      "unit": "share",
+      "limitations": "Only 3/3 linked notices publish a procedure type; OCDS 'limited' covers several lawful routes. This is a source-supported procedural statistic, not an assessment. Computed over notices linked in THIS alpha dataset only; published-notice visibility is not a complete measure of public-sector activity or dependence.",
+      "confidence": "PROBABLE",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Directly derived from the source's own procedure field."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-MISSING_DATA_SCORE",
+      "name": "missing_data_score",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "share(headline-linked notices missing any of: value, end date, supplier identifier)",
+      "input_fields": [
+        "value.amount",
+        "dates.end",
+        "suppliers.identifier_id"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [],
+      "value": 0.3333,
+      "unit": "share",
+      "limitations": "Higher means weaker records, not worse behaviour.",
+      "confidence": "CONFIRMED",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Data-quality transparency metric."
+    },
+    {
+      "indicator_id": "IND-SUP-fixturecorp-technology-EVIDENCE_CONFIDENCE_SCORE",
+      "name": "evidence_confidence_score",
+      "subject_type": "StrategicSupplier",
+      "subject_id": "SUP-fixturecorp-technology",
+      "formula": "share(headline links at CONFIRMED)",
+      "input_fields": [
+        "supplier_link.fact_state"
+      ],
+      "input_record_ids": [
+        "fixture-ocds-0001",
+        "fixture-ocds-0002",
+        "fixture-ocds-0005"
+      ],
+      "evidence_ids": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+      ],
+      "value": 0.6667,
+      "unit": "share",
+      "limitations": "Reflects evidence strength of the linkage itself.",
+      "confidence": "CONFIRMED",
+      "calculated_at": "2026-07-17T09:27:24Z",
+      "safe_to_display_reason": "Meta-metric on the atlas's own evidence."
+    }
+  ],
+  "manual_review_items": [
+    {
+      "item_id": "MR-SUP-fixturecorp-technology-fixture-ocds-0003",
+      "entity_affected": "fixture-ocds-0003",
+      "issue_type": "contract_attribution_ambiguous",
+      "evidence_available": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+      ],
+      "candidate_resolutions": [
+        "Confirm via GB-COH identifier or CH search that 'Fixturecorp Technology Services (UK)' is Fixturecorp Technology Services",
+        "Mark unrelated if the match is a name collision"
+      ],
+      "recommended_next_step": "Capture CH record / FTS org identifier and re-run resolution",
+      "publication_status": "displayable_as_unresolved",
+      "severity": "medium",
+      "created_at": "2026-07-17T09:27:24Z",
+      "resolved_at": null,
+      "resolution": null
+    },
+    {
+      "item_id": "MR-ENTITY-ENT-NAME_FIXTURECORP_TECHNOLOGY_SERVICES_UK",
+      "entity_affected": "ENT-NAME_FIXTURECORP_TECHNOLOGY_SERVICES_UK",
+      "issue_type": "missing_company_number",
+      "evidence_available": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME"
+      ],
+      "candidate_resolutions": [
+        "CH search once API key + access available"
+      ],
+      "recommended_next_step": "Run companies_house.search for the notice supplier name",
+      "publication_status": "displayable_as_unresolved",
+      "severity": "medium",
+      "created_at": "2026-07-17T09:27:24Z",
+      "resolved_at": null,
+      "resolution": null
+    },
+    {
+      "item_id": "MR-ENTITY-ENT-NAME_FIXTURECORP_TECHNOLOGY_SERVICES",
+      "entity_affected": "ENT-NAME_FIXTURECORP_TECHNOLOGY_SERVICES",
+      "issue_type": "missing_company_number",
+      "evidence_available": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+      ],
+      "candidate_resolutions": [
+        "CH search once API key + access available"
+      ],
+      "recommended_next_step": "Run companies_house.search for the notice supplier name",
+      "publication_status": "displayable_as_unresolved",
+      "severity": "medium",
+      "created_at": "2026-07-17T09:27:24Z",
+      "resolved_at": null,
+      "resolution": null
+    },
+    {
+      "item_id": "MR-MULTI-SUP-fixturecorp-technology",
+      "entity_affected": "SUP-fixturecorp-technology",
+      "issue_type": "multiple_legal_entity_candidates",
+      "evidence_available": [
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME",
+        "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME"
+      ],
+      "candidate_resolutions": [
+        "Fixturecorp Technology Services (FIX00001)",
+        "Fixturecorp Technology Services (UK) (no number)",
+        "Fixturecorp Technology Services (no number)"
+      ],
+      "recommended_next_step": "Review group structure; decide primary contracting entity; keep others as group members",
+      "publication_status": "displayable_as_unresolved",
+      "severity": "medium",
+      "created_at": "2026-07-17T09:27:24Z",
+      "resolved_at": null,
+      "resolution": null
+    }
+  ],
+  "evidence_ledger": [
+    {
+      "evidence_id": "FIXTURE-CH-20260717-FIX00001-COMPANY_NAME",
+      "source": "CH",
+      "source_name": "Companies House",
+      "source_url": "https://fixture.invalid/company/FIX00001",
+      "source_identifier": "FIX00001",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+      "json_pointer": "/company_name",
+      "field": "COMPANY_NAME",
+      "extracted_value": "FIXTURECORP TECHNOLOGY SERVICES LIMITED",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-CH-20260717-FIX00001-COMPANY_NUMBER",
+      "source": "CH",
+      "source_name": "Companies House",
+      "source_url": "https://fixture.invalid/company/FIX00001",
+      "source_identifier": "FIX00001",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+      "json_pointer": "/company_number",
+      "field": "COMPANY_NUMBER",
+      "extracted_value": "FIX00001",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-CH-20260717-FIX00001-COMPANY_STATUS",
+      "source": "CH",
+      "source_name": "Companies House",
+      "source_url": "https://fixture.invalid/company/FIX00001",
+      "source_identifier": "FIX00001",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+      "json_pointer": "/company_status",
+      "field": "COMPANY_STATUS",
+      "extracted_value": "active",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-CH-20260717-FIX00001-DATE_OF_CREATION",
+      "source": "CH",
+      "source_name": "Companies House",
+      "source_url": "https://fixture.invalid/company/FIX00001",
+      "source_identifier": "FIX00001",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+      "json_pointer": "/date_of_creation",
+      "field": "DATE_OF_CREATION",
+      "extracted_value": "1999-04-01",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-CH-20260717-FIX00001-PREVIOUS_NAME",
+      "source": "CH",
+      "source_name": "Companies House",
+      "source_url": "https://fixture.invalid/company/FIX00001",
+      "source_identifier": "FIX00001",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_profile_20260717.json",
+      "json_pointer": "/previous_company_names/0/name",
+      "field": "PREVIOUS_NAME",
+      "extracted_value": "FIXTURE LEGACY SYSTEMS LIMITED",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-CH-20260717-FIX00001-PSC_0",
+      "source": "CH",
+      "source_name": "Companies House",
+      "source_url": "https://fixture.invalid/company/FIX00001/psc",
+      "source_identifier": "FIX00001",
+      "raw_path": "tests/fixtures/raw/companies_house/FIX00001_psc_20260717.json",
+      "json_pointer": "/items/0",
+      "field": "PSC_0",
+      "extracted_value": {
+        "name": "Fixturecorp Global Holdings BV",
+        "natures_of_control": [
+          "ownership-of-shares-75-to-100-percent"
+        ]
+      },
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-AWARD_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/awards/0/date",
+      "field": "AWARD_DATE",
+      "extracted_value": "2026-01-15T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-BUYER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/buyer/name",
+      "field": "BUYER_NAME",
+      "extracted_value": "Fixture Department for Testing",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-CONTRACT_END",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/awards/0/contractPeriod/endDate",
+      "field": "CONTRACT_END",
+      "extracted_value": "2027-01-31T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-CONTRACT_START",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/awards/0/contractPeriod/startDate",
+      "field": "CONTRACT_START",
+      "extracted_value": "2026-02-01T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-CPV_CODE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/tender/classification/id",
+      "field": "CPV_CODE",
+      "extracted_value": "72000000",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-PROCEDURE_TYPE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/tender/procurementMethod",
+      "field": "PROCEDURE_TYPE",
+      "extracted_value": "open",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-PUBLISHED_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/date",
+      "field": "PUBLISHED_DATE",
+      "extracted_value": "2026-01-15T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_IDENTIFIER",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/parties/1/identifier/id",
+      "field": "SUPPLIER_IDENTIFIER",
+      "extracted_value": "GB-COH:FIX00001",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-SUPPLIER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/awards/0/suppliers/0/name",
+      "field": "SUPPLIER_NAME",
+      "extracted_value": "Fixturecorp Technology Services",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-TITLE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/tender/title",
+      "field": "TITLE",
+      "extracted_value": "Fixture managed IT services contract",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0001-VALUE_AMOUNT",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0001",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/0/awards/0/value/amount",
+      "field": "VALUE_AMOUNT",
+      "extracted_value": 1200000,
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-AWARD_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/awards/0/date",
+      "field": "AWARD_DATE",
+      "extracted_value": "2026-03-02T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-BUYER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/buyer/name",
+      "field": "BUYER_NAME",
+      "extracted_value": "Fixture Department for Testing",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-CONTRACT_END",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/awards/0/contractPeriod/endDate",
+      "field": "CONTRACT_END",
+      "extracted_value": "2027-03-31T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-CONTRACT_START",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/awards/0/contractPeriod/startDate",
+      "field": "CONTRACT_START",
+      "extracted_value": "2026-04-01T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-CPV_CODE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/tender/classification/id",
+      "field": "CPV_CODE",
+      "extracted_value": "72300000",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-PROCEDURE_TYPE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/tender/procurementMethod",
+      "field": "PROCEDURE_TYPE",
+      "extracted_value": "open",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-PUBLISHED_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/date",
+      "field": "PUBLISHED_DATE",
+      "extracted_value": "2026-03-02T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_IDENTIFIER",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/parties/1/identifier/id",
+      "field": "SUPPLIER_IDENTIFIER",
+      "extracted_value": "GB-COH:FIX00001",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-SUPPLIER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/awards/0/suppliers/0/name",
+      "field": "SUPPLIER_NAME",
+      "extracted_value": "Fixturecorp Technology Services Limited",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-TITLE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/tender/title",
+      "field": "TITLE",
+      "extracted_value": "Fixture data platform award",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0002-VALUE_AMOUNT",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0002",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/1/awards/0/value/amount",
+      "field": "VALUE_AMOUNT",
+      "extracted_value": 450000,
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-AWARD_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/awards/0/date",
+      "field": "AWARD_DATE",
+      "extracted_value": "2026-05-20T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-BUYER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/buyer/name",
+      "field": "BUYER_NAME",
+      "extracted_value": "Fixture Agency for Examples",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-CONTRACT_START",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/awards/0/contractPeriod/startDate",
+      "field": "CONTRACT_START",
+      "extracted_value": "2026-06-01T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-CPV_CODE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/tender/classification/id",
+      "field": "CPV_CODE",
+      "extracted_value": "72500000",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-PUBLISHED_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/date",
+      "field": "PUBLISHED_DATE",
+      "extracted_value": "2026-05-20T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-SUPPLIER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/awards/0/suppliers/0/name",
+      "field": "SUPPLIER_NAME",
+      "extracted_value": "Fixturecorp Technology Services (UK)",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0003-TITLE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0003",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/2/tender/title",
+      "field": "TITLE",
+      "extracted_value": "Fixture support services renewal",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-AWARD_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/awards/0/date",
+      "field": "AWARD_DATE",
+      "extracted_value": "2026-06-01T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-BUYER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/buyer/name",
+      "field": "BUYER_NAME",
+      "extracted_value": "Fixture Agency for Examples",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-CONTRACT_END",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/awards/0/contractPeriod/endDate",
+      "field": "CONTRACT_END",
+      "extracted_value": "2027-02-28T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-CONTRACT_START",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/awards/0/contractPeriod/startDate",
+      "field": "CONTRACT_START",
+      "extracted_value": "2026-07-01T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-CPV_CODE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/tender/classification/id",
+      "field": "CPV_CODE",
+      "extracted_value": "72400000",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-PROCEDURE_TYPE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/tender/procurementMethod",
+      "field": "PROCEDURE_TYPE",
+      "extracted_value": "direct",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-PUBLISHED_DATE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/date",
+      "field": "PUBLISHED_DATE",
+      "extracted_value": "2026-06-01T00:00:00Z",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-SUPPLIER_NAME",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/awards/0/suppliers/0/name",
+      "field": "SUPPLIER_NAME",
+      "extracted_value": "Fixturecorp Technology Services",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-TITLE",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/tender/title",
+      "field": "TITLE",
+      "extracted_value": "Fixture hosting call-off",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-FAT-20260717-FIXTURE_OCDS_0005-VALUE_AMOUNT",
+      "source": "FAT",
+      "source_name": "Find a Tender OCDS",
+      "source_url": "https://fixture.invalid/ocds",
+      "source_identifier": "fixture-ocds-0005",
+      "raw_path": "tests/fixtures/raw/procurement/fts_packages_20260717_000.json",
+      "json_pointer": "/releases/4/awards/0/value/amount",
+      "field": "VALUE_AMOUNT",
+      "extracted_value": 800000,
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-GOVUK-20260717-STRATEGIC_SUPPLIER_LIST_ROW01-CROWN_REPRESENTATIVE",
+      "source": "GOVUK",
+      "source_name": "GOV.UK",
+      "source_url": "https://fixture.invalid/strategic-suppliers",
+      "source_identifier": "STRATEGIC_SUPPLIER_LIST_ROW01",
+      "raw_path": "tests/fixtures/raw/strategic_suppliers/attachment_20260717_strategic_suppliers_fixture.csv",
+      "json_pointer": "row 2 col 2",
+      "field": "CROWN_REPRESENTATIVE",
+      "extracted_value": "Fixture Person A",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    },
+    {
+      "evidence_id": "FIXTURE-GOVUK-20260717-STRATEGIC_SUPPLIER_LIST_ROW01-SUPPLIER_NAME",
+      "source": "GOVUK",
+      "source_name": "GOV.UK",
+      "source_url": "https://fixture.invalid/strategic-suppliers",
+      "source_identifier": "STRATEGIC_SUPPLIER_LIST_ROW01",
+      "raw_path": "tests/fixtures/raw/strategic_suppliers/attachment_20260717_strategic_suppliers_fixture.csv",
+      "json_pointer": "row 2 col 1",
+      "field": "SUPPLIER_NAME",
+      "extracted_value": "Fixturecorp Technology Services",
+      "retrieved_at": "2026-07-17T09:30:00Z",
+      "transformation": "none",
+      "provenance_class": "DIRECT_OBSERVATION",
+      "evidence_class": "SYNTHETIC_TEST_FIXTURE",
+      "fact_state": "CONFIRMED",
+      "contradiction_status": null,
+      "notes": ""
+    }
+  ],
+  "meta": {
+    "built_at": "2026-07-17T09:27:24Z",
+    "fixture_mode": true,
+    "raw_root": "tests/fixtures/raw",
+    "offline": true,
+    "rebuild_command": "python3 scripts/atlas.py build_truth_slice --supplier 'Fixturecorp Technology Services' --fixture",
+    "counts": {
+      "contracts_linked": 4,
+      "entities": 3,
+      "manual_review": 4,
+      "evidence_records": 47
+    }
+  }
+}
