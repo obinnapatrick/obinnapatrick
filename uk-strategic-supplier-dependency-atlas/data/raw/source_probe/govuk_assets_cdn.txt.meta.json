@@ -1,0 +1,13 @@
+{
+  "probe": "govuk_assets_cdn",
+  "source_url": "https://assets.publishing.service.gov.uk/robots.txt",
+  "retrieval_method": "HTTP GET (stdlib urllib via session proxy)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "content_type": "",
+  "note": "GOV.UK attachment CDN reachability (robots.txt)",
+  "local_path": "data/raw/source_probe/govuk_assets_cdn.txt",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bytes": 0,
+  "saved_at": "2026-07-17T09:05:18Z"
+}

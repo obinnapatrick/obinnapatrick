@@ -1,0 +1,13 @@
+{
+  "probe": "contracts_finder_rest2_keyword",
+  "source_url": "https://www.contractsfinder.service.gov.uk/api/rest/2/search_notices/json?keyword=cloud&size=3",
+  "retrieval_method": "HTTP GET (stdlib urllib via session proxy)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "content_type": "",
+  "note": "Contracts Finder REST v2 keyword search",
+  "local_path": "data/raw/source_probe/contracts_finder_rest2_keyword.txt",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bytes": 0,
+  "saved_at": "2026-07-17T09:05:43Z"
+}

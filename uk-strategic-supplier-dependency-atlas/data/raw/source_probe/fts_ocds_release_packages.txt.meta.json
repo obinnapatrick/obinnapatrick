@@ -1,0 +1,13 @@
+{
+  "probe": "fts_ocds_release_packages",
+  "source_url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-07-16T09:05:19&updatedTo=2026-07-17T09:05:19",
+  "retrieval_method": "HTTP GET (stdlib urllib via session proxy)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "content_type": "",
+  "note": "Find a Tender OCDS API, 1-day update window",
+  "local_path": "data/raw/source_probe/fts_ocds_release_packages.txt",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bytes": 0,
+  "saved_at": "2026-07-17T09:05:26Z"
+}
