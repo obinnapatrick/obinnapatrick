@@ -43,12 +43,16 @@ def build(supplier_name_or_id: str, raw_root: str | None = None,
 
     fts_contracts, fts_ev = fts.load_offline(raw_root)
     cf_contracts, cf_ev = cf.load_offline(raw_root)
-    contracts = fts_contracts + cf_contracts
-    # cross-source dedupe by ocid (keep first = FTS priority)
+    cf2_contracts, cf2_ev = cf.load_offline_rest2(raw_root)
+    cf_ev = cf_ev + cf2_ev
+    # OCDS-rich records first so they win dedupe over REST2 summaries
+    contracts = fts_contracts + cf_contracts + cf2_contracts
+    # cross-source dedupe; CF ocids embed the notice id behind the
+    # registered "ocds-b5fd17-" prefix, so strip it for comparison
     seen_ocids = set()
     deduped = []
     for c in contracts:
-        key = c.get("ocid") or c["record_id"]
+        key = str(c.get("ocid") or c["record_id"]).replace("ocds-b5fd17-", "")
         if key in seen_ocids:
             continue
         seen_ocids.add(key)

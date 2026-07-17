@@ -25,7 +25,7 @@ Commands (see README.md):
   prepare_operator_review  write docs/OPERATOR_REVIEW_GATE.md from state
   decide_release_state     classify the current release state honestly
   package_release          zip the release package into outputs/release/
-  write_handoff            refresh machine state + verify continuation docs
+  import_inbox             import operator-dropped official files from data/inbox\n  write_handoff            refresh machine state + verify continuation docs
 
 Every command logs to docs/RUN_LEDGER.md and updates
 data/validation/status.json. Commands never delete raw evidence.
@@ -553,6 +553,21 @@ def cmd_package_release(_):
     print("packaged:", os.path.relpath(out, ROOT))
 
 
+def cmd_import_inbox(args):
+    from src.ingest.inbox_import import import_all
+    report = import_all(dry_run=args.dry_run)
+    for r in report["imported"]:
+        print("imported:" if not r.get("dry_run") else "would import:",
+              r["file"], "->", r.get("raw_path") or r.get("would_write"),
+              f"({r['type']})")
+    for r in report["refused"]:
+        print("REFUSED:", r["file"], "-", r["reason"])
+    if report["imported"] and not args.dry_run:
+        print("run 'python3 scripts/atlas.py lock_sources' to register imports")
+    if not report["imported"] and not report["refused"]:
+        print("inbox empty -", report.get("note", "nothing to import"))
+
+
 def cmd_write_handoff(_):
     import subprocess
     try:
@@ -582,6 +597,8 @@ def main():
     ap.add_argument("--online", action="store_true")
     ap.add_argument("--fixture", action="store_true",
                     help="operate on tests/fixtures (never touches real outputs)")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="import_inbox: validate and report without writing")
     args = ap.parse_args()
     fn = globals().get("cmd_" + args.command)
     if not fn:

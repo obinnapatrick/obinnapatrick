@@ -77,6 +77,9 @@ def check_secrets() -> list[str]:
                     continue
                 if rel == os.path.join("src", "validation", "gates.py"):
                     continue  # the pattern definitions themselves
+                if re.search(r"(?i)paste|your|placeholder|example|xxxx|<|>",
+                             frag):
+                    continue  # documentation placeholders, not credentials
                 findings.append(f"{rel}: {label}: {frag[:24]}…")
         for v in env_values:
             if v in text:

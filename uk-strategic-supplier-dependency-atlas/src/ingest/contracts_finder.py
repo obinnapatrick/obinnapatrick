@@ -96,3 +96,133 @@ def keyword_hit_count(raw_root: str | None = None, keyword_slug: str = "") -> in
             return doc[key]
     lst = doc.get("noticeList") or doc.get("results") or []
     return len(lst) if isinstance(lst, list) else None
+
+
+# ---------------------------------------------------------------------------
+# REST v2 keyword-search parsing (defensive secondary path)
+# ---------------------------------------------------------------------------
+# The REST2 search response is an official Contracts Finder payload, so
+# fields extracted from it are DIRECT_OBSERVATION evidence — but its exact
+# shape must be confirmed against a live response. This parser maps only
+# fields it can positively identify and returns [] (never guesses) for
+# unrecognised structures; the orchestrator then falls back to OCDS window
+# harvesting and records a manual-review item.
+
+_REST2_LIST_KEYS = ("noticeList", "results", "notices", "releases")
+
+
+def _rest2_items(doc: dict) -> tuple[str, list]:
+    for key in _REST2_LIST_KEYS:
+        lst = doc.get(key)
+        if isinstance(lst, list) and lst:
+            return key, lst
+    return "", []
+
+
+def _rest2_field(item: dict, *names):
+    for n in names:
+        if item.get(n) not in (None, ""):
+            return item[n], n
+    return None, None
+
+
+def load_offline_rest2(raw_root: str | None = None) -> tuple[list[dict], list[dict]]:
+    """Parse saved cf_search_* keyword captures into contract records."""
+    from src.normalize.ocds import make_evidence
+
+    raw_root = raw_root or util.RAW_DIR
+    d = os.path.join(raw_root, RAW_SUBDIR)
+    contracts, evidence = [], []
+    if not os.path.isdir(d):
+        return contracts, evidence
+    for fname in sorted(os.listdir(d)):
+        if not fname.startswith("cf_search_") or not fname.endswith(".json") \
+                or fname.endswith(".meta.json"):
+            continue
+        path = os.path.join(d, fname)
+        meta = util.read_json(path + ".meta.json", default={}) or {}
+        fixture = bool(meta.get("SYNTHETIC_TEST_FIXTURE"))
+        doc = util.read_json(path, default={}) or {}
+        retrieved_at = meta.get("saved_at") or util.utcnow()
+        date_compact = retrieved_at[:10].replace("-", "")
+        relpath = os.path.relpath(path, util.ROOT)
+        list_key, items = _rest2_items(doc)
+        for i, wrapper in enumerate(items):
+            item = wrapper.get("item") if isinstance(wrapper.get("item"), dict) else wrapper
+            base_ptr = (f"/{list_key}/{i}/item" if wrapper is not item
+                        else f"/{list_key}/{i}")
+            notice_id, _ = _rest2_field(item, "id", "noticeIdentifier", "noticeId")
+            title, title_key = _rest2_field(item, "title", "noticeTitle")
+            buyer, buyer_key = _rest2_field(item, "organisationName", "buyerName",
+                                             "organisation")
+            if not notice_id or not title or not buyer:
+                continue  # cannot positively identify -> skip, never guess
+            record_id = str(notice_id)
+
+            def ev(field, key, value):
+                rec = make_evidence(
+                    fixture=fixture, source="CF", date_compact=date_compact,
+                    record_id=record_id, field=field,
+                    source_url=meta.get("source_url", ""), raw_path=relpath,
+                    json_pointer=f"{base_ptr}/{key}", value=value,
+                    retrieved_at=retrieved_at)
+                evidence.append(rec)
+                return rec["evidence_id"]
+
+            title_ev = ev("TITLE", title_key, title)
+            buyer_rec = {"name": buyer, "identifier": None,
+                         "evidence_id": ev("BUYER_NAME", buyer_key, buyer)}
+            suppliers = []
+            sup, sup_key = _rest2_field(item, "awardedSupplier", "supplierName",
+                                         "awardedToSupplier")
+            if sup:
+                suppliers.append({"name": str(sup), "identifier_scheme": None,
+                                   "identifier_id": None,
+                                   "evidence_id": ev("SUPPLIER_NAME", sup_key, sup)})
+            value_obj = {}
+            amount, amount_key = _rest2_field(item, "awardedValue", "valueLow",
+                                               "awardedAmount")
+            if isinstance(amount, (int, float)):
+                value_obj = {"amount": amount, "currency": "GBP",
+                             "evidence_id": ev("VALUE_AMOUNT", amount_key, amount)}
+            dates = {}
+            for field, keys, out_key in (
+                    ("PUBLISHED_DATE", ("publishedDate",), "published"),
+                    ("AWARD_DATE", ("awardedDate", "awardDate"), "award"),
+                    ("CONTRACT_START", ("start", "startDate", "contractStartDate"), "start"),
+                    ("CONTRACT_END", ("end", "endDate", "contractEndDate"), "end")):
+                val, key = _rest2_field(item, *keys)
+                if val:
+                    dates[out_key] = str(val)
+                    ev(field, key, val)
+            cpv = []
+            codes = item.get("cpvCodes")
+            if isinstance(codes, str):
+                codes = [c.strip() for c in codes.split(",") if c.strip()]
+            if isinstance(codes, list):
+                for c in codes[:10]:
+                    if isinstance(c, str) and c[:2].isdigit():
+                        ev("CPV_CODE", "cpvCodes", c)
+                        cpv.append({"code": c, "description": None})
+            contracts.append({
+                "record_id": record_id,
+                "source": "CF",
+                "ocid": None,
+                "title": str(title),
+                "title_evidence_id": title_ev,
+                "description": None,
+                "stage": "award" if suppliers else "unknown",
+                "buyer": buyer_rec,
+                "suppliers": suppliers,
+                "value": value_obj,
+                "dates": dates,
+                "procedure_type": None,
+                "cpv": cpv,
+                "notice_url": f"https://www.contractsfinder.service.gov.uk/notice/{record_id}",
+                "evidence": [e["evidence_id"] for e in evidence
+                             if e["source_identifier"] == record_id],
+                "raw_path": relpath,
+                "fixture": fixture,
+                "rest2_parsed": True,
+            })
+    return contracts, evidence
