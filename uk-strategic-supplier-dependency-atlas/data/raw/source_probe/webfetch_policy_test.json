@@ -1,0 +1,27 @@
+{
+  "record_type": "ACCESS_TEST",
+  "evidence_class": "ACCESS_TEST",
+  "purpose": "Determine whether the Claude Code harness WebFetch tool provides an alternative sanctioned read path to official sources while direct container egress is policy-blocked.",
+  "tested_at": "2026-07-17T09:03:30Z",
+  "tests": [
+    {
+      "tool": "WebFetch",
+      "url": "https://www.gov.uk/government/publications/strategic-suppliers",
+      "result": "HTTP 403 Forbidden (response body not retrieved)",
+      "conclusion": "WebFetch is subject to the same egress policy for this host."
+    },
+    {
+      "tool": "WebFetch",
+      "url": "https://pypi.org/project/requests/",
+      "result": "HTTP 200; content returned (package page readable)",
+      "conclusion": "WebFetch itself is functional in this session; the gov.uk denial is a per-host policy denial, not a tool failure."
+    },
+    {
+      "tool": "WebSearch",
+      "query": "GOV.UK strategic suppliers publication Cabinet Office list",
+      "result": "Search results returned (titles, URLs, snippets)",
+      "conclusion": "WebSearch works but yields only search snippets, which the mission prohibits as confirmed evidence. Usable as URL locator only."
+    }
+  ],
+  "overall_conclusion": "No sanctioned evidence-grade read path exists in this session for www.gov.uk, assets.publishing.service.gov.uk, www.find-tender.service.gov.uk, www.contractsfinder.service.gov.uk, api.company-information.service.gov.uk, find-and-update.company-information.service.gov.uk, or download.companieshouse.gov.uk. Source-access verdict: BLOCKED."
+}

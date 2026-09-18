@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/finding.schema.json",
+  "title": "Finding",
+  "description": "",
+  "type": "object",
+  "required": [
+    "finding_id",
+    "exact_claim",
+    "source_records",
+    "evidence_ids",
+    "confidence",
+    "limitations",
+    "safe_wording",
+    "prohibited_stronger_wording",
+    "release_state"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string"
+    },
+    "exact_claim": {
+      "type": "string"
+    },
+    "source_records": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "derived_indicators": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED",
+        "PROBABLE",
+        "POSSIBLE",
+        "UNRESOLVED",
+        "CONFLICTING"
+      ]
+    },
+    "limitations": {
+      "type": "string"
+    },
+    "excluded_interpretations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "safe_wording": {
+      "type": "string"
+    },
+    "prohibited_stronger_wording": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "release_state": {
+      "type": "string",
+      "enum": [
+        "public",
+        "private",
+        "blocked"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

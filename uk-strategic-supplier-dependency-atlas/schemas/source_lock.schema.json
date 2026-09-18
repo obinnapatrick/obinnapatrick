@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/source_lock.schema.json",
+  "title": "SourceLockEntry",
+  "description": "",
+  "type": "object",
+  "required": [
+    "source_name",
+    "retrieval_method",
+    "retrieved_at",
+    "source_url",
+    "local_raw_path",
+    "sha256",
+    "bytes",
+    "evidence_class"
+  ],
+  "properties": {
+    "source_name": {
+      "type": "string"
+    },
+    "retrieval_method": {
+      "type": "string"
+    },
+    "retrieved_at": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "query_params": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    },
+    "local_raw_path": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "bytes": {
+      "type": "integer"
+    },
+    "record_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "licence_note": {
+      "type": "string"
+    },
+    "citation_method": {
+      "type": "string"
+    },
+    "known_limitations": {
+      "type": "string"
+    },
+    "refresh_policy": {
+      "type": "string"
+    },
+    "evidence_class": {
+      "type": "string",
+      "enum": [
+        "EVIDENCE",
+        "ACCESS_TEST",
+        "LOCATOR_ONLY",
+        "MODEL_MEDIATED_FETCH",
+        "SYNTHETIC_TEST_FIXTURE"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

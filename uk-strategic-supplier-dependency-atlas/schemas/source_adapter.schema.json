@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/source_adapter.schema.json",
+  "title": "SourceAdapterContract",
+  "description": "",
+  "type": "object",
+  "required": [
+    "name",
+    "source",
+    "access_method",
+    "auth_required",
+    "raw_payload_format",
+    "raw_path_pattern",
+    "normalized_schema",
+    "stable_record_id",
+    "evidence_fields",
+    "citation_method",
+    "known_limitations",
+    "retry_failure_behaviour",
+    "freshness_behaviour",
+    "offline_capable"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "access_method": {
+      "type": "string"
+    },
+    "auth_required": {
+      "type": "boolean"
+    },
+    "auth_variable": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rate_limits": {
+      "type": "string"
+    },
+    "raw_payload_format": {
+      "type": "string"
+    },
+    "raw_path_pattern": {
+      "type": "string"
+    },
+    "normalized_schema": {
+      "type": "string"
+    },
+    "stable_record_id": {
+      "type": "string"
+    },
+    "evidence_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "citation_method": {
+      "type": "string"
+    },
+    "known_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "retry_failure_behaviour": {
+      "type": "string"
+    },
+    "freshness_behaviour": {
+      "type": "string"
+    },
+    "offline_capable": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

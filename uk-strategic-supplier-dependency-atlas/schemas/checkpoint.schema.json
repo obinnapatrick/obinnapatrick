@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/checkpoint.schema.json",
+  "title": "Checkpoint",
+  "description": "",
+  "type": "object",
+  "required": [
+    "checkpoint_id",
+    "phase",
+    "timestamp",
+    "completed_outputs",
+    "missing_outputs",
+    "status",
+    "next_command",
+    "continuation_note"
+  ],
+  "properties": {
+    "checkpoint_id": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "completed_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "files_changed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_saved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "blocked"
+      ]
+    },
+    "blocker": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "next_command": {
+      "type": "string"
+    },
+    "continuation_note": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

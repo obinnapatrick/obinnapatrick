@@ -1,0 +1,243 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/contract.schema.json",
+  "title": "ContractRecord",
+  "description": "",
+  "type": "object",
+  "required": [
+    "record_id",
+    "source",
+    "title",
+    "stage",
+    "buyer",
+    "suppliers",
+    "notice_url",
+    "evidence",
+    "raw_path"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "FAT",
+        "CF"
+      ]
+    },
+    "ocid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "tender",
+        "award",
+        "contract",
+        "implementation",
+        "planning",
+        "unknown"
+      ]
+    },
+    "buyer": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_id": {
+          "type": "string"
+        }
+      }
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "identifier_scheme": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "identifier_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "dates": {
+      "type": "object",
+      "properties": {
+        "published": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "award": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "start": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "end": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "procedure_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cpv": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "notice_url": {
+      "type": "string"
+    },
+    "supplier_link": {
+      "type": "object",
+      "required": [
+        "supplier_id",
+        "method",
+        "fact_state",
+        "evidence_ids"
+      ],
+      "properties": {
+        "supplier_id": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "exact_company_number",
+            "exact_legal_name",
+            "normalised_legal_name",
+            "previous_company_name",
+            "registered_office_postcode",
+            "fts_org_identifier",
+            "companies_house_search",
+            "deterministic_alias_rule",
+            "model_assisted_candidate_ranking",
+            "manual_review"
+          ]
+        },
+        "fact_state": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "PROBABLE",
+            "POSSIBLE",
+            "UNRESOLVED",
+            "CONFLICTING"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Evidence IDs resolving to evidence-ledger records"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    },
+    "raw_path": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

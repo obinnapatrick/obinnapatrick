@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/status.schema.json",
+  "title": "PipelineStatus",
+  "description": "",
+  "type": "object",
+  "required": [
+    "updated_at"
+  ],
+  "properties": {
+    "phase": {
+      "type": "string"
+    },
+    "artifact_level": {
+      "type": "string"
+    },
+    "release_state": {
+      "type": "string",
+      "enum": [
+        "PUBLIC_ALPHA",
+        "PRIVATE_ALPHA",
+        "TECHNICAL_PROTOTYPE_ONLY",
+        "SOURCE_PROOF_PACKAGE_ONLY",
+        "METHODOLOGY_AND_DATA_SPINE_PACKAGE",
+        "BLOCKED_NEEDS_HUMAN_DECISION",
+        "UNDECIDED"
+      ]
+    },
+    "source_probe_verdict": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PARTIAL",
+        "BLOCKED",
+        "NOT_RUN"
+      ]
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

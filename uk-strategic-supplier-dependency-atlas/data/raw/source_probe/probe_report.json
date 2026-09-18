@@ -1,0 +1,103 @@
+{
+  "ran_at": "2026-07-17T09:06:08Z",
+  "verdict": "BLOCKED",
+  "companies_house_key_present": false,
+  "probes": [
+    {
+      "probe": "govuk_strategic_suppliers_content",
+      "url": "https://www.gov.uk/api/content/government/publications/crown-representatives-and-strategic-suppliers",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/govuk_strategic_suppliers_content.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "GOV.UK content API for the official strategic suppliers publication"
+    },
+    {
+      "probe": "govuk_assets_cdn",
+      "url": "https://assets.publishing.service.gov.uk/robots.txt",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/govuk_assets_cdn.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "GOV.UK attachment CDN reachability (robots.txt)"
+    },
+    {
+      "probe": "fts_ocds_release_packages",
+      "url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages?updatedFrom=2026-07-16T09:05:19&updatedTo=2026-07-17T09:05:19",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/fts_ocds_release_packages.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "Find a Tender OCDS API, 1-day update window"
+    },
+    {
+      "probe": "contracts_finder_ocds_search",
+      "url": "https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search?publishedFrom=2026-07-14&publishedTo=2026-07-16&limit=5",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/contracts_finder_ocds_search.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "Contracts Finder OCDS search, date window"
+    },
+    {
+      "probe": "contracts_finder_rest2_keyword",
+      "url": "https://www.contractsfinder.service.gov.uk/api/rest/2/search_notices/json?keyword=cloud&size=3",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/contracts_finder_rest2_keyword.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "Contracts Finder REST v2 keyword search"
+    },
+    {
+      "probe": "companies_house_api_company",
+      "url": "https://api.company-information.service.gov.uk/company/00000006",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/companies_house_api_company.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "no COMPANIES_HOUSE_API_KEY in environment; probing unauthenticated"
+    },
+    {
+      "probe": "companies_house_web_profile",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/00000006",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/companies_house_web_profile.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "Public CH web profile - used for LINK-ONLY citations, not scraping"
+    },
+    {
+      "probe": "companies_house_bulk_download",
+      "url": "https://download.companieshouse.gov.uk/en_output.html",
+      "http_status": null,
+      "ok": false,
+      "reachable": false,
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+      "bytes": 0,
+      "raw_file": "data/raw/source_probe/companies_house_bulk_download.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "Free Company Data Product index page (key-free bulk fallback)"
+    }
+  ]
+}

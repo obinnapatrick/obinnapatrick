@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/evidence.schema.json",
+  "title": "SourceEvidence",
+  "description": "One evidence-ledger record. Every displayed claim points at >=1 of these.",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "source",
+    "source_url",
+    "raw_path",
+    "field",
+    "extracted_value",
+    "retrieved_at",
+    "provenance_class",
+    "evidence_class",
+    "fact_state"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^(SRC|FIXTURE)-"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "GOVUK",
+        "FAT",
+        "CF",
+        "CH",
+        "PARLIAMENT",
+        "OTHER"
+      ]
+    },
+    "source_name": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "source_identifier": {
+      "type": "string"
+    },
+    "source_publication_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "raw_path": {
+      "type": "string",
+      "description": "Path under data/raw/ (or tests/fixtures/raw/ for fixtures)"
+    },
+    "json_pointer": {
+      "type": "string",
+      "description": "Location of the field/passage inside the raw file"
+    },
+    "field": {
+      "type": "string"
+    },
+    "extracted_value": {},
+    "retrieved_at": {
+      "type": "string"
+    },
+    "transformation": {
+      "type": "string",
+      "description": "none | description of deterministic transformation"
+    },
+    "provenance_class": {
+      "type": "string",
+      "enum": [
+        "DIRECT_OBSERVATION",
+        "DETERMINISTIC_TRANSFORMATION",
+        "MODEL_ASSISTED_CANDIDATE",
+        "HUMAN_REVIEWED_CONCLUSION"
+      ]
+    },
+    "evidence_class": {
+      "type": "string",
+      "enum": [
+        "EVIDENCE",
+        "ACCESS_TEST",
+        "LOCATOR_ONLY",
+        "MODEL_MEDIATED_FETCH",
+        "SYNTHETIC_TEST_FIXTURE"
+      ]
+    },
+    "fact_state": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED",
+        "PROBABLE",
+        "POSSIBLE",
+        "UNRESOLVED",
+        "CONFLICTING"
+      ]
+    },
+    "contradiction_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

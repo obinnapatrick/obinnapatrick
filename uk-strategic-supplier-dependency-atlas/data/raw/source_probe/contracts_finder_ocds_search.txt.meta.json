@@ -1,0 +1,13 @@
+{
+  "probe": "contracts_finder_ocds_search",
+  "source_url": "https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search?publishedFrom=2026-07-14&publishedTo=2026-07-16&limit=5",
+  "retrieval_method": "HTTP GET (stdlib urllib via session proxy)",
+  "http_status": null,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "content_type": "",
+  "note": "Contracts Finder OCDS search, date window",
+  "local_path": "data/raw/source_probe/contracts_finder_ocds_search.txt",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bytes": 0,
+  "saved_at": "2026-07-17T09:05:35Z"
+}

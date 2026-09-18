@@ -1,0 +1,12 @@
+{
+  "source_name": "SYNTHETIC fixture list",
+  "source_url": "https://fixture.invalid/strategic-suppliers",
+  "retrieval_method": "fixture",
+  "content_id": "FIXTURE-CONTENT-0001",
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "warning": "SYNTHETIC_TEST_FIXTURE - not real data; never cite as evidence",
+  "local_path": "tests/fixtures/raw/strategic_suppliers/attachment_20260717_strategic_suppliers_fixture.csv",
+  "sha256": "2befa08da6df9351ac92848ca7a44ce088814db4a66c7eda1c69f60c4ca4a1ed",
+  "bytes": 141,
+  "saved_at": "2026-07-17T09:30:00Z"
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/acceptance_gate.schema.json",
+  "title": "AcceptanceGate",
+  "description": "",
+  "type": "object",
+  "required": [
+    "gate_id",
+    "phase",
+    "requirement",
+    "test_method",
+    "status",
+    "blocking",
+    "ran_at"
+  ],
+  "properties": {
+    "gate_id": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "requirement": {
+      "type": "string"
+    },
+    "test_method": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "blocked",
+        "not_run"
+      ]
+    },
+    "evidence_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "failure_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "next_action": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ran_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

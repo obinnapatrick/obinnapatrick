@@ -1,0 +1,10 @@
+{
+  "source_name": "ACCESS_TEST",
+  "source_url": "n/a",
+  "retrieval_method": "curated",
+  "saved_at": "2026-07-17T09:03:30Z",
+  "evidence_class": "ACCESS_TEST",
+  "sha256": "c063f9f766a5a318700f5dc7a58267baee62955a7007cea2f3f462bf68f570af",
+  "bytes": 1578,
+  "local_path": "data/raw/source_probe/webfetch_policy_test.json"
+}

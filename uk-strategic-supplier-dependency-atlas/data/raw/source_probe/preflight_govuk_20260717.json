@@ -1,0 +1,8 @@
+{
+  "probe": "govuk",
+  "url": "https://www.gov.uk/api/content/government/publications/crown-representatives-and-strategic-suppliers",
+  "http_status": null,
+  "reachable": false,
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "tested_at": "2026-07-17T21:53:41Z"
+}

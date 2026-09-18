@@ -1,0 +1,10 @@
+{
+  "source_name": "LOCATOR_ONLY",
+  "source_url": "https://www.gov.uk/government/publications/crown-representatives-and-strategic-suppliers",
+  "retrieval_method": "Claude Code harness WebSearch tool (server-side search API; bypasses container egress)",
+  "saved_at": "2026-07-17T09:04:00Z",
+  "evidence_class": "LOCATOR_ONLY",
+  "sha256": "a5cecd6930192e03fba98be87073cf3c4004e38bc0a2ef3daaac004ef8346935",
+  "bytes": 2063,
+  "local_path": "data/raw/source_probe/websearch_locator_govuk_publication.json"
+}

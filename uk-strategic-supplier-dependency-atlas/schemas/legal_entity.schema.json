@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://atlas.local/schemas/legal_entity.schema.json",
+  "title": "LegalEntity",
+  "description": "A candidate or matched legal entity for a strategic supplier.",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "name",
+    "match",
+    "evidence"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "company_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "match": {
+      "type": "object",
+      "required": [
+        "supplier_id",
+        "method",
+        "fact_state",
+        "reason",
+        "reviewer_status",
+        "assessed_at"
+      ],
+      "properties": {
+        "supplier_id": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "exact_company_number",
+            "exact_legal_name",
+            "normalised_legal_name",
+            "previous_company_name",
+            "registered_office_postcode",
+            "fts_org_identifier",
+            "companies_house_search",
+            "deterministic_alias_rule",
+            "model_assisted_candidate_ranking",
+            "manual_review"
+          ]
+        },
+        "fact_state": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "PROBABLE",
+            "POSSIBLE",
+            "UNRESOLVED",
+            "CONFLICTING"
+          ]
+        },
+        "confidence_score": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "candidate_alternatives": {
+          "type": "array"
+        },
+        "evidence_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Evidence IDs resolving to evidence-ledger records"
+        },
+        "evidence_against": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Evidence IDs resolving to evidence-ledger records"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "reviewer_status": {
+          "type": "string",
+          "enum": [
+            "unreviewed",
+            "machine_only",
+            "human_reviewed"
+          ]
+        },
+        "assessed_at": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Evidence IDs resolving to evidence-ledger records"
+    }
+  },
+  "additionalProperties": true
+}

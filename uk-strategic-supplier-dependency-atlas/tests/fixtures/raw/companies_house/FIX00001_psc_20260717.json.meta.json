@@ -1,0 +1,12 @@
+{
+  "source_name": "SYNTHETIC fixture CH PSC",
+  "source_url": "https://fixture.invalid/company/FIX00001/psc",
+  "retrieval_method": "fixture",
+  "company_number": "FIX00001",
+  "SYNTHETIC_TEST_FIXTURE": true,
+  "warning": "SYNTHETIC_TEST_FIXTURE - not real data; never cite as evidence",
+  "local_path": "tests/fixtures/raw/companies_house/FIX00001_psc_20260717.json",
+  "sha256": "1e3f7ac9ab9171bfd5b42381b6e50fea4404235e17e6e135b5e17ad9e31d86a0",
+  "bytes": 301,
+  "saved_at": "2026-07-17T09:30:00Z"
+}
