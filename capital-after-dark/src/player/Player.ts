@@ -87,9 +87,10 @@ export class Player implements Combatant {
     this.grounded = this.cc.computedGrounded();
     if (this.grounded && this.vy < 0) this.vy = -1;
     this.planarSpeed = Math.hypot(m.x, m.z) / Math.max(dt, 1e-4);
-    let ny = t.y + m.y;
-    if (ny < -200) ny = CENTRE + 0.3; // absolute safety net: never fall out of the world
-    this.body.setNextKinematicTranslation({ x: t.x + m.x, y: ny, z: t.z + m.z });
+    let nx = t.x + m.x, ny = t.y + m.y, nz = t.z + m.z;
+    if (!Number.isFinite(nx + ny + nz)) { nx = t.x; ny = t.y; nz = t.z; } // never feed the solver a bad number
+    if (ny < -200) { ny = CENTRE + 0.3; this.vy = 0; } // absolute safety net: never fall out of the world
+    this.body.setNextKinematicTranslation({ x: nx, y: ny, z: nz });
 
     // facing
     if (this.alive && this.downT <= 0) {

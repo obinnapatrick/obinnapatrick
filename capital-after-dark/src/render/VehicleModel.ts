@@ -1,29 +1,33 @@
 // Procedural vehicle bodies. All models face +Z with the origin at the centre of the collision box.
 import * as THREE from 'three';
 import { VEHICLES, VehicleType } from '../vehicles/specs';
-import { labelTexture } from './textures';
+import { glowTexture, labelTexture } from './textures';
 
 const BOX = new THREE.BoxGeometry(1, 1, 1);
 const WHEEL = new THREE.CylinderGeometry(0.34, 0.34, 0.24, 12).rotateZ(Math.PI / 2);
 const tyre = new THREE.MeshStandardMaterial({ color: 0x0c0c0d, roughness: 0.9 });
 const glass = new THREE.MeshStandardMaterial({ color: 0x0b1118, roughness: 0.08, metalness: 0.9, envMapIntensity: 2 });
 const chrome = new THREE.MeshStandardMaterial({ color: 0x9aa0a6, roughness: 0.25, metalness: 0.9 });
+const plateRear = new THREE.MeshStandardMaterial({ color: 0xf2c200, emissive: 0xf2c200, emissiveIntensity: 0.35 });
+const plateFront = new THREE.MeshStandardMaterial({ color: 0xf4f4f4, emissive: 0xffffff, emissiveIntensity: 0.25 });
+let beamTex: THREE.Texture | null = null;
+const BEAM = new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2);
 const busGlass = new THREE.MeshStandardMaterial({ color: 0x22201a, emissive: 0xffe2b0, emissiveIntensity: 0.55, roughness: 0.3 });
 
 export interface VehicleVisual {
   group: THREE.Group; paint: THREE.MeshStandardMaterial; wheels: THREE.Mesh[]; tail: THREE.MeshStandardMaterial; head: THREE.MeshStandardMaterial;
-  bar?: [THREE.MeshStandardMaterial, THREE.MeshStandardMaterial]; sign?: THREE.MeshStandardMaterial; smoke: THREE.Mesh;
+  bar?: [THREE.MeshStandardMaterial, THREE.MeshStandardMaterial]; sign?: THREE.MeshStandardMaterial; smoke: THREE.Mesh; beam: THREE.Mesh;
 }
 
 export function buildVehicle(type: VehicleType, colour: number): VehicleVisual {
   const s = VEHICLES[type], g = new THREE.Group();
-  const paint = new THREE.MeshStandardMaterial({ color: colour, roughness: 0.28, metalness: 0.55, envMapIntensity: 1.8 });
+  const paint = new THREE.MeshStandardMaterial({ color: colour, roughness: 0.3, metalness: 0.35, envMapIntensity: 2.4 });
   const tail = new THREE.MeshStandardMaterial({ color: 0x400808, emissive: 0xff1a1a, emissiveIntensity: 0.9 });
   const head = new THREE.MeshStandardMaterial({ color: 0xfff6dd, emissive: 0xfff2cc, emissiveIntensity: 1.6 });
   const b = (m: THREE.Material, w: number, h: number, l: number, x: number, y: number, z: number) => { const o = new THREE.Mesh(BOX, m); o.scale.set(w, h, l); o.position.set(x, y, z); o.castShadow = true; g.add(o); return o; };
   const base = -s.h / 2; // bottom of the collision box
   const clear = 0.28;
-  const v: VehicleVisual = { group: g, paint, wheels: [], tail, head, smoke: new THREE.Mesh() };
+  const v: VehicleVisual = { group: g, paint, wheels: [], tail, head, smoke: new THREE.Mesh(), beam: new THREE.Mesh() };
   if (type === 'bus') {
     b(paint, s.w, s.h - clear, s.l, 0, clear / 2, 0);
     for (const y of [base + 1.55, base + 3.35]) { b(busGlass, s.w + 0.03, 0.85, s.l - 1.2, 0, y, -0.1); b(busGlass, s.w - 0.3, 0.85, 0.05, 0, y, s.l / 2 + 0.01); }
@@ -62,6 +66,13 @@ export function buildVehicle(type: VehicleType, colour: number): VehicleVisual {
     b(m1, 0.5, 0.13, 0.26, 0.3, s.h / 2 + 0.05, -0.2); b(m2, 0.5, 0.13, 0.26, -0.3, s.h / 2 + 0.05, -0.2);
     v.bar = [m1, m2];
   }
+  // UK plates: white at the front, yellow at the back
+  b(plateFront, 0.5, 0.11, 0.03, 0, base + clear + (type === 'bus' ? 0.5 : 0.2), s.l / 2 + 0.04);
+  b(plateRear, 0.5, 0.11, 0.03, 0, base + clear + (type === 'bus' ? 0.6 : 0.32), -s.l / 2 - 0.04);
+  // pool of headlight on the road ahead (cheap stand-in for real spotlights)
+  beamTex ??= glowTexture();
+  v.beam = new THREE.Mesh(BEAM, new THREE.MeshBasicMaterial({ map: beamTex, color: 0xfff0cc, transparent: true, opacity: 0.3, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false }));
+  v.beam.scale.set(s.w + 2.6, 1, 11); v.beam.position.set(0, base + 0.06, s.l / 2 + 4.6); g.add(v.beam);
   // smoke puff shown when the engine is failing
   v.smoke = new THREE.Mesh(new THREE.SphereGeometry(0.5, 6, 5), new THREE.MeshBasicMaterial({ color: 0x555555, transparent: true, opacity: 0.55, depthWrite: false }));
   v.smoke.position.set(0, s.h / 2 - 0.2, s.l * 0.36); v.smoke.visible = false; g.add(v.smoke);

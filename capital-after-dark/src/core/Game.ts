@@ -37,6 +37,10 @@ export class Game {
   police!: PoliceManager; missions!: MissionManager; events!: RandomEvents; ui!: UI;
   mode: Mode = 'menu';
   time = 0; godMode = false;
+  /** Tests switch this off so the simulation only advances when they say so. */
+  autoStep = true;
+  /** Tests can also switch off continuous rendering (software GL is slow) and render on demand. */
+  autoRender = true;
   perf = { fps: 0, simMs: 0, simMax: 0 };
   errors: string[] = [];
   private crimeSeq = 1; private recent = new Map<string, { id: number; time: number; cast: number }>();
@@ -59,6 +63,14 @@ export class Game {
     g.gfx.setTime(22);
     g.bus.on('playerDown', () => g.after(2.3, () => g.wasted()));
     canvas.addEventListener('click', () => { g.audio.start(); if (g.mode === 'playing' && !g.ui.dialogueActive && !g.ui.shopActive) g.input.lock(); });
+    // Losing the mouse (Esc in the browser, alt-tab) pauses the game rather than leaving you defenceless.
+    let hadLock = false;
+    document.addEventListener('pointerlockchange', () => {
+      const locked = document.pointerLockElement === canvas;
+      if (hadLock && !locked && g.mode === 'playing' && g.autoStep && !g.ui.dialogueActive && !g.ui.shopActive) g.setPaused(true);
+      hadLock = locked;
+    });
+    window.addEventListener('blur', () => { if (g.mode === 'playing' && g.autoStep && !g.ui.dialogueActive && !g.ui.shopActive) g.setPaused(true); });
     window.addEventListener('error', (e) => g.errors.push(String(e.message)));
     window.addEventListener('unhandledrejection', (e) => g.errors.push(String(e.reason)));
     window.addEventListener('beforeunload', () => { if (g.mode !== 'menu' && !g.missions.active && g.player.alive) g.saveGame('Saved', true); });
@@ -82,9 +94,11 @@ export class Game {
     this.state = state;
     this.timers = []; this.recent.clear();
     this.events.cancel(); this.missions.reset();
-    this.police.reset(); this.vehicles.clear(); this.npcs.clear();
     const d = state.data, p = this.player;
-    p.reset(); p.hp = clamp(d.hp, 10, 100);
+    p.reset(); // must leave any vehicle BEFORE the vehicles (and their physics bodies) are destroyed
+    if (this.interiors.current) { this.interiors.current = null; this.gfx.lightOverride = null; }
+    this.police.reset(); this.vehicles.clear(); this.npcs.clear();
+    p.hp = clamp(d.hp, 10, 100);
     p.teleport(d.pos[0], d.pos[1], d.pos[2], d.yaw); this.camera.snapBehind(d.yaw);
     this.combat.current = 'fists'; p.gunOut = false; p.model.setGun(false);
     this.vehicles.populate();
@@ -117,10 +131,10 @@ export class Game {
     const dt = Math.min(0.05, Math.max(0.001, (now - this.lastFrame) / 1000));
     this.lastFrame = now;
     try {
-      if (this.mode === 'playing') this.step(dt);
+      if (this.mode === 'playing') { if (this.autoStep) this.step(dt); }
       else if (this.mode === 'menu') this.menuScene(dt);
       else { this.ui.modalInput(); if (this.input.rawHit('Escape') || this.input.rawHit('KeyP')) this.setPaused(false); this.input.endTick(); }
-      this.gfx.render();
+      if (this.autoRender) this.gfx.render();
     } catch (e) { const m = String((e as Error)?.stack ?? e); if (this.errors.length < 20) this.errors.push(m); console.error(e); }
   }
   private menuScene(dt: number): void {
@@ -137,8 +151,9 @@ export class Game {
     const t0 = performance.now();
     const inp = this.input, p = this.player, ui = this.ui;
     this.time += dt;
+    const wasModal = ui.dialogueActive || ui.shopActive; // Esc that closes a panel must not also pause
     ui.modalInput();
-    const modal = ui.dialogueActive || ui.shopActive;
+    const modal = wasModal || ui.dialogueActive || ui.shopActive;
     inp.enabled = !modal;
     if (!modal && (inp.rawHit('Escape') || inp.rawHit('KeyP'))) { this.setPaused(true); inp.endTick(); return; }
     if (inp.rawHit('F5') && !this.missions.active) this.saveGame();

@@ -13,6 +13,9 @@ export interface DriverAI {
   a: number; b: number; // road-graph edge currently being driven
   cruise: number; stuck: number; reverse: number; token: number; panic: number;
   route: number[]; routeTimer: number;
+  next?: number; // junction exit chosen in advance, so the driver can slow down for a turn
+  why?: string; // debugging aid: what the driver is currently waiting for
+  jam?: number; wait?: number; push?: number; // patience: after waiting too long behind something, edge past it
 }
 let NEXT_ID = 1;
 
@@ -32,7 +35,7 @@ export class Vehicle {
   siren = false; owned = false; crew = 0; missionTag = ''; locked = false; permitted = false; stolen = false;
   hazard = 0;
   private setVx = 0; private setVz = 0; private driven = false;
-  private gy = 0; private wheelSpin = 0; private steerVis = 0;
+  private gy = 0; private wheelSpin = 0; private steerVis = 0; private hitAcc = 0; private hitT = 0;
   impact = 0; // strength of the collision detected this step (0 = none)
   onDestroyed: (() => void) | null = null;
 
@@ -96,9 +99,12 @@ export class Vehicle {
     this.lateral = v.x * leftX(this.yaw) + v.z * leftZ(this.yaw);
     this.impact = 0;
     if (this.driven) {
+      // The solver may spread one crash over a few steps, so add up the unexplained change in
+      // velocity for the whole contact and report it once when the contact ends.
       const dv = Math.hypot(v.x - this.setVx, v.z - this.setVz);
-      if (dv > 3.5) this.impact = dv;
-    }
+      if (dv > 0.3) { this.hitAcc += dv; this.hitT = 0.1; }
+      else if (this.hitAcc > 0 && (this.hitT -= dt) <= 0) { if (this.hitAcc > 3.5) this.impact = this.hitAcc; this.hitAcc = 0; }
+    } else this.hitAcc = 0;
     if (this.hazard > 0) this.hazard -= dt;
     this.syncVisual(dt);
   }
@@ -125,6 +131,7 @@ export class Vehicle {
     this.visual.head.emissiveIntensity = this.dead ? 0 : flash ? 3 : 1.6;
     if (this.visual.bar) { const on = this.siren && !this.dead; const ph = Math.floor(now / 140) % 2; this.visual.bar[0].emissiveIntensity = on && ph ? 6 : 0; this.visual.bar[1].emissiveIntensity = on && !ph ? 6 : 0; }
     if (this.visual.sign) this.visual.sign.emissiveIntensity = this.driver === 'player' ? 0.2 : 1.2;
+    this.visual.beam.visible = !!this.driver && !this.dead;
     const smoking = this.health < this.spec.health * 0.3;
     this.visual.smoke.visible = smoking;
     if (smoking) { const k = (now / 700) % 1; this.visual.smoke.scale.setScalar(0.5 + k * 1.6); this.visual.smoke.position.y = this.spec.h / 2 + k * 1.6; (this.visual.smoke.material as THREE.MeshBasicMaterial).opacity = (this.dead ? 0.75 : 0.5) * (1 - k); }

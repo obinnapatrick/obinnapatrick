@@ -36,6 +36,7 @@ export class VehicleManager {
   /** Initial traffic and kerbside parking. */
   populate(): void {
     const L = this.g.city.layout;
+    this.trafficTarget = 16;
     for (let i = 0; i < this.trafficTarget; i++) this.spawnTraffic(TRAFFIC_MIX[i % TRAFFIC_MIX.length], 28);
     const patrol = this.spawnTraffic('police', 60);
     if (patrol) patrol.crew = 2;
@@ -95,33 +96,59 @@ export class VehicleManager {
     let desired = fleeing ? v.spec.maxSpeed * 0.7 : ai.cruise;
     const distB = len - s;
     let hold = true;
-    if (distB < 28 && !fleeing) { hold = this.acquire(ai.b, v, now); if (!hold && distB < 17.5) desired = 0; else if (!hold) desired = Math.min(desired, 4.5); }
+    ai.why = '';
+    if (distB < 28 && !fleeing) {
+      // Only the FRONT car of a lane may claim the junction. (If a queued car could claim it, the car in
+      // front would wait for the token while the token-holder waits for the car in front: deadlock.)
+      const queued = this.list.some((o) => o !== v && o.ai && o.driver === 'ai' && o.ai.a === ai.a && o.ai.b === ai.b && (o.x - A.x) * fwdX(hd) + (o.z - A.z) * fwdZ(hd) > s);
+      if (queued) { hold = false; const t = this.tokens.get(ai.b); if (t && t.v === v.id) this.tokens.delete(ai.b); }
+      else hold = this.acquire(ai.b, v, now);
+      // stop with the NOSE well short of the junction box (and the zebra crossing), whatever the vehicle's length
+      if (!hold && distB < 10 + v.spec.l / 2) { desired = 0; ai.why = queued ? 'queue' : 'junction ' + ai.b + ' held by #' + this.tokens.get(ai.b)?.v; } else if (!hold) desired = Math.min(desired, 4.5);
+    }
     if (s > 11) { const t = this.tokens.get(ai.a); if (t && t.v === v.id) this.tokens.delete(ai.a); }
-    if (s + look > len - INSET && hold) {
-      const c = R.nextNode(ai.a, ai.b, this.rnd);
+    // decide the way out of the junction early and slow down if it is a turn
+    if (distB < 30 && ai.next === undefined) ai.next = R.nextNode(ai.a, ai.b, this.rnd);
+    if (ai.next !== undefined && distB < 22 && Math.abs(angleDiff(hd, R.heading(ai.b, ai.next))) > 0.1) desired = Math.min(desired, fleeing ? 9 : 5);
+    // stay in lane right up to the junction box, then steer for the exit lane (no diagonal corner-cutting)
+    if (s > len - INSET + 0.5 && hold) {
+      const c = ai.next ?? R.nextNode(ai.a, ai.b, this.rnd);
+      ai.next = undefined;
       ai.a = ai.b; ai.b = c;
       A = R.nodes[ai.a]; B = R.nodes[ai.b]; hd = R.heading(ai.a, ai.b); len = R.edgeLength(ai.a, ai.b);
       s = (v.x - A.x) * fwdX(hd) + (v.z - A.z) * fwdZ(hd);
     }
-    const tp = R.lanePoint(ai.a, ai.b, clamp(s + look, INSET, len - INSET));
+    const tp = R.lanePoint(ai.a, ai.b, clamp(s + look, INSET, len - INSET + 3));
     const err = angleDiff(v.yaw, yawTo(tp.x - v.x, tp.z - v.z));
     v.steer = clamp(err * 2.4, -1, 1);
     if (Math.abs(err) > 0.3) desired = Math.min(desired, fleeing ? 9 : 5);
 
     // keep a gap to whatever is ahead in our corridor
     if (!fleeing) {
-      const fx = fwdX(v.yaw), fz = fwdZ(v.yaw), lx = leftX(v.yaw), lz = leftZ(v.yaw);
+      // Look along the path we intend to drive (towards the lane target), not just where the bonnet points:
+      // mid-turn, the bonnet sweeps across cars queuing in other lanes and they must not count as "ahead".
+      const tl = Math.hypot(tp.x - v.x, tp.z - v.z) || 1;
+      const fx = (tp.x - v.x) / tl, fz = (tp.z - v.z) / tl, lx = fz, lz = -fx;
       const reach = 5 + v.spec.l / 2 + Math.max(0, v.speed) * 0.9;
-      const check = (ox: number, oz: number, halfL: number, halfW: number) => {
+      let blocked = false;
+      ai.push = Math.max(0, (ai.push ?? 0) - dt);
+      const check = (ox: number, oz: number, halfL: number, halfW: number, what: string) => {
         const dx = ox - v.x, dz = oz - v.z, f = dx * fx + dz * fz;
         if (f <= 0 || f > reach + halfL) return;
         if (Math.abs(dx * lx + dz * lz) > v.spec.w / 2 + halfW + 0.25) return;
-        desired = f - halfL - v.spec.l / 2 < 3.2 ? 0 : Math.min(desired, 3.5);
+        const gap = f - halfL - v.spec.l / 2;
+        if (ai.push! > 0 && gap > 0.9) { desired = Math.min(desired, 2.5); return; } // out of patience: creep round
+        if (gap < 3.2) { desired = 0; blocked = true; ai.why = what; } else desired = Math.min(desired, 3.5);
       };
-      for (const o of this.list) if (o !== v && Math.abs(o.x - v.x) < 30 && Math.abs(o.z - v.z) < 30) check(o.x, o.z, o.spec.l / 2, Math.abs(angleDiff(o.yaw, v.yaw)) % Math.PI > 0.6 ? o.spec.l / 2 : o.spec.w / 2 - 0.3);
+      for (const o of this.list) if (o !== v && Math.abs(o.x - v.x) < 30 && Math.abs(o.z - v.z) < 30) check(o.x, o.z, o.spec.l / 2, Math.abs(angleDiff(o.yaw, v.yaw)) % Math.PI > 0.6 ? o.spec.l / 2 : o.spec.w / 2 - 0.3, o.type + ' #' + o.id + (o.driver ? '' : ' (parked)'));
       const pl = this.g.player;
-      if (!pl.vehicle && pl.pos.y > -10) check(pl.pos.x, pl.pos.z, 0.4, 0.5);
-      for (const n of this.g.npcs.list) if (!n.far && n.state !== 'indoors' && Math.abs(n.pos.x - v.x) < 22 && Math.abs(n.pos.z - v.z) < 22) check(n.pos.x, n.pos.z, 0.4, 0.45);
+      if (!pl.vehicle && pl.pos.y > -10) check(pl.pos.x, pl.pos.z, 0.4, 0.5, 'player');
+      for (const n of this.g.npcs.list) if (!n.far && n.state !== 'indoors' && n.state !== 'ko' && Math.abs(n.pos.x - v.x) < 22 && Math.abs(n.pos.z - v.z) < 22) check(n.pos.x, n.pos.z, 0.4, 0.45, 'pedestrian ' + n.state);
+      ai.wait = blocked ? (ai.wait ?? 0) + dt : Math.max(0, (ai.wait ?? 0) - dt * 3);
+      if (ai.wait > 7) { ai.wait = 0; ai.push = 3; }
+      // last resort for a genuine jam (two vehicles wedged together): back off, or re-route if nobody is watching
+      ai.jam = blocked && Math.abs(v.speed) < 0.3 ? (ai.jam ?? 0) + dt : Math.max(0, (ai.jam ?? 0) - dt);
+      if (ai.jam > 18) { ai.jam = 0; if (dist2(v.x, v.z, pl.pos.x, pl.pos.z) > 60 && !v.missionTag) { this.relocate(v); return; } ai.reverse = 1.6; }
     }
     if (desired <= 0.1) { v.throttle = v.speed > 0.6 ? -1 : 0; v.handbrake = v.speed < 0.6; }
     else { v.handbrake = false; v.throttle = v.speed < desired - 0.4 ? (fleeing ? 1 : 0.7) : v.speed > desired + 1.2 ? -0.5 : 0.15; }
@@ -139,11 +166,16 @@ export class VehicleManager {
     const d = dist2(v.x, v.z, tx, tz);
     let ax = tx, az = tz;
     if (!(d < 75 && city.los(v.x, v.z, tx, tz))) {
+      const R = city.roads;
       ai.routeTimer -= dt;
-      if (ai.routeTimer <= 0 || !ai.route.length) { ai.routeTimer = 1; ai.route = city.roads.route(city.roads.nearest(v.x, v.z), city.roads.nearest(tx, tz)); }
-      let n = city.roads.nodes[ai.route[0]];
-      if (ai.route.length > 1 && dist2(v.x, v.z, n.x, n.z) < 13) { ai.route.shift(); n = city.roads.nodes[ai.route[0]]; }
-      ax = n.x; az = n.z;
+      if (ai.routeTimer <= 0 || !ai.route.length) { ai.routeTimer = 0.5; ai.route = R.route(R.nearest(v.x, v.z), R.nearest(tx, tz)); }
+      if (ai.route.length > 1) {
+        // head for the junction after the nearest one as soon as we are at it or already on the connecting street
+        const n0 = R.nodes[ai.route[0]], n1 = R.nodes[ai.route[1]];
+        const next = dist2(v.x, v.z, n0.x, n0.z) < 14 || dist2(v.x, v.z, n1.x, n1.z) < dist2(n0.x, n0.z, n1.x, n1.z);
+        const n = next ? n1 : n0;
+        ax = n.x; az = n.z;
+      }
     }
     const err = angleDiff(v.yaw, yawTo(ax - v.x, az - v.z));
     v.steer = clamp(err * 2.6, -1, 1);
@@ -160,7 +192,7 @@ export class VehicleManager {
     for (let i = 0; i < 20; i++) {
       const a = Math.floor(this.rnd() * 25), b = R.nodes[a].links[Math.floor(this.rnd() * R.nodes[a].links.length)], pt = R.lanePoint(a, b, 30);
       if (dist2(pt.x, pt.z, p.x, p.z) < 80 || this.list.some((o) => o !== v && dist2(o.x, o.z, pt.x, pt.z) < 13)) continue;
-      v.place(pt.x, pt.z, R.heading(a, b)); v.ai!.a = a; v.ai!.b = b; return;
+      v.place(pt.x, pt.z, R.heading(a, b)); v.ai!.a = a; v.ai!.b = b; v.ai!.next = undefined; return;
     }
   }
 

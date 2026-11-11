@@ -219,7 +219,7 @@ export class ChooseSide extends Mission {
     this.go(9, '');
     const who = this.side === 'marlowe' ? 'Col Hartigan' : 'Kes';
     this.say([{ who, text: this.side === 'marlowe' ? 'I heard it from here. Vivienne says welcome to the Firm - and to give you this. Reeve will want your head now, so use it.' : 'Unopened. Good. You’re a Kestrel now, driver - and the Firm will be looking for you. Take this; you’ll need it in Soho.' }], () => {
-      g.state.changeRep(this.side, 35); g.state.changeRep(rival, -18, false); g.state.setFlag('side', this.side);
+      g.state.changeRep(this.side, 35); g.state.changeRep(rival, Math.min(-18, -45 - g.state.data.rep[rival]), false); g.state.setFlag('side', this.side); // the other crew is now an enemy
       g.state.remember(this.side === 'marlowe' ? 'col' : 'kes', 'sided', 'London', 30); g.state.remember(this.side === 'marlowe' ? 'kes' : 'col', 'betrayed', 'London', -40);
       g.combat.give('smg', 3);
       this.win({ cash: 400, lines: [`${FACTIONS[this.side].name} +35 · ${FACTIONS[rival].name} now hostile`, 'New weapon: Kessler Compact SMG'] });

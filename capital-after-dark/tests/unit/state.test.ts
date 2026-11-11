@@ -38,7 +38,7 @@ describe('factions and relationships', () => {
     const s = new WorldState(); s.addNotoriety('Soho', 30); s.addNotoriety('Soho', 500); expect(s.notoriety('Soho')).toBe(100);
     s.decayNotoriety(10); expect(s.notoriety('Soho')).toBe(85); expect(s.notoriety('Chinatown')).toBe(0);
   });
-  it('clock rolls over into the next day', () => { const s = new WorldState(); s.data.clock = 1430; s.advanceClock(20); expect(s.data.day).toBe(2); expect(s.data.clock).toBe(10); });
+  it('clock rolls over into the next day', () => { const s = new WorldState(); const d0 = s.data.day; s.data.clock = 1430; s.advanceClock(20); expect(s.data.day).toBe(d0 + 1); expect(s.data.clock).toBe(10); });
 });
 
 describe('save system', () => {

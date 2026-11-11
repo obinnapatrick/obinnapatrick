@@ -25,6 +25,8 @@ export class Renderer {
   hemi = new THREE.HemisphereLight(0x8fa8ff, 0x1a1410, 0.6);
   sun = new THREE.DirectionalLight(0xbfd0ff, 0.5);
   private lampLights: THREE.PointLight[] = [];
+  /** A faint fill light that travels with the player so the character always reads against the dark. */
+  private follow = new THREE.PointLight(0xdfe6ff, 5, 9, 1.6);
   private lampPositions: V2[] = [];
   private lampTimer = 0;
   /** When set (interiors), the pooled lights are placed here instead of on street lamps. */
@@ -51,7 +53,7 @@ export class Renderer {
     this.scene.environmentIntensity = 0.5;
     pm.dispose();
 
-    this.scene.add(this.hemi, this.sun, this.sun.target);
+    this.scene.add(this.hemi, this.sun, this.sun.target, this.follow);
     this.sun.shadow.mapSize.set(2048, 2048);
     const sc = this.sun.shadow.camera; sc.left = -45; sc.right = 45; sc.top = 45; sc.bottom = -45; sc.near = 1; sc.far = 160;
     this.sun.shadow.bias = -0.0006;
@@ -118,7 +120,8 @@ export class Renderer {
     (this.scene.background as THREE.Color).copy(sky);
     (this.scene.fog as THREE.FogExp2).color.copy(sky);
     (this.scene.fog as THREE.FogExp2).density = lerp(0.004, 0.0085, n) + this.rainAmount * 0.002;
-    this.hemi.intensity = lerp(1.9, 0.55, n);
+    this.hemi.intensity = lerp(1.9, 0.9, n);
+    this.follow.intensity = lerp(0, 5, n);
     this.hemi.color.set(n > 0.5 ? 0x8fa0e0 : 0xdfe8f2);
     this.sun.intensity = lerp(2.2, 0.35, n);
     this.sun.color.set(n > 0.5 ? 0x9fb4ff : 0xfff1dd);
@@ -142,6 +145,7 @@ export class Renderer {
       }
       this.rain.geometry.attributes.position.needsUpdate = true;
     }
+    this.follow.position.set(focus.x, focus.y + 2.6, focus.z);
     // sun/shadow frustum follows the action
     this.sun.position.set(focus.x + 40, focus.y + 70, focus.z + 25);
     this.sun.target.position.copy(focus);

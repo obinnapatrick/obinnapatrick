@@ -69,7 +69,8 @@ export class MissionManager {
     if (this.active) {
       const m = this.active;
       m.t += dt;
-      if (m.timer > 0 && !g.ui.dialogueActive) m.timer = Math.max(0, m.timer - dt);
+      if (g.ui.dialogueActive) return; // nothing progresses (or expires) while people are talking
+      if (m.timer > 0) m.timer = Math.max(0, m.timer - dt);
       m.tick(dt);
       return;
     }

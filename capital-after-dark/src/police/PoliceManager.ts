@@ -49,7 +49,7 @@ export class PoliceManager {
       this.visible = false;
     } else {
       this.losT -= dt;
-      if (this.losT <= 0) {
+      if (this.losT <= 0 || w.level > 0) { // every tick while wanted, so "last known position" is exact
         this.losT = 0.2;
         this.visible = this.officers.some((o) => o.state !== 'down' && !o.far && this.canSee(o.pos.x, o.pos.z)) || this.cars.some((c) => c.crew > 0 && this.canSee(c.x, c.z));
       }
@@ -100,7 +100,7 @@ export class PoliceManager {
       o.setState('idle'); o.target = null; o.mood = 'calm'; o.hostileToPlayer = false; o.idleFor = rand(1, 4); o.order = null;
       if (o.responder) { o.goalKind = 'tube'; o.goTo(this.g, ...this.exitPoint(o)); } // responders walk off and leave the district
     }
-    for (const c of this.cars) if (c.ai) { c.siren = false; if (c.crew > 0) { c.ai.mode = 'traffic'; const R = this.g.city.roads; c.ai.a = R.nearest(c.x, c.z); c.ai.b = R.nodes[c.ai.a].links[0]; c.ai.cruise = 9; } else c.ai.mode = 'stop'; }
+    for (const c of this.cars) if (c.ai) { c.siren = false; if (c.crew > 0) { c.ai.mode = 'traffic'; const R = this.g.city.roads; c.ai.a = R.nearest(c.x, c.z); c.ai.b = R.nodes[c.ai.a].links[0]; c.ai.next = undefined; c.ai.cruise = 9; } else c.ai.mode = 'stop'; }
   }
   private exitPoint(o: Npc): [number, number] { const q = this.g.city.layout.poi(o.pos.x < 0 ? 'tube_picc' : 'tube_leic'); return [q.x, q.z]; }
 

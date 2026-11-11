@@ -25,8 +25,8 @@ export class RandomEvents {
     if (this.live) {
       const e = this.live;
       e.ttl -= dt; e.tick(dt);
-      // dismissal: timed out, or the player has wandered far away
-      if (this.live === e && (e.ttl <= 0 || dist2(p.pos.x, p.pos.z, e.x, e.z) > 190)) this.end(false);
+      // dismissal: timed out, or (before the player has committed to it) they have wandered far away
+      if (this.live === e && (e.ttl <= 0 || (!e.data.committed && dist2(p.pos.x, p.pos.z, e.x, e.z) > 190))) this.end(false);
       return;
     }
     this.cooldown -= dt;
@@ -75,14 +75,20 @@ export class RandomEvents {
     }
     return null;
   }
-  /** A kerbside point (and heading) near a pavement corner, clear of other vehicles. */
-  private kerb(s: { x: number; z: number }): { x: number; z: number; yaw: number } | null {
-    const R = this.g.city.roads, a = R.nearest(s.x, s.z);
-    for (const b of R.nodes[a].links) {
-      const pt = R.lanePoint(a, b, 24 + this.rnd() * 20, PARK_OFFSET);
-      if (!this.g.vehicles.list.some((v) => dist2(v.x, v.z, pt.x, pt.z) < 9)) return { ...pt, yaw: R.heading(a, b) };
+  /** A point part-way along a block's pavement (not on a corner), so a car can pull up beside it. */
+  private midBlock(min = 30, max = 90): { x: number; z: number } | null {
+    const g = this.g, p = g.player.pos, N = g.city.nav.nodes;
+    for (let i = 0; i < 30; i++) {
+      const c = Math.floor(this.rnd() * 64), a = N[c], b = N[c - (c % 4) + ((c % 4) + 1) % 4], t = 0.3 + this.rnd() * 0.4;
+      const x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, d = dist2(x, z, p.x, p.z);
+      if (d >= min && d <= max && !g.city.inSolid(x, z, 1)) return { x, z };
     }
     return null;
+  }
+  /** A kerbside point (and heading) near a pavement corner, clear of other vehicles. */
+  private kerb(s: { x: number; z: number }): { x: number; z: number; yaw: number } | null {
+    const k = this.g.kerbNear(s.x, s.z);
+    return this.g.vehicles.list.some((v) => dist2(v.x, v.z, k.x, k.z) < 9) ? null : k;
   }
 
   private build(kind: EventKind): Live | null {
@@ -91,7 +97,7 @@ export class RandomEvents {
     const npc = (e: Live, role: any, x: number, z: number, look?: string) => { const n = g.npcs.spawn(role, x, z, { scripted: true, look }); e.npcs.push(n); return n; };
 
     if (kind === 'fare' || kind === 'delivery') {
-      const s = this.spot(30, 85); if (!s) return null;
+      const s = this.midBlock(30, 85); if (!s) return null;
       const destId = pick(DESTS, this.rnd), dq = g.city.layout.poi(destId);
       if (dist2(dq.x, dq.z, s.x, s.z) < 70) return null;
       const e = base(s.x, s.z, 75);
@@ -100,12 +106,12 @@ export class RandomEvents {
       e.markers.push(g.fx.addMarker(s.x, s.z, 3.2, kind === 'fare' ? 0x8dff9a : 0x7df3ff, kind === 'fare' ? '£' : 'P'));
       g.ui.toast(kind === 'fare' ? 'Someone is hailing a cab nearby (green marker)' : 'Someone nearby needs a parcel delivered (blue marker)');
       const pay = Math.round(18 + dist2(dq.x, dq.z, s.x, s.z) * 0.22);
-      const drop = () => { e.markers.forEach((m) => m.remove()); e.markers = [g.fx.addMarker(dq.nx ?? dq.x, dq.nz ?? dq.z, 4, 0x8dff9a, 'D')]; e.x = dq.x; e.z = dq.z; e.ttl = 110; e.stage = 2; };
+      const drop = () => { e.markers.forEach((m) => m.remove()); e.markers = [g.fx.addMarker(dq.nx ?? dq.x, dq.nz ?? dq.z, 4, 0x8dff9a, 'D')]; e.x = dq.x; e.z = dq.z; e.ttl = 130; e.stage = 2; e.data.committed = true; };
       e.tick = () => {
         const near = dist2(p.pos.x, p.pos.z, s.x, s.z);
         if (!who.alive && e.stage < 2) return this.end(false);
         if (e.stage === 0) {
-          if (kind === 'fare' && p.vehicle?.type === 'cab' && near < 6 && Math.abs(p.vehicle.speed) < 1.5) { who.pose = 'none'; who.follow = { pos: p.pos }; who.setState('follow'); e.stage = 1; e.ttl = 30; }
+          if (kind === 'fare' && p.vehicle?.type === 'cab' && near < 11 && Math.abs(p.vehicle.speed) < 1.5) { who.pose = 'none'; who.follow = { pos: p.pos }; who.setState('follow'); e.stage = 1; e.ttl = 30; }
           if (kind === 'delivery' && !p.vehicle && near < 2.4) {
             e.stage = 1; e.ttl = 200;
             g.ui.dialogue([{ who: who.name, text: `You’re a driver, aren’t you? This has to be at ${dq.name} tonight and I can’t leave the stall. ${fmtMoney(pay)} if you run it over.` },
@@ -171,7 +177,7 @@ export class RandomEvents {
       return e;
     }
     // collision / breakdown: vehicles stopped at the kerb with hazards on
-    const s = this.spot(35, 90); if (!s) return null;
+    const s = this.midBlock(35, 90); if (!s) return null;
     const k = this.kerb(s); if (!k) return null;
     const e = base(k.x, k.z, 90);
     const v1 = g.vehicles.spawn(pick(['saloon', 'van', 'cab'] as const, this.rnd), k.x, k.z, k.yaw, { tag: 'event' });
@@ -195,7 +201,7 @@ export class RandomEvents {
     drv.talk = () => {
       if (e.stage !== 0) return false;
       g.ui.dialogue([{ who: drv.name, text: `Engine’s gone and recovery say two hours. If you could get it to Brewer Street Motors I’d make it worth your while - ${fmtMoney(pay)}?` },
-        { who: 'You', text: '', choices: [{ label: `Drive it to the garage (${fmtMoney(pay)})`, pick: () => { e.stage = 1; e.ttl = 160; v1.permitted = true; e.markers.forEach((m) => m.remove()); e.markers = [g.fx.addMarker(bay.x, bay.z, 4, 0x7df3ff, 'G')]; e.x = bay.x; e.z = bay.z; g.ui.toast('Nurse the car to the garage forecourt - it won’t survive another knock'); } }, { label: 'Sorry, can’t help', pick: () => this.end(false) }] }]);
+        { who: 'You', text: '', choices: [{ label: `Drive it to the garage (${fmtMoney(pay)})`, pick: () => { e.stage = 1; e.ttl = 160; e.data.committed = true; v1.permitted = true; e.markers.forEach((m) => m.remove()); e.markers = [g.fx.addMarker(bay.x, bay.z, 4, 0x7df3ff, 'G')]; e.x = bay.x; e.z = bay.z; g.ui.toast('Nurse the car to the garage forecourt - it won’t survive another knock'); } }, { label: 'Sorry, can’t help', pick: () => this.end(false) }] }]);
       return true;
     };
     e.tick = () => {

@@ -1,6 +1,6 @@
 // Road graph (vehicles, left-hand traffic) and pavement graph (pedestrians). Pure logic.
 import { V2, dist2, leftX, leftZ, yawTo } from '../core/util';
-import { XS, ZS, LANE, ROAD_HALF, Layout } from './layout';
+import { XS, ZS, LANE, ROAD_HALF, Layout, lineClear } from './layout';
 
 export interface GNode extends V2 { id: number; links: number[]; tag?: string }
 
@@ -74,7 +74,7 @@ const PAVE_MID = ROAD_HALF + 1.9;
 export class NavGraph {
   nodes: GNode[] = [];
   private poiNode = new Map<string, number>();
-  constructor(layout: Layout) {
+  constructor(private layout: Layout) {
     const add = (x: number, z: number, tag?: string) => { const n: GNode = { id: this.nodes.length, x, z, links: [], tag }; this.nodes.push(n); return n.id; };
     const link = (a: number, b: number) => { if (a !== b && !this.nodes[a].links.includes(b)) { this.nodes[a].links.push(b); this.nodes[b].links.push(a); } };
     // four pavement corners per block: index = (j*4+i)*4 + corner (0 NW, 1 NE, 2 SE, 3 SW)
@@ -108,6 +108,12 @@ export class NavGraph {
       else if (p.via === 'yard') link(n, this.poiNode.get('site')!);
       else this.attach(n, link, p.id === 'square' ? 4 : p.id === 'circus' ? 1 : 2);
     }
+    // shortcuts: doorways, alley mouths and plazas also connect to anything close by in a clear straight line
+    for (let i = 64; i < this.nodes.length; i++) for (const o of this.nodes) {
+      if (o.id === i) continue;
+      const me = this.nodes[i];
+      if (dist2(me.x, me.z, o.x, o.z) < 30 && lineClear(layout, me.x, me.z, o.x, o.z)) link(i, o.id);
+    }
   }
   /** Link a node to its nearest block-corner nodes (the first 64 nodes). */
   private attach(n: number, link: (a: number, b: number) => void, count = 2) {
@@ -122,11 +128,26 @@ export class NavGraph {
     return b;
   }
   path(from: number, to: number): number[] { return astar(this.nodes, from, to); }
+  private nearestClear(x: number, z: number, k: number): number[] {
+    const sorted = this.nodes.map((n) => ({ id: n.id, d: dist2(x, z, n.x, n.z) })).sort((a, b) => a.d - b.d).slice(0, k + 3);
+    const clear = sorted.filter((n) => lineClear(this.layout, x, z, this.nodes[n.id].x, this.nodes[n.id].z)).slice(0, k).map((n) => n.id);
+    return clear.length ? clear : [sorted[0].id];
+  }
+  /**
+   * Walking route between two arbitrary points. The entry and exit nodes are chosen to minimise the
+   * whole journey (not just "nearest node"), which stops chasers doubling back on themselves.
+   */
   pathPoints(fx: number, fz: number, tx: number, tz: number): V2[] {
-    const ids = this.path(this.nearest(fx, fz), this.nearest(tx, tz));
-    const pts = ids.map((i) => ({ x: this.nodes[i].x, z: this.nodes[i].z }));
-    // skip the first node if we are already past it
-    if (pts.length > 1 && dist2(fx, fz, pts[1].x, pts[1].z) < dist2(pts[0].x, pts[0].z, pts[1].x, pts[1].z)) pts.shift();
+    let best: number[] = [], bc = Infinity;
+    for (const s of this.nearestClear(fx, fz, 3)) for (const e of this.nearestClear(tx, tz, 2)) {
+      const ids = this.path(s, e); if (!ids.length) continue;
+      let c = dist2(fx, fz, this.nodes[s].x, this.nodes[s].z) + dist2(tx, tz, this.nodes[e].x, this.nodes[e].z);
+      for (let i = 1; i < ids.length; i++) c += dist2(this.nodes[ids[i - 1]].x, this.nodes[ids[i - 1]].z, this.nodes[ids[i]].x, this.nodes[ids[i]].z);
+      if (c < bc) { bc = c; best = ids; }
+    }
+    const pts = best.map((i) => ({ x: this.nodes[i].x, z: this.nodes[i].z }));
+    // drop leading nodes we can already walk past in a straight line
+    while (pts.length > 1 && lineClear(this.layout, fx, fz, pts[1].x, pts[1].z) && dist2(fx, fz, pts[1].x, pts[1].z) < 40) pts.shift();
     pts.push({ x: tx, z: tz });
     return pts;
   }

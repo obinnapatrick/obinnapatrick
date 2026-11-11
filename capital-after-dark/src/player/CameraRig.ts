@@ -22,7 +22,7 @@ export class CameraRig {
     if (v) {
       wantDist = 5.8 + v.spec.l * 0.5 + Math.abs(v.speed) * 0.07; height = v.spec.h * 0.5 + 1.0; wantFov = 64 + Math.min(14, Math.abs(v.speed) * 0.35);
       if (this.idle > 1 && v.speed > -1.5) { this.yaw = dampAngle(this.yaw, v.yaw, 2.6, dt); this.pitch = damp(this.pitch, -0.2, 2, dt); }
-    } else if (p.aiming && p.gunOut) { wantDist = 2.3; wantFov = 48; shoulder = 0.55; height = 1.6; }
+    } else if (p.aiming && p.gunOut) { wantDist = 2.9; wantFov = 50; shoulder = 0.8; height = 1.65; }
     else if (g.interiors.current) wantDist = 3.2;
     if (p.crouching && !v) height -= 0.35;
     this.fov = damp(this.fov, wantFov, 8, dt);
