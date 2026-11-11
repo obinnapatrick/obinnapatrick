@@ -132,6 +132,8 @@ export class Vehicle {
     if (this.visual.bar) { const on = this.siren && !this.dead; const ph = Math.floor(now / 140) % 2; this.visual.bar[0].emissiveIntensity = on && ph ? 6 : 0; this.visual.bar[1].emissiveIntensity = on && !ph ? 6 : 0; }
     if (this.visual.sign) this.visual.sign.emissiveIntensity = this.driver === 'player' ? 0.2 : 1.2;
     this.visual.beam.visible = !!this.driver && !this.dead;
+    this.visual.tailGlow.opacity = this.dead ? 0 : flash ? 0.7 : braking ? 0.6 : this.driver ? 0.22 : 0.06;
+    if (this.visual.barGlow) this.visual.barGlow.opacity = this.siren && !this.dead ? 0.35 + 0.45 * (Math.floor(now / 140) % 2) : 0;
     const smoking = this.health < this.spec.health * 0.3;
     this.visual.smoke.visible = smoking;
     if (smoking) { const k = (now / 700) % 1; this.visual.smoke.scale.setScalar(0.5 + k * 1.6); this.visual.smoke.position.y = this.spec.h / 2 + k * 1.6; (this.visual.smoke.material as THREE.MeshBasicMaterial).opacity = (this.dead ? 0.75 : 0.5) * (1 - k); }

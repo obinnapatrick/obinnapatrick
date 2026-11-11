@@ -4,7 +4,7 @@ An original third-person, open-world action game set in a rainy, night-time slic
 Soho, Piccadilly Circus, Chinatown and Leicester Square. You are a minicab driver on the night shift; one odd
 fare drags you between two rival crews and a property developer who is quietly burning the neighbourhood down.
 
-This is a **playable prototype (version 0.4)**, not a concept. Everything listed under
+This is a **playable prototype (version 0.5)**, not a concept. Everything listed under
 [What is implemented](#what-is-implemented) runs in the browser today and is exercised by the automated
 browser checks in [`tests/e2e`](tests/e2e/gameplay.mjs). Everything that is *not* done is listed under
 [Known limitations](#known-limitations) and the [Roadmap](#roadmap).
@@ -179,6 +179,70 @@ wanted stars, objective and timer, vehicle speed and condition, minimap with bli
 street), interaction prompts, dialogue with choices, shop panels, mission banners, save indicator.
 Settings: graphics quality (low / medium / high), volume, mouse sensitivity, invert Y, performance counter.
 
+## Visual overhaul (v0.5)
+
+A pure art-direction pass over the v0.4 mechanics prototype: no gameplay systems were added, and the same
+25 browser gameplay checks pass on the new build. The target was a gritty, rainy, early-2000s console look.
+Before / after pairs below are captured by the same script from the same positions
+(`tests/e2e/screenshots.mjs`, sheets built by `tests/e2e/compare.mjs`).
+
+![Piccadilly Circus before and after](docs/screenshots/compare-piccadilly.jpg)
+![Shaftesbury Avenue from the cab, before and after](docs/screenshots/compare-driving.jpg)
+![Chinatown gate before and after](docs/screenshots/compare-chinatown.jpg)
+![Police response before and after](docs/screenshots/compare-police.jpg)
+![Outside The Gilded Stag before and after](docs/screenshots/compare-melee.jpg)
+
+New line-ups: ![vehicles](docs/screenshots/vehicles.jpg) ![people](docs/screenshots/people.jpg)
+
+**What changed**
+
+- **Wet streets**: a real planar reflection of the scene over the tarmac, broken up by puddles and ripples,
+  so neon, shopfronts, headlights and the LED wall smear down the road. Rain splashes, lit rain under lamps.
+- **Lighting and grade**: darker ambient, sodium-orange street lamps, coloured light thrown by neon and
+  screens, shop light spilling across the pavement, a sky dome with a dirty horizon glow, and a final grade
+  (crushed blacks, cold shadows, warm highlights, vignette, film grain).
+- **Buildings**: repainted brick, stone, stucco and faience facades with sills, arches, blinds, curtains,
+  soot and drainpipes; cornices, slate mansards with dormers, chimney stacks; taller blocks.
+- **Street identity**: projecting neon blade signs, awnings, shuttered shops with tags, window stickers,
+  theatre canopies with bulb-lit marquees and vertical signs, a two-face wall of LED advertising panels at
+  the Circus, a second Chinatown gate with strung lanterns and restaurant signs, cinema neon on the Square.
+- **Street furniture and clutter**: bus shelters with lit adverts and BUS STOP road text, pedestrian guard
+  railings, Belisha beacons, yellow box junctions, give-way lines, LOOK RIGHT / LOOK LEFT at crossings,
+  manhole covers, granite kerbs, scaffolding with debris netting and barriers, bin bags, boxes, wheelie
+  bins in the alleys, A-boards, street cabinets, café tables, newspaper stands, cones, fly-posted hoardings,
+  re-modelled phone boxes, pillar boxes and lamp columns.
+- **Characters**: rebuilt as tapered, jointed figures (elbows, knees, necks, hands, shoes) with coats,
+  hoods, skirts, ties, bags, aprons, hi-vis vests and proper police headgear; new walk / run cycle with knee
+  and elbow bend, guard stance, extending punches, two-handed aim, crouch, cower and phone poses.
+- **Vehicles**: each type extruded from its own side profile with tumblehome, glazing, arches, bumpers,
+  mirrors, door shuts, hubcaps and UK plates. The cab is tall and upright with round lamps and a chrome
+  grille; the police car has chequered flanks, rear chevrons and a blue light bar with glow; the bus has
+  two lit decks with passengers, blinds and a side advert; headlamp beams, brake-light bloom, and a real
+  spotlight on the car you drive.
+- **Camera and HUD**: a lower, off-centre follow camera with lag, sprint and speed field-of-view changes,
+  a chase camera that leads into corners, a wider over-the-shoulder aim; a chunkier outlined HUD with a
+  round radar.
+
+**What still does not meet the target**
+
+- **Street proportions are unchanged.** Every street is still the same ~20 m wall to wall on a regular grid,
+  so Soho's narrow lanes and the real shapes of Piccadilly Circus and Leicester Square are not there. Fixing
+  this means reworking the layout data and everything measured against it; it was out of scope for an art pass.
+- **Models are still primitive-built.** Characters and vehicles are far better shaped but have no painted
+  textures (faces, clothing detail, panel lines), no skeletal animation, and no vehicle enter/exit animation.
+- **Facades are still flat textures on boxes** with added trim; there are no modelled bays, balconies or
+  recessed shop doors, and buildings repeat six wall styles.
+- **Traffic lights are absent** (traffic does not obey signals yet, so none are drawn).
+- **Rendering cost roughly tripled.** A busy street is now about 2,700 draw calls and 236k triangles because
+  the reflection renders the scene a second time and there is much more signage. This has only run on a
+  software rasteriser; on a weak GPU use the Low setting, which switches the reflection and bloom off.
+- **No human has judged it in motion.** The evidence is still screenshots plus automated checks.
+
+**Verdict.** It is clearly closer: the screenshots now read as a rainy night-time West End in the style of
+an early-2000s open-world crime game rather than a block-colour prototype, mostly thanks to reflections,
+signage density, lighting and silhouettes. It is not yet at the level of a shipped PS2 title - the grid
+streets and untextured models are what most give it away.
+
 ## Verified test results
 
 All figures below are from an actual run of the checks in this repository (2026-11-11), not estimates.
@@ -211,21 +275,18 @@ Additional checks: garage / pub / shop services (X1), every random-event type in
 refusal (X2), time-of-day routines and background simulation (X3), hospital flow, carjacking and hit-and-run (X4).
 
 **Performance (measured, with caveats).** With the full district running (59 NPCs, 57 vehicles, physics, police,
-UI) one simulation tick averaged **1.3 ms** against a 16.7 ms budget, with occasional spikes of 25-34 ms
-(roughly one dropped frame; not yet profiled). A street view draws about 920 draw calls and 32k triangles.
-The test browser has **no GPU** (SwiftShader software rasteriser); its frame loop reached the 60 fps cap at
-1280 × 720 on medium quality, but that is not evidence of real-hardware performance, which has not been measured.
-The 920 draw calls come mostly from un-instanced character and vehicle parts and are the first thing to
-optimise if a real GPU struggles; the low-quality setting disables bloom and reduces resolution.
+UI) one simulation tick averaged **1.2 ms** against a 16.7 ms budget, with occasional spikes of about 20 ms
+(not yet profiled). After the visual overhaul a street view draws about **2,700 draw calls and 236k triangles**
+on Medium (it was about 920 and 32k), because the wet-road reflection renders the scene twice.
+The test browser has **no GPU** (SwiftShader software rasteriser); its frame loop still reached the 60 fps cap
+at 1280 × 720, but that is not evidence of real-hardware performance, which has not been measured. Low quality
+turns off the reflection and bloom.
 
 **What the automated checks do not cover:** how the game *feels* in the hand (camera comfort, handling,
 difficulty, pacing), audio quality, and visuals beyond the screenshots in `docs/screenshots/`. No human
 play-test was possible in the build environment. Some checks reposition the player or a vehicle to set up a
 situation (noted in the test source); the behaviour being measured is always produced by the game itself.
 
-![Piccadilly Circus](docs/screenshots/piccadilly.jpg)
-![Driving the cab on Shaftesbury Avenue](docs/screenshots/driving.jpg)
-![Armed response on Wardour Street](docs/screenshots/police.jpg)
 ![Inside The Gilded Stag](docs/screenshots/pub.jpg)
 
 ## Known limitations
@@ -252,7 +313,7 @@ Stated plainly so nothing here is mistaken for finished work:
 - **Keyboard and mouse only.** No gamepad, touch or rebinding yet.
 - **Performance** has only been measured in a software-rendered headless browser (see above). The simulation
   cost is comfortably inside a 60 fps budget there; real-GPU frame rates have not been measured, and draw calls
-  (~920 in a busy street) are higher than they need to be.
+  (~2,700 in a busy street on Medium) are much higher than they need to be.
 - **Not play-tested by a person.** Tuning values (damage, speeds, police aggression, prices, timers) are first
   guesses that pass functional checks; expect them to need adjustment.
 

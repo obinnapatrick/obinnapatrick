@@ -329,5 +329,5 @@ export class Npc implements Combatant {
     return false;
   }
 
-  dispose(scene: THREE.Scene): void { scene.remove(this.model.root); }
+  dispose(scene: THREE.Scene): void { scene.remove(this.model.root); this.model.dispose(); }
 }

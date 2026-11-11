@@ -14,7 +14,7 @@ const { browser, page, errors } = await openGame();
 await page.evaluate(() => {
   const g = window.__cad;
   const T = (window.T = {
-    fresh() { g.autoStep = false; g.autoRender = false; g.godMode = false; g.newGame(); g.advance(0.2); T.skip(); },
+    fresh() { g.autoStep = false; g.autoRender = false; g.godMode = false; g.camera.shoulder = 0; g.newGame(); g.advance(0.2); T.skip(); },
     skip(pickIdx = 0) { let n = 0; while (g.ui.dialogueActive && n++ < 60) { const el = document.querySelectorAll('#dchoices button'); if (el.length) g.ui.choose(pickIdx); else g.ui.advanceDialogue(); g.advance(0.05); } },
     hold(code, secs) { g.input.inject(code, true); g.advance(secs); g.input.inject(code, false); g.advance(1 / 60); },
     tap(code) { g.input.inject(code, true); g.advance(1 / 60); g.input.inject(code, false); g.advance(1 / 60); },
@@ -440,7 +440,7 @@ await check('12', 'Progress survives closing and reopening the page', async () =
       pos: [p.pos.x, p.pos.z], hp: p.hp, ownType: own?.type, ownDist: own ? Math.hypot(own.x - p.pos.x, own.z - p.pos.z) : -1, marker: g.fx.markers.map((k) => k.icon), clock: Math.floor(s.data.clock), day: s.data.day };
   });
   // helpers were lost with the reload: re-install them
-  await page.evaluate(() => { const g = window.__cad; window.T = { fresh() { g.autoStep = false; g.autoRender = false; g.godMode = false; g.newGame(); g.advance(0.2); T.skip(); }, skip(i = 0) { let n = 0; while (g.ui.dialogueActive && n++ < 60) { if (document.querySelectorAll('#dchoices button').length) g.ui.choose(i); else g.ui.advanceDialogue(); g.advance(0.05); } },
+  await page.evaluate(() => { const g = window.__cad; window.T = { fresh() { g.autoStep = false; g.autoRender = false; g.godMode = false; g.camera.shoulder = 0; g.newGame(); g.advance(0.2); T.skip(); }, skip(i = 0) { let n = 0; while (g.ui.dialogueActive && n++ < 60) { if (document.querySelectorAll('#dchoices button').length) g.ui.choose(i); else g.ui.advanceDialogue(); g.advance(0.05); } },
     hold(c, s) { g.input.inject(c, true); g.advance(s); g.input.inject(c, false); g.advance(1 / 60); }, tap(c) { g.input.inject(c, true); g.advance(1 / 60); g.input.inject(c, false); g.advance(1 / 60); }, click(b = 0) { g.input.injectMouse(b, true); g.advance(1 / 60); g.input.injectMouse(b, false); g.advance(1 / 60); },
     isolate() { g.npcs.clear(); g.interiors.populate(); g.vehicles.trafficTarget = 0; for (const v of [...g.vehicles.list]) if (!v.owned) g.vehicles.remove(v); g.events.cancel(); g.events.cooldown = 1e9; }, face(x, z, pitch = -0.06) { const p = g.player.pos; g.camera.yaw = Math.atan2(x - p.x, z - p.z); g.camera.pitch = pitch; g.player.yaw = g.camera.yaw; g.advance(1 / 60); },
     npc(role, dx, dz, o = {}) { const p = g.player.pos; const n = g.npcs.spawn(role, p.x + dx, p.z + dz, { scripted: o.scripted ?? false, look: o.look }); if (o.hold) { n.setState('idle'); n.idleFor = 999; n.scripted = true; } return n; }, dist(a, b) { return Math.hypot(a.x - b.x, a.z - b.z); } }; const T = window.T; });

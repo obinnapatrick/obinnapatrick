@@ -1,7 +1,7 @@
 {
   "name": "capital-after-dark",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "CAPITAL: AFTER DARK - an original third-person open-world London game prototype",
   "scripts": {

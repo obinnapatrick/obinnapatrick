@@ -176,8 +176,9 @@ export class Game {
     if (p.vehicle) this.state.data.stats.distance += Math.abs(p.vehicle.speed) * dt;
     this.camera.update(dt);
     this.fx.update(dt, this.time); this.city.update(dt);
-    this.gfx.setTime(this.state.hour); this.gfx.update(dt, p.pos);
     const v = p.vehicle;
+    if (v && !v.dead) this.gfx.setHeadlight(true, v.x + fwdX(v.yaw) * v.spec.l * 0.45, p.pos.y + 0.75, v.z + fwdZ(v.yaw) * v.spec.l * 0.45, fwdX(v.yaw), fwdZ(v.yaw)); else this.gfx.setHeadlight(false);
+    this.gfx.setTime(this.state.hour); this.gfx.update(dt, p.pos);
     let siren = 0;
     for (const c of this.vehicles.list) if (c.siren) siren = Math.max(siren, 1 - dist2(c.x, c.z, p.pos.x, p.pos.z) / 120);
     this.audio.ambience(dt, { rain: this.gfx.rainAmount, engine: v && !v.dead ? Math.min(1, Math.abs(v.speed) / v.spec.maxSpeed + Math.abs(v.throttle) * 0.15) : -1, siren: Math.max(0, siren), indoors: !!this.interiors.current, night: this.gfx.night });

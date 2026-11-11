@@ -92,7 +92,7 @@ export function generateLayout(seed = 1904): Layout {
   let shopIdx = 0, theatreIdx = 0;
 
   const add = (x0: number, z0: number, x1: number, z1: number, o: Partial<Building> = {}) => {
-    const b: Building = { x0, z0, x1, z1, h: 11 + Math.floor(r() * 5) * 3.4, style: Math.floor(r() * 6), ...o };
+    const b: Building = { x0, z0, x1, z1, h: 14.4 + Math.floor(r() * 5) * 3.4, style: Math.floor(r() * 6), ...o };
     if (!b.kind && !b.shop) {
       const wide = Math.max(x1 - x0, z1 - z0) >= 17;
       if (wide && theatreIdx < THEATRES.length && Math.abs(z1 - -BUILD_LINE) < 0.1 && r() < 0.6) { b.kind = 'theatre'; b.name = THEATRES[theatreIdx++]; b.h = 21; }

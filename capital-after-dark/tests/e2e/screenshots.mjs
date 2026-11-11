@@ -4,9 +4,11 @@ import path from 'node:path';
 import { startServer, openGame, ROOT } from './harness.mjs';
 
 const DIR = path.join(ROOT, 'docs/screenshots');
+const ONLY = process.env.SHOTS ? process.env.SHOTS.split(',') : null;
 const srv = await startServer();
 const { browser, page, errors } = await openGame();
 const snap = async (name) => {
+  if (ONLY && !ONLY.includes(name)) return;
   await page.evaluate(() => new Promise((res) => { const g = window.__cad; g.autoRender = true; requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => { g.autoRender = false; res(); }))); }));
   await page.screenshot({ path: path.join(DIR, name + '.jpg'), type: 'jpeg', quality: 82, timeout: 120000 });
   console.log('saved', name);
@@ -35,5 +37,16 @@ await snap('police'); await page.evaluate(() => { window.__cad.input.injectMouse
 // 6 inside the pub
 await page.evaluate(() => { const g = window.__cad; g.police.reset(); g.police.disengage(); const q = g.city.layout.poi('pub'); window.S.at(q.x, q.z, 0, -0.1, 0.2); g.interiors.enter(g.interiors.defs[0]); g.advance(0.5); g.camera.yaw = Math.PI - 0.5; g.camera.pitch = -0.12; g.advance(0.5); document.getElementById('toasts').innerHTML = ''; });
 await snap('pub');
+// 7 vehicle line-up at dusk, so the silhouettes can be judged
+await page.evaluate(() => { const g = window.__cad; g.interiors.exit(); g.events.cancel(); for (const v of [...g.vehicles.list]) if (!v.owned) g.vehicles.remove(v); g.vehicles.trafficTarget = 0; g.npcs.clear(); g.ownedVehicle().place(140, 140, 0);
+  g.state.data.clock = 18.3 * 60; g.gfx.rainAmount = 0.2;
+  ['cab', 'police', 'saloon', 'sports', 'van', 'bus'].forEach((t, i) => { const v = g.vehicles.spawn(t, 101 + i * 3.9 + (t === 'bus' ? 3.4 : 0), 96 - (t === 'bus' ? 3.5 : 0), 0.55); if (t === 'police') v.siren = true; if (t !== 'bus') v.setDriver('ai'); });
+  window.S.at(111.5, 105.5, Math.PI - 0.1, -0.08, 1.0); g.player.model.root.visible = false; g.camera.shoulder = 0; g.advance(0.3); document.getElementById('toasts').innerHTML = ''; });
+await snap('vehicles');
+// 8 a line-up of the people you meet
+await page.evaluate(() => { const g = window.__cad; g.player.model.root.visible = true; for (const v of [...g.vehicles.list]) if (!v.owned) g.vehicles.remove(v);
+  ['police', 'armed', 'office', 'tourist', 'nightlife', 'marlowe', 'kestrel', 'heavy', 'cabbie', 'pedestrian'].forEach((r, i) => { const n = g.npcs.spawn(r, -98 + i * 0.95, 82.2, { scripted: true, yaw: Math.PI }); n.pose = i === 4 ? 'talk' : i === 2 ? 'phone' : 'none'; });
+  g.state.data.clock = 21.9 * 60; g.gfx.rainAmount = 1; window.S.at(-93.7, 77.4, 0, -0.03, 0.8); g.player.model.root.visible = false; g.camera.shoulder = 0; g.advance(0.6); document.getElementById('toasts').innerHTML = ''; });
+await snap('people');
 console.log('errors', errors, await page.evaluate(() => window.__cad.errors));
 await browser.close(); srv.kill(); process.exit(0);

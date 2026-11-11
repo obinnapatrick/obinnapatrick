@@ -4,6 +4,8 @@ import { angleDiff, clamp, dist2, fwdX, fwdZ, leftX, leftZ, mulberry32, pointInO
 import { Vehicle } from './Vehicle';
 import { VehicleType } from './specs';
 
+/** Is another vehicle broadside-on to us (rather than parallel or head-on)? */
+const crosswise = (a: number, b: number) => { const d = Math.abs(angleDiff(a, b)); return Math.min(d, Math.PI - d) > 0.6; };
 const INSET = 8; // how far from a junction centre the lane "ends"
 const TRAFFIC_MIX: VehicleType[] = ['cab', 'cab', 'saloon', 'saloon', 'cab', 'van', 'bus', 'saloon', 'cab', 'sports', 'saloon', 'bus', 'van', 'cab', 'saloon', 'cab'];
 
@@ -140,7 +142,7 @@ export class VehicleManager {
         if (ai.push! > 0 && gap > 0.9) { desired = Math.min(desired, 2.5); return; } // out of patience: creep round
         if (gap < 3.2) { desired = 0; blocked = true; ai.why = what; } else desired = Math.min(desired, 3.5);
       };
-      for (const o of this.list) if (o !== v && Math.abs(o.x - v.x) < 30 && Math.abs(o.z - v.z) < 30) check(o.x, o.z, o.spec.l / 2, Math.abs(angleDiff(o.yaw, v.yaw)) % Math.PI > 0.6 ? o.spec.l / 2 : o.spec.w / 2 - 0.3, o.type + ' #' + o.id + (o.driver ? '' : ' (parked)'));
+      for (const o of this.list) if (o !== v && Math.abs(o.x - v.x) < 30 && Math.abs(o.z - v.z) < 30) check(o.x, o.z, o.spec.l / 2, crosswise(o.yaw, v.yaw) ? o.spec.l / 2 : o.spec.w / 2 - 0.3, o.type + ' #' + o.id + (o.driver ? '' : ' (parked)'));
       const pl = this.g.player;
       if (!pl.vehicle && pl.pos.y > -10) check(pl.pos.x, pl.pos.z, 0.4, 0.5, 'player');
       for (const n of this.g.npcs.list) if (!n.far && n.state !== 'indoors' && n.state !== 'ko' && Math.abs(n.pos.x - v.x) < 22 && Math.abs(n.pos.z - v.z) < 22) check(n.pos.x, n.pos.z, 0.4, 0.45, 'pedestrian ' + n.state);
