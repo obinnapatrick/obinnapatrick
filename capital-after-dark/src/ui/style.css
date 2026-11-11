@@ -1,0 +1,72 @@
+:root { --amber: #ffb400; --ink: #0b0d12; --panel: rgba(10, 12, 18, 0.82); --line: rgba(255, 255, 255, 0.14); --txt: #eef0f4; --dim: #9aa3b2; --red: #ff4d4d; --blue: #5aa2ff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #05060a; color: var(--txt); font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; user-select: none; }
+canvas#game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+#vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%); transition: box-shadow 0.25s; }
+#vignette.hurt { box-shadow: inset 0 0 140px 40px rgba(255, 40, 40, 0.5); transition: none; }
+#hud { position: fixed; inset: 0; pointer-events: none; font-variant-numeric: tabular-nums; text-shadow: 0 1px 3px #000; }
+#tl { position: absolute; left: 18px; top: 18px; }
+#minimap { display: block; width: 190px; height: 190px; border-radius: 10px; border: 2px solid var(--line); background: #0d1017; }
+#place { margin-top: 6px; font-size: 13px; }
+#place b { display: block; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); font-size: 12px; }
+#clock { font-size: 13px; color: var(--dim); }
+#tr { position: absolute; right: 20px; top: 16px; text-align: right; }
+#stars { font-size: 26px; letter-spacing: 3px; height: 32px; color: rgba(255, 255, 255, 0.18); }
+#stars .on { color: var(--blue); text-shadow: 0 0 10px var(--blue); }
+#stars.search .on { animation: blink 0.7s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0.25; } }
+#money { font-size: 28px; font-weight: 700; color: #8dff9a; }
+#weapon { font-size: 15px; margin-top: 2px; } #weapon b { font-size: 20px; color: var(--amber); }
+#veh { font-size: 13px; color: var(--dim); margin-top: 2px; }
+#bl { position: absolute; left: 18px; bottom: 18px; width: 240px; }
+.bar { height: 12px; background: rgba(0, 0, 0, 0.55); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #d9342b, #ff7a59); transition: width 0.15s; }
+#hptext, #items { font-size: 12px; color: var(--dim); margin-top: 4px; }
+#tc { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); text-align: center; max-width: 46vw; }
+#objective { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--amber); padding: 8px 14px; border-radius: 6px; font-size: 15px; }
+#objective:empty { display: none; }
+#timer { font-size: 22px; font-weight: 700; margin-top: 6px; color: var(--amber); } #timer.low { color: var(--red); }
+#crosshair { position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; opacity: 0; }
+#crosshair::before, #crosshair::after { content: ""; position: absolute; background: #fff; box-shadow: 0 0 2px #000; }
+#crosshair::before { left: 8px; top: 0; width: 2px; height: 18px; } #crosshair::after { top: 8px; left: 0; height: 2px; width: 18px; }
+#crosshair.on { opacity: 0.9; } #crosshair.hot::before, #crosshair.hot::after { background: var(--red); }
+#arrest { position: absolute; left: 50%; top: 62%; transform: translateX(-50%); width: 300px; text-align: center; font-weight: 700; color: var(--blue); }
+#arrest .bar i { background: var(--blue); transition: none; }
+#bark { position: absolute; left: 50%; bottom: 120px; transform: translateX(-50%); background: var(--panel); padding: 8px 16px; border-radius: 6px; max-width: 60vw; font-size: 16px; }
+#bark b { color: var(--amber); margin-right: 8px; }
+#prompt { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); background: rgba(0, 0, 0, 0.7); border: 1px solid var(--line); padding: 6px 14px; border-radius: 20px; font-size: 14px; }
+#prompt kbd, .keys kbd { background: #fff; color: #111; border-radius: 4px; padding: 1px 7px; font: 700 12px/1.6 inherit; margin-right: 6px; text-shadow: none; }
+#toasts { position: absolute; right: 20px; top: 150px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+.toast { background: var(--panel); border-right: 3px solid var(--amber); padding: 6px 12px; border-radius: 4px; font-size: 13px; animation: tin 0.2s; }
+@keyframes tin { from { transform: translateX(30px); opacity: 0; } }
+#saveind { position: absolute; right: 20px; bottom: 18px; font-size: 12px; color: var(--dim); }
+#fps { position: absolute; left: 230px; top: 18px; font: 12px/1.4 monospace; color: #9f9; white-space: pre; }
+#banner { position: fixed; left: 0; right: 0; top: 30%; text-align: center; pointer-events: none; text-shadow: 0 3px 14px #000; }
+#banner h1 { margin: 0; font-size: 58px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+#banner.fail h1 { color: var(--red); } #banner p { font-size: 20px; margin: 8px 0 0; white-space: pre-line; }
+#dialogue { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); width: min(760px, 86vw); background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--amber); border-radius: 8px; padding: 14px 20px; }
+#dwho { color: var(--amber); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; }
+#dtext { font-size: 18px; line-height: 1.45; margin-top: 4px; min-height: 52px; }
+#dchoices button, #shopitems button, #menu button { font: inherit; color: var(--txt); background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+#dchoices button { display: block; width: 100%; text-align: left; padding: 8px 12px; margin-top: 6px; }
+#dchoices button:hover, #shopitems button:hover:not(:disabled), #menu button:hover { background: rgba(255, 180, 0, 0.2); border-color: var(--amber); }
+#dhint, .hint { font-size: 11px; color: var(--dim); margin-top: 8px; text-align: right; }
+#shop { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(560px, 90vw); background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--amber); border-radius: 10px; padding: 18px 22px; }
+#shop h2 { margin: 0; } #shop .sub { color: var(--dim); margin: 4px 0 12px; }
+#shopitems button { display: flex; width: 100%; justify-content: space-between; gap: 12px; padding: 10px 12px; margin-top: 6px; text-align: left; }
+#shopitems button:disabled { opacity: 0.4; cursor: default; }
+#shopitems small { display: block; color: var(--dim); } #shopitems .price { color: #8dff9a; font-weight: 700; white-space: nowrap; }
+#fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.45s; } #fade.on { opacity: 1; }
+#menu { position: fixed; inset: 0; display: flex; align-items: center; justify-content: flex-start; padding-left: 8vw; background: linear-gradient(90deg, rgba(4, 5, 9, 0.92) 0%, rgba(4, 5, 9, 0.55) 45%, rgba(4, 5, 9, 0.05) 100%); }
+#menu .panel { width: 360px; max-height: 92vh; overflow: auto; }
+.logo span { display: block; font-size: 64px; font-weight: 800; letter-spacing: 0.14em; line-height: 1; }
+.logo em { display: block; font-style: normal; font-size: 30px; letter-spacing: 0.42em; color: var(--amber); text-shadow: 0 0 18px rgba(255, 180, 0, 0.7); }
+.tag { color: var(--dim); margin: 14px 0 26px; }
+#menu button { display: block; width: 100%; padding: 12px 16px; margin-top: 8px; text-align: left; font-size: 17px; letter-spacing: 0.04em; }
+#menu button:disabled { opacity: 0.35; cursor: default; }
+#menu label { display: block; margin-top: 14px; font-size: 14px; color: var(--dim); } #menu label.row { display: flex; gap: 8px; align-items: center; }
+#menu select, #menu input[type="range"] { display: block; width: 100%; margin-top: 6px; } #menu select { padding: 6px; background: #151923; color: var(--txt); border: 1px solid var(--line); border-radius: 4px; }
+.small { font-size: 12px; color: var(--dim); margin-top: 22px; }
+.keys { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 13px; align-items: center; } .keys b { color: var(--amber); margin-top: 8px; }
+#standing { margin-top: 18px; font-size: 13px; color: var(--dim); line-height: 1.6; } #standing b { color: var(--txt); }
