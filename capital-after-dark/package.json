@@ -1,0 +1,29 @@
+{
+  "name": "capital-after-dark",
+  "private": true,
+  "version": "0.5.0",
+  "type": "module",
+  "description": "CAPITAL: AFTER DARK - an original third-person open-world London game prototype",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "build:play": "tsc --noEmit && vite build --outDir play --emptyOutDir",
+    "report": "node tests/e2e/report.mjs",
+    "screenshots": "node tests/e2e/screenshots.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "node tests/e2e/gameplay.mjs",
+    "check": "npm run typecheck && npm run test && npm run build && npm run test:e2e"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.21.0",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.187.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}
