@@ -32,6 +32,11 @@ npm run preview      # serves dist/ at http://localhost:4173
 
 `dist/` is fully static (relative paths), so it can be hosted from any static web server or sub-folder.
 
+**No Node? A pre-built copy is committed in [`play/`](play/).** Serve that folder with any static server
+(`npx serve play`, `python3 -m http.server -d play`) and open it - browsers will not load the game straight
+from `file://`. If GitHub Pages is enabled for this repository it is playable at
+`<pages-url>/capital-after-dark/play/` once merged. Rebuild it with `npm run build:play`.
+
 ## Checks
 
 ```bash
@@ -176,7 +181,52 @@ Settings: graphics quality (low / medium / high), volume, mouse sensitivity, inv
 
 ## Verified test results
 
-RESULTS_PLACEHOLDER
+All figures below are from an actual run of the checks in this repository (2026-11-11), not estimates.
+
+- **Unit tests:** 35 / 35 passing (`npm test`) - district layout, pavement and road graphs (left-hand lanes),
+  wanted-level rules, economy, faction reputation, character memory, save round-trip and corruption handling,
+  mission unlocking, NPC routines.
+- **Browser gameplay checks:** 25 / 25 passing, 0 browser console errors (`npm run test:e2e`).
+  The script loads the production build in headless Chromium, drives the real game through its input layer
+  and reads back real game state. Full measured output: [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md).
+
+| Brief requirement | Check(s) | Result | What was measured |
+| --- | --- | --- | --- |
+| 1. Movement and camera work | 1a, 1b | PASS | Real key events walk the player; run 4.4 m/s, sprint 7.4 m/s, 0.78 m jump, crouch, strafe, dodge; injected and real mouse-drag both turn the camera |
+| 2. Cannot walk through solid buildings | 2 | PASS | Stopped 0.35 m from the wall face even when sprint-jumping; kerb and fountain steps climbed; parked car blocks; 6 m drop lands on the road |
+| 3. Melee registers damage | 3 | PASS | Jab / cross / hook / kick dealt exactly 12 / 15 / 26 / 20; kick knocks down; KO state reached; blocking cut an enemy hit from 13.0 to 2.9 |
+| 4. Firearms aim, fire, reload, damage | 4 | PASS | Pistol body-shot 34, magazine 12→11, reload from reserve, a miss and a shot through a building dealt 0, car took 18.7, SMG automatic fire, weapon switching |
+| 5. NPCs react to nearby combat | 5 | PASS | One gunshot: 12 calm bystanders → all scared, fled / cowered, several decided to phone the police; district notoriety rose |
+| 6. Police respond to incidents | 6a, 7b | PASS | Unwitnessed punch → no wanted level; same punch in front of a constable → 1★ and immediate pursuit; at 3★ a car arrived from out of sight and its armed crew got out |
+| 7. Police can pursue and lose the player | 7a, 7c | PASS | Officers chased 31 m, lost sight, searched the frozen last-known position, stood down ("You lost the police"); standing still → arrested, £175 fine, 36 rounds confiscated |
+| 8. Vehicles can be entered and driven | 8 | PASS | F to enter; 0→35 mph in 4 s; steering both ways; brake, reverse, handbrake; crash damage; safe exit beside a wall and when boxed in |
+| 9. Traffic follows road directions | 9, 9b | PASS | 17 AI vehicles: 100 % of 1,323 samples on the left; every vehicle moving in every one of six consecutive minutes; no wrecks, no pedestrians hit |
+| 10. Missions can be completed and failed | 10a, 10b, 10c | PASS | Mission 1 completed through its real stages; failed three ways (wreck, timer, arrest) and became available again; missions 2-6 played through to the ending choice |
+| 11. Rewards update money | 10a, 10c, X2 | PASS | Mission 1 paid £110 (fare + tip); Delivery paid £175 with the package at 50 % after a crash; finale paid £1,500; street jobs paid £47-£52 |
+| 12. Saved progress loads correctly | 12 | PASS | After a real page reload: cash, weapons, ammunition, items, missions, owned vehicle, reputation, a character's memory, notoriety, position and health all restored |
+| 13. Relationships change after events | 13, 10c | PASS | Hitting a Firm member cost reputation and drew his crew; a busker remembered *what, where, when*; the shopkeeper barred the player until a paid apology; a hostile crew attacked on sight |
+| 14. No recurring fatal errors | 14 + all | PASS | 14,400 ticks of random input: 0 errors, player never left the world or entered a building; 0 console errors across the whole run |
+
+Additional checks: garage / pub / shop services (X1), every random-event type including dismissal and overlap
+refusal (X2), time-of-day routines and background simulation (X3), hospital flow, carjacking and hit-and-run (X4).
+
+**Performance (measured, with caveats).** With the full district running (59 NPCs, 57 vehicles, physics, police,
+UI) one simulation tick averaged **1.3 ms** against a 16.7 ms budget, with occasional spikes of 25-34 ms
+(roughly one dropped frame; not yet profiled). A street view draws about 920 draw calls and 32k triangles.
+The test browser has **no GPU** (SwiftShader software rasteriser); its frame loop reached the 60 fps cap at
+1280 × 720 on medium quality, but that is not evidence of real-hardware performance, which has not been measured.
+The 920 draw calls come mostly from un-instanced character and vehicle parts and are the first thing to
+optimise if a real GPU struggles; the low-quality setting disables bloom and reduces resolution.
+
+**What the automated checks do not cover:** how the game *feels* in the hand (camera comfort, handling,
+difficulty, pacing), audio quality, and visuals beyond the screenshots in `docs/screenshots/`. No human
+play-test was possible in the build environment. Some checks reposition the player or a vehicle to set up a
+situation (noted in the test source); the behaviour being measured is always produced by the game itself.
+
+![Piccadilly Circus](docs/screenshots/piccadilly.jpg)
+![Driving the cab on Shaftesbury Avenue](docs/screenshots/driving.jpg)
+![Armed response on Wardour Street](docs/screenshots/police.jpg)
+![Inside The Gilded Stag](docs/screenshots/pub.jpg)
 
 ## Known limitations
 
@@ -201,7 +251,10 @@ Stated plainly so nothing here is mistaken for finished work:
 - **Audio** is entirely synthesised; there is no music and no voiced dialogue.
 - **Keyboard and mouse only.** No gamepad, touch or rebinding yet.
 - **Performance** has only been measured in a software-rendered headless browser (see above). The simulation
-  cost is comfortably inside a 60 fps budget there; real-GPU frame rates have not been measured.
+  cost is comfortably inside a 60 fps budget there; real-GPU frame rates have not been measured, and draw calls
+  (~920 in a busy street) are higher than they need to be.
+- **Not play-tested by a person.** Tuning values (damage, speeds, police aggression, prices, timers) are first
+  guesses that pass functional checks; expect them to need adjustment.
 
 ## Project structure
 

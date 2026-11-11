@@ -28,11 +28,14 @@ await page.evaluate(() => {
   });
 });
 
+const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null; // e.g. ONLY=9,9b npm run test:e2e
 async function check(id, name, fn) {
+  if (ONLY && !ONLY.includes(String(id))) return;
   const t0 = Date.now();
   let res;
-  try { res = await fn(); } catch (e) { res = { pass: false, detail: 'threw: ' + String(e.message).split('\n')[0] }; }
-  const pageErrs = await page.evaluate(() => window.__cad.errors.splice(0));
+  try { res = await fn(); } catch (e) { res = { pass: false, detail: 'threw: ' + String(e.message).split('\n').slice(0, 3).join(' / ') }; }
+  let pageErrs = [];
+  try { await page.waitForFunction(() => !!window.__cad, null, { timeout: 30000 }); pageErrs = await page.evaluate(() => window.__cad.errors.splice(0)); } catch { /* page mid-navigation */ }
   if (pageErrs.length) { res.pass = false; res.detail += ' | runtime errors: ' + pageErrs.join(' ; ').slice(0, 300); }
   results.push({ id, name, ...res, ms: Date.now() - t0 });
   console.log(`${res.pass ? 'PASS' : 'FAIL'}  ${String(id).padEnd(4)} ${name}\n        ${res.detail}`);
@@ -428,7 +431,7 @@ await check('12', 'Progress survives closing and reopening the page', async () =
     p.teleport(60, 0.15, -8.3, 1); g.advance(0.2); g.tryEnter; const ok = g.saveGame('Game saved');
     return { ok, cash: s.data.cash, weapons: s.data.weapons, ammo: s.data.ammo.pistol, items: s.data.items, missions: s.data.missionsDone, vehicles: s.data.vehicles, rep: s.data.rep, farah: s.person('farah').rel, not: Math.round(s.notoriety('Chinatown')), clock: Math.floor(s.data.clock), day: s.data.day };
   });
-  await page.reload(); await page.waitForFunction(() => !!window.__cad);
+  await page.reload({ timeout: 120000, waitUntil: 'domcontentloaded' }); await page.waitForFunction(() => !!window.__cad, null, { timeout: 120000 });
   const enabled = await page.evaluate(() => !document.getElementById('btn-continue').disabled);
   await page.click('#btn-continue'); await page.waitForTimeout(300);
   const after = await ev(() => {

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capital: After Dark</title>
+  <script type="module" crossorigin src="./assets/index-C-j03jsj.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-FxDALHaU.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div id="vignette"></div>
+  <div id="hud" class="hidden">
+    <div id="tl"><canvas id="minimap" width="190" height="190"></canvas><div id="place"><b id="district"></b><span id="street"></span></div><div id="clock"></div></div>
+    <div id="tr"><div id="stars"></div><div id="money"></div><div id="weapon"></div><div id="veh"></div></div>
+    <div id="bl"><div class="bar"><i id="hpfill"></i></div><div id="hptext"></div><div id="items"></div></div>
+    <div id="tc"><div id="objective"></div><div id="timer"></div></div>
+    <div id="crosshair"></div>
+    <div id="arrest" class="hidden"><span>BEING ARRESTED - MOVE!</span><div class="bar"><i id="arrestfill"></i></div></div>
+    <div id="bark" class="hidden"></div>
+    <div id="prompt" class="hidden"></div>
+    <div id="toasts"></div>
+    <div id="saveind" class="hidden"></div>
+    <div id="fps" class="hidden"></div>
+  </div>
+  <div id="banner" class="hidden"><h1></h1><p></p></div>
+  <div id="dialogue" class="hidden"><div id="dwho"></div><div id="dtext"></div><div id="dchoices"></div><div id="dhint">E / Enter to continue</div></div>
+  <div id="shop" class="hidden"><h2></h2><p class="sub"></p><div id="shopitems"></div><div class="hint">Click or press a number to buy · Esc to leave</div></div>
+  <div id="fade"></div>
+  <div id="menu">
+    <div class="panel" id="menu-main">
+      <div class="logo"><span>CAPITAL</span><em>AFTER DARK</em></div>
+      <p class="tag">Soho. Rain. One long night shift.</p>
+      <button data-act="continue" id="btn-continue">Continue</button>
+      <button data-act="new">New Game</button>
+      <button data-act="settings">Settings</button>
+      <button data-act="controls">Controls</button>
+      <p class="small" id="menu-note">Prototype build 0.4 · all art and audio generated in code</p>
+    </div>
+    <div class="panel hidden" id="menu-pause">
+      <h2>Paused</h2>
+      <button data-act="resume">Resume</button>
+      <button data-act="save">Save Game</button>
+      <button data-act="settings">Settings</button>
+      <button data-act="controls">Controls</button>
+      <button data-act="quit">Quit to Menu</button>
+      <div id="standing"></div>
+    </div>
+    <div class="panel hidden" id="menu-settings">
+      <h2>Settings</h2>
+      <label>Graphics quality <select id="set-quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label>
+      <label>Volume <input id="set-volume" type="range" min="0" max="1" step="0.05" /></label>
+      <label>Mouse sensitivity <input id="set-sens" type="range" min="0.3" max="2.5" step="0.1" /></label>
+      <label class="row"><input id="set-invert" type="checkbox" /> Invert mouse Y</label>
+      <label class="row"><input id="set-fps" type="checkbox" /> Show performance counter</label>
+      <button data-act="back">Back</button>
+    </div>
+    <div class="panel hidden" id="menu-controls">
+      <h2>Controls</h2>
+      <div class="keys">
+        <b>On foot</b><span></span>
+        <kbd>W A S D</kbd><span>Move</span><kbd>Mouse</kbd><span>Look / aim</span><kbd>Shift</kbd><span>Sprint</span><kbd>Space</kbd><span>Jump</span><kbd>C</kbd><span>Crouch</span>
+        <kbd>Left click</kbd><span>Punch (combo) / fire</span><kbd>Right click</kbd><span>Block (fists) / aim (gun)</span><kbd>V</kbd><span>Kick</span><kbd>Q</kbd><span>Dodge</span>
+        <kbd>1 2 3 / wheel</kbd><span>Switch weapon</span><kbd>R</kbd><span>Reload</span><kbd>E</kbd><span>Talk / interact / enter doors</span><kbd>F</kbd><span>Enter / exit vehicle</span><kbd>G</kbd><span>Eat snack / use first-aid kit</span>
+        <b>Driving</b><span></span>
+        <kbd>W / S</kbd><span>Accelerate / brake &amp; reverse</span><kbd>A / D</kbd><span>Steer</span><kbd>Space</kbd><span>Handbrake</span><kbd>H</kbd><span>Horn</span>
+        <b>General</b><span></span>
+        <kbd>Esc / P</kbd><span>Pause</span><kbd>F5</kbd><span>Quick save</span>
+      </div>
+      <button data-act="back">Back</button>
+    </div>
+  </div>
+</body>
+</html>
