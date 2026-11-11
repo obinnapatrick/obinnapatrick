@@ -245,7 +245,7 @@ streets and untextured models are what most give it away.
 
 ## Verified test results
 
-All figures below are from an actual run of the checks in this repository (2026-11-11), not estimates.
+All figures below are from actual runs of the checks in this repository, not estimates. The pass counts are from the v0.5 build; the example values in the table were recorded on the v0.4 run and vary slightly from run to run - the complete output of the latest run is in [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md).
 
 - **Unit tests:** 35 / 35 passing (`npm test`) - district layout, pavement and road graphs (left-hand lanes),
   wanted-level rules, economy, faction reputation, character memory, save round-trip and corruption handling,
